@@ -1,16 +1,16 @@
-#PROJETOS DE TECNOLOGIA DA INFORMAÇÃO 
+# PROJETOS DE TECNOLOGIA DA INFORMAÇÃO 
 
 Projetos de Tecnologia da Informação do curso de Gestão da Tecnologia da Informação da Faculdade de Tecnologia de Campinas, elaborado sob orientação do Prof. Humberto Celeste Innarelli.
 
 FERREIRA, E. O., MORGAN, G. S., FORESTO, J. L., Projetos de Tecnologia da Informação. Trabalho em grupo (Gestão da Tecnologia da Informação) - Centro Paula Souza - Faculdade de Tecnologia de Campinas, 2024.
 
-##TIO DU PET SERVICES
+## TIO DU PET SERVICES
 
 Tio Du Pet Services é uma solução popular para donos de animais que precisam se ausentar por um período e não podem levar seus companheiros peludos. Com diversas opções disponíveis de serviços para escolher o melhor para o seu pet.
 
 ![image](https://github.com/user-attachments/assets/f90ab311-5cdc-45b4-8c40-479de2320a62)
 
-###ÁREA DE ATUAÇÃO
+### ÁREA DE ATUAÇÃO
 
 Tio Du Pet Services atua na área de hospedagem animal oferecendo cuidados personalizados em um ambiente seguro e divertido.
 Serviços Oferecidos:
@@ -22,7 +22,7 @@ Benefícios da Hospedagem para Pets:
 •	Segurança: Profissionais treinados garantem que o pet esteja seguro e bem cuidado, reduzindo o risco de acidentes ou problemas de saúde.
 •	Tranquilidade para o Dono: Saber que seu pet está em boas mãos permite que você viaje ou se ocupe de outras atividades sem preocupações.
 
-###PRODUTO A SER DESENVOLVIDO
+### PRODUTO A SER DESENVOLVIDO
 
 O produto a ser desenvolvido é um website completo e personalizado para oferecer a melhor experiência aos tutores de pets. A plataforma online irá apresentar de forma clara e objetiva os serviços oferecidos, além de fornecer informações sobre cuidados com os pets. Ao mesmo tempo, o site será uma ferramenta poderosa para gerar leads e consolidar a marca no mercado.
 
