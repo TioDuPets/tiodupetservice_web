@@ -45,7 +45,7 @@ nav{
 
 .imagem-fundo {
     padding: 20px;
-    background-image: url('tiodumainimage.jpg');
+    background-image: url('images/tiodumainimage.jpg');
     background-size: cover;
     background-position-x: center;
     height: 120vh;
@@ -238,18 +238,24 @@ nav{
 	border: 3px solid;
     border-radius: 10pt;
     background-color: #010193;
-    text-align: center;
     padding: 10px;
 }
 
 .footer p {
+    text-align: center;
     font-size: large;
     color: #ffffff;
 }
 
 .footer hr {
+    text-align: center;
     border: 0;
     height: 2px;
     background-color: #ffffff;
 
+}
+
+span {
+    content: '\2699';
+    color: #ffffff;
 }
