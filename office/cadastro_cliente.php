@@ -13,28 +13,46 @@ include 'header.php';
 
 <body>
 	<div>
-		<h1 class="w3-center w3-teal w3-round-large w3-margin">Cadastro de Cliente</h1>
-		<form action="cadastroAction_cliente.php" class="w3-container" method='post'>
-		<label class="w3-text-teal" style="font-weight: bold;">Código</label>
-			<input name="txtID" class="w3-input w3-grey w3-border" disabled><br>
+		<h1 class="w">Cadastro de Cliente</h1>
+		<form action="cadastroAction_cliente.php" class="" method='post'>
+		<label class="" style="font-weight: bold;">Código</label>
+			<input name="txtID" class="" disabled><br>
 
-			<label class="w3-text-teal" style="font-weight: bold;">Nome Cliente</label>
-			<input name="txtNome" class="w3-input w3-light-grey w3-border" required><br>
+			<label class="" style="font-weight: bold;">Nome Cliente</label>
+			<input name="txtNome" class="" required><br>
 
-			<label class="w3-text-teal" style="font-weight: bold;">CPF</label>
-			<input name="txtCpf" class="w3-input w3-light-grey w3-border" required><br>
+			<label class="" style="font-weight: bold;">CPF</label>
+			<input name="txtCpf" class="" required><br>
 
-			<label class="w3-text-teal" style="font-weight: bold;">Telefone</label>
-			<input name="txtTelefone" class="w3-input w3-light-grey w3-border" required><br>
+			<label class="" style="font-weight: bold;">Telefone</label>
+			<input name="txtTelefone" class="" required><br>
 
-			<label class="w3-text-teal" style="font-weight: bold;">Email</label>
-			<input name="txtEmail" class="w3-input w3-light-grey w3-border" required><br>
+			<label class="" style="font-weight: bold;">Email</label>
+			<input name="txtEmail" class="" required><br>
 
-			<label class="w3-text-teal" style="font-weight: bold;">ID do Pet</label>
-			<input name="txtPetID" class="w3-input w3-light-grey w3-border" required><br>
+			<label class="" style="font-weight: bold;">Endereço</label>
+			<input name="txtEndereco" class="" required><br>
 
-			<button name="btnAdicionar" class="w3-button w3-teal w3-cell w3-round-large w3-right w3-margin-right">
-				<i class="w3-xxlarge fa fa-user-plus"></i> Adicionar
+			<label class="" style="font-weight: bold;">Número</label>
+			<input name="txtNumero" class="" type="number"><br>
+
+			<label class="" style="font-weight: bold;">Complemento</label>
+			<input name="txtComplemento" class=""><br>
+
+			<label class="" style="font-weight: bold;">Bairro</label>
+			<input name="txtBairro" class="" required><br>
+
+			<label class="" style="font-weight: bold;">CEP</label>
+			<input name="txtCep" class="" required><br>
+
+			<label class="" style="font-weight: bold;">Cidade</label>
+			<input name="txtCidade" class="" required><br>
+
+			<label class="" style="font-weight: bold;">Estado</label>
+			<input name="txtEstado" class="" required><br>
+
+			<button name="btnAdicionar" class="">
+				<i class="fa fa-user-plus"></i> Adicionar
 			</button>
 		</form>
 	</div>

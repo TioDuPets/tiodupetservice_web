@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Cadastro de Cliente</title>
+	<title>Cadastro de Serviço</title>
 </head>
 <body>
 	<div class="">
@@ -17,11 +17,11 @@
 		if ($conexao->connect_error) {
 			die("Connection failed: " . $conexao->connect_error);
 		}
-		$sql = "INSERT INTO cliente (nome, cpf, telefone, email, endereco, numero, complemento, bairro, cep, cidade, estado) VALUES ('" . $_POST['txtNome'] . "', '" . $_POST['txtCpf'] . "', '" . $_POST['txtTelefone'] . "', '" . $_POST['txtEmail'] . "', '" . $_POST['txtEndereco'] . "', '" . $_POST['txtNumero'] . "', '" . $_POST['txtComplemento'] . "', '" . $_POST['txtBairro'] . "', '" . $_POST['txtCep'] . "', '" . $_POST['txtCidade'] . "', '" . $_POST['txtEstado'] . "')";
+		$sql = "INSERT INTO servico (nome, tipo, preco) VALUES ('" . $_POST['txtNome'] . "', '" . $_POST['txtTipo'] . "', '" . $_POST['txtPreco'] . "')";
 		if ($conexao->query($sql) === TRUE) {
 			echo ' 
-							<a href="main.php"> 
-							<h1 class="">Cliente Salvo com sucesso! </h1> </a> ';
+							<a href="main.php">
+							<h1 class="">Pet Salvo com sucesso! </h1> </a> ';
 		} else {
 			echo '
 							 <a href="main.php">
