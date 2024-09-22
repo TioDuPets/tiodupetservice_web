@@ -138,15 +138,15 @@ nav{
         <!-- Dropdown de Alteração -->
         <li class="dropdown">
 
-            <a class="dropbtn">Atualização</a>
+            <a class="dropbtn">Consulta</a>
 
             <div class="dropdown-content">
 
                 <ul>
-                    <li><a href="listar_pet.php">Atualizar Pet</a></li>
-                    <li><a href="listar_cliente.php">Atualizar Cliente</a></li>
-                    <li><a href="listar_veterinario.php">Atualizar Veterinário</a></li>
-                    <li><a href="listar_servico.php">Atualizar Serviço</a></li>
+                    <li><a href="listar_pet.php">Consultar Pet</a></li>
+                    <li><a href="listar_cliente.php">Consultar Cliente</a></li>
+                    <li><a href="listar_veterinario.php">Consultar Veterinário</a></li>
+                    <li><a href="listar_servico.php">Consultar Serviço</a></li>
                 </ul>
 
             </div>

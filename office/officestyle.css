@@ -1,5 +1,5 @@
-.container-centered {
-    width: 200%;
+/*.container-centered {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +20,8 @@
 
 }
 
-/* Largura da div do formulário */
 .form-container {
-    width: 200%;
+    width: 100%;
     max-width: 100px;
     background-color: #f8f9fa;
     padding: 300px;
@@ -80,7 +79,6 @@ input:disabled {
     background-color: #e9ecef;
 }
 
-/* Estilização do botão */
 button{
     display: block; 
     background-color: #007bff;

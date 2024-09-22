@@ -14,32 +14,37 @@ include 'header.php';
 </head>
 <body>
 
-	<div class="">
-		<h1 class="">EXCLUIR:
-			<?php echo " " . $_GET['id'] ?>
-		</h1>
-		<form action="excluirAction_pet.php" class="" method='post'>
-			<input name="txtID" class="" type="hidden" value="<?php echo $_GET['id'] ?>">
+	<section>
+      <div class="container-centered">
+        <div class="form-container">
+
+                            <h1 class="text-center">EXCLUIR:<?php echo " " . $_GET['id'] ?></h1>
+
+		<form action="excluirAction_pet.php" method='post'>
+			<input name="txtID" type="hidden" value="<?php echo $_GET['id'] ?>">
 			<br>
-			<label class="" >Nome</label>
-			<input name="txtNome" class="" disabled value="<?php echo $_GET['nome'] ?>">
+			<label >Nome</label>
+			<input name="txtNome" disabled value="<?php echo $_GET['nome'] ?>">
 			<br>
-			<label class="" >Sexo</label>
-			<input name="txtApelido" class="" disabled value="<?php echo $_GET['sexo'] ?>">
+			<label >Sexo</label>
+			<input name="txtApelido" disabled value="<?php echo $_GET['sexo'] ?>">
 			<br>
-			<label class="" >Espécie</label>
-			<input name="txtEmail" class="" disabled value="<?php echo $_GET['especie'] ?>">
+			<label >Espécie</label>
+			<input name="txtEmail" disabled value="<?php echo $_GET['especie'] ?>">
 			<br>
 
             <div class="form-content">
-			<a href="main.php" class=""	style="text-decoration:none; ">	<i class="fa fa-ban" style="font-size:5em"></i>
-		<p style="font-weight:bold;">CANCELAR EXCLUSÃO</p>
+				<button name="btnCancelar"><a href="listar_pet.php">
+				<i class="fa fa-ban"></i> Cancelar Exclusão.</a>
+				</button>
 
-			<button name="btnExcuir" class="">
+				<button name="btnExcuir">
 				<i class="fa fa-check"></i> Confirmar Exclusão.
-			</button>
-</div>
+				</button>
+		</div>
 		</form>
-	</div>
+		</div>
+		</div>
+</section>
 </body>
 </html>
