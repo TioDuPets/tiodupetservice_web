@@ -49,4 +49,7 @@ include 'header.php';
 		</div>
 </section>
 </body>
+<?php
+include 'footer.php';
+?>
 </html>
