@@ -20,26 +20,27 @@ include 'header.php';
             <label for="txtID" hidden></label>
             <input name="txtID" id="txtID" type="text" hidden>
 
+            <div class="form-content">
             <label for="txtNome">Nome Cliente</label>
             <input name="txtNome" id="txtNome" type="text" required>
 
-            <div class="form-content">
+
                 <label for="txtCpf">CPF</label>
                 <input name="txtCpf" id="txtCpf" type="text" required>
+            </div>
 
+            <div class="form-content">
                 <label for="txtTelefone">Telefone</label>
                 <input name="txtTelefone" id="txtTelefone" type="text" required>
-            </div>
 
-            <div class="form-content">
                 <label for="txtEmail">Email</label>
                 <input name="txtEmail" id="txtEmail" type="email" required>
-	
-                <label for="txtEndereco">Endereço</label>
-                <input name="txtEndereco" id="txtEndereco" type="text" required>
             </div>
 
             <div class="form-content">
+                <label for="txtEndereco">Endereço</label>
+                <input name="txtEndereco" id="txtEndereco" type="text" required>
+
                 <label for="txtNumero">Número</label>
                 <input name="txtNumero" id="txtNumero" type="number">
 

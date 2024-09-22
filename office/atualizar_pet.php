@@ -25,12 +25,15 @@ include 'header.php';
             <div class="form-content">
 			<label type="text">Nome Pet</label>
 			<input name="txtNome"  value="<?php echo $_GET['nome'] ?>">
+
+			<label type="number">RGA</label>
+			<input name="txtRga" value="<?php echo $_GET['rga'] ?>">
 			<br>
             </div>
             <div class="form-content">
 			<label type="text">Sexo</label>
 			<input name="txtSexo"  value="<?php echo $_GET['sexo'] ?>">
-			<br>
+
 			<label type="text">Espécie</label>
 			<input name="txtEspecie"  value="<?php echo $_GET['especie'] ?>">
 			<br>
@@ -38,7 +41,7 @@ include 'header.php';
             <div class="form-content">
 			<label type="text">Raça</label>
 			<input name="txtRaca"  value="<?php echo $_GET['raca'] ?>">
-			<br>
+	
 			<label type="text">Cor</label>
 			<input name="txtCor"  value="<?php echo $_GET['cor'] ?>">
 			<br>
@@ -46,16 +49,15 @@ include 'header.php';
             <div class="form-content">
 			<label type="number">Idade</label>
 			<input name="txtIdade"  value="<?php echo $_GET['idade'] ?>">
-			<br>
+	
 			<label type="text">Porte</label>
 			<input name="txtPorte"  value="<?php echo $_GET['porte'] ?>">
 			<br>
             </div>
-            <div class="form-content">
-            <label type="number">RGA</label>
-			<input name="txtRga" value="<?php echo $_GET['rga'] ?>">
-			<br>
-            </div>
+
+			<button name="btnCancelar"><a href="listar_pet.php">
+				<i class="fa fa-ban"></i> Cancelar Atualização.</a>
+				</button>
 
 			<button name="btnAtualizar" >
 				<i class="fa fa-paw"></i> Atualizar

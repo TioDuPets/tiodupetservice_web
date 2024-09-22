@@ -13,25 +13,24 @@ include 'header.php';
 
 </head>
 <body>
-	<div class="container-centered"> 
+<div class="container-centered"> 
 		<div class="form-container">
 			<h1 class="text-center">Cadastro de Serviço</h1>
-			<form action="cadastroAction_servico.php" method="post">
-				<label for="txtID"></label>
-				<input type="text" name="txtID" id="txtID" hidden>
 
-				<div class="form-content">
-					<label for="txtNome">Nome do Serviço</label>
-					<input type="text" name="txtNome" id="txtNome" required>
-				</div>
+        		<form action="cadastroAction_servico.php" method="post">
+          		  <label for="txtID"></label>
+	          		<input type="text" name="txtID" id="txtID" hidden>
 
 					<div class="form-content">
-					<label for="txtTipo">Tipo</label>
-					<input type="text" name="txtTipo" id="txtTipo" required>
+						<label for="txtServico">Servico</label>
+						<input type="text" name="txtServico" id="txtServico" required>
 
-					<label for="txtPreco">Preço</label>
-					<input type="text" name="txtPreco" id="txtPreco" required>
-				</div>
+                		<label for="txtTipo">Tipo</label>
+                		<input type="text" name="txtTipo" id="txtTipo" required>
+
+						<label for="txtPreco">Preço</label>
+						<input type="text" name="txtPreco" id="txtPreco" required>
+					</div>
 
 				<button type="submit"><i class="fa fa-wrench"></i> Adicionar</button>
 			</form>

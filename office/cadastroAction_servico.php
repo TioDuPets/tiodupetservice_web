@@ -17,11 +17,11 @@
 		if ($conexao->connect_error) {
 			die("Connection failed: " . $conexao->connect_error);
 		}
-		$sql = "INSERT INTO servico (nome, tipo, preco) VALUES ('" . $_POST['txtNome'] . "', '" . $_POST['txtTipo'] . "', '" . $_POST['txtPreco'] . "')";
+		$sql = "INSERT INTO servico (servico, tipo, preco) VALUES ('" . $_POST['txtServico'] . "', '" . $_POST['txtTipo'] . "', '" . $_POST['txtPreco'] . "')";
 		if ($conexao->query($sql) === TRUE) {
-			echo ' 
+			echo '
 							<a href="main.php">
-							<h1 class="">Pet Salvo com sucesso! </h1> </a> ';
+							<h1 class="">Serviço Salvo com sucesso! </h1> </a> ';
 		} else {
 			echo '
 							 <a href="main.php">

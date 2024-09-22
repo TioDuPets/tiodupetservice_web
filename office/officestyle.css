@@ -1,11 +1,9 @@
-/*.container-centered {
-    width: 100%;
+.container-centered {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    display: flex;
-    margin: 200px auto;
+    margin: 20px auto;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10pt;
@@ -22,15 +20,13 @@
 
 .form-container {
     width: 100%;
-    max-width: 100px;
     background-color: #f8f9fa;
-    padding: 300px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-content {
-    
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -59,7 +55,6 @@ label {
     font-weight: bold;
     justify-content:baseline;
     display: flex;
-    
 }
 
 
@@ -80,7 +75,8 @@ input:disabled {
 }
 
 button{
-    display: block; 
+    justify-content: center;
+    display: flex;
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -88,15 +84,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    text-align:right;
-    margin-left: 0;
-    align-items:unset
+
 }
 
 button:hover {
     background-color: #0056b3;
-}
-
-.form-container button {
-    margin-left: 0;
 }

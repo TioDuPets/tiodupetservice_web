@@ -61,14 +61,9 @@ include 'header.php';
                              <thead>
                               <tr>
                                <th>Código</th>
-                               <th>Nome Pet</th>
-                               <th>RGA</th>
-                               <th>Sexo</th>
-                               <th>Espécie</th>
-                               <th>Raça</th>
-                               <th>Cor</th>
-                               <th>Idade</th>
-                               <th>Porte</th>
+                               <th>Serviço</th>
+                               <th>Tipo</th>
+                               <th>Preço</th>
                                <th>Excluir</hd>
                                <th>Atualizar</th>
                                </tr>
@@ -77,40 +72,24 @@ include 'header.php';
                     </div>
                 </section> ';
 
-        $sql = "SELECT * FROM pet";
+        $sql = "SELECT * FROM servico";
         $resultado = $conexao->query($sql);
         if ($resultado != null)
             foreach ($resultado as $linha) {
                 echo '<tr>';
                 echo '<td>' . $linha['id'] . '</td>';
-                echo '<td>' . $linha['nome'] . '</td>';
-                echo '<td>' . $linha['rga'] . '</td>';
-                echo '<td>' . $linha['sexo'] . '</td>';
-                echo '<td>' . $linha['especie'] . '</td>';
-                echo '<td>' . $linha['raca'] . '</td>';
-                echo '<td>' . $linha['cor'] . '</td>';
-                echo '<td>' . $linha['idade'] . '</td>';
-                echo '<td>' . $linha['porte'] . '</td>';
-
-                echo '<td><a href="excluir_pet.php?id=' . $linha['id'] .
-                                             '&nome=' . $linha['nome'] .
-                                             '&rga=' . $linha['rga'] .
-                                              '&sexo=' . $linha['sexo'] .
-                                               '&especie=' . $linha['especie'] .
-                                                '&raca=' . $linha['raca'] .
-                                                 '&cor=' . $linha['cor'] .
-                                                  '&idade=' . $linha['idade'] .
-                                                   '&porte=' . $linha['porte'] .
+                echo '<td>' . $linha['servico'] . '</td>';
+                echo '<td>' . $linha['tipo'] . '</td>';
+                echo '<td>' . $linha['preco'] . '</td>';
+                echo '<td><a href="excluir_servico.php?id=' . $linha['id'] .
+                                             '&servico=' . $linha['servico'] .
+                                              '&tipo=' . $linha['tipo'] .
+                                               '&preco=' . $linha['preco'] .
                                                      '"><i class="fa fa-user-times"></i></a></td></td>';
-                echo '<td><a href="atualizar_pet.php?id=' . $linha['id'] .
-                                             '&nome=' . $linha['nome'] .
-                                              '&rga=' . $linha['rga'] .
-                                              '&sexo=' . $linha['sexo'] .
-                                               '&especie=' . $linha['especie'] .
-                                                '&raca=' . $linha['raca'] .
-                                                 '&cor=' . $linha['cor'] .
-                                                  '&idade=' . $linha['idade'] .
-                                                   '&porte=' . $linha['porte'] .
+                echo '<td><a href="atualizar_servico.php?id=' . $linha['id'] .
+                                             '&servico=' . $linha['servico'] .
+                                              '&tipo=' . $linha['tipo'] .
+                                               '&preco=' . $linha['preco'] .
                                                      '"><i class="fa fa-refresh"></i></a></td></td>';
  
                 echo '</tr>';

@@ -10,7 +10,7 @@ include 'header.php';
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="officestyle.css">
-	<title>Excluir</title>
+	<title>Excluir Cliente</title>
 </head>
 <body>
 
@@ -18,25 +18,23 @@ include 'header.php';
       <div class="container-centered">
         <div class="form-container">
 
-                            <h1 class="text-center">EXCLUIR PET:<?php echo " " . $_GET['id'] ?></h1>
+                            <h1 class="text-center">EXCLUIR CLIENTE:<?php echo " " . $_GET['id'] ?></h1>
 
-		<form action="excluirAction_pet.php" method='post'>
+		<form action="excluirAction_cliente.php" method='post'>
 			<input name="txtID" type="hidden" value="<?php echo $_GET['id'] ?>">
 			<br>
-			<div class="form-content">
 			<label >Nome</label>
 			<input name="txtNome" disabled value="<?php echo $_GET['nome'] ?>">
 			<br>
-			<label >Sexo</label>
-			<input name="txtApelido" disabled value="<?php echo $_GET['sexo'] ?>">
+			<label >CPF</label>
+			<input name="txtCpf" disabled value="<?php echo $_GET['cpf'] ?>">
 			<br>
-			<label >Espécie</label>
-			<input name="txtEspecie" disabled value="<?php echo $_GET['especie'] ?>">
+			<label >Telefone</label>
+			<input name="txtTelefone" disabled value="<?php echo $_GET['telefone'] ?>">
 			<br>
-</div>
 
             <div class="form-content">
-				<button name="btnCancelar"><a href="listar_pet.php">
+				<button name="btnCancelar"><a href="listar_cliente.php">
 				<i class="fa fa-ban"></i> Cancelar Exclusão.</a>
 				</button>
 

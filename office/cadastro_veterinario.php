@@ -38,20 +38,20 @@ include 'header.php';
 
 						<label for="txtNumero">Número</label>
 						<input type="number" name="txtNumero" id="txtNumero">
-					</div>
 
-					<div class="form-content">
 						<label for="txtComplemento">Complemento</label>
 						<input type="text" name="txtComplemento" id="txtComplemento">
-
-						<label for="txtBairro">Bairro</label>
-						<input type="text" name="txtBairro" id="txtBairro" required>
 					</div>
 
 					<div class="form-content">
+						<label for="txtBairro">Bairro</label>
+						<input type="text" name="txtBairro" id="txtBairro" required>
+
 						<label for="txtCep">CEP</label>
 						<input type="text" name="txtCep" id="txtCep" required>
+					</div>
 
+					<div class="form-content">
 						<label for="txtCidade">Cidade</label>
 						<input type="text" name="txtCidade" id="txtCidade" required>
 
