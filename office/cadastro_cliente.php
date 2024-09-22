@@ -8,51 +8,62 @@ include 'header.php';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="officestyle.css">
 	<title>Cadastro Cliente</title>
 </head>
 
 <body>
-	<div>
-		<h1 class="w">Cadastro de Cliente</h1>
-		<form action="cadastroAction_cliente.php" class="" method='post'>
-		<label class="" style="font-weight: bold;">Código</label>
-			<input name="txtID" class="" disabled><br>
+<div class="container-centered">
+    <div class="form-container">
+        <h1 class="text-center">Cadastro de Cliente</h1>
+        <form action="cadastroAction_cliente.php" method="post">
+            <label for="txtID" hidden></label>
+            <input name="txtID" id="txtID" type="text" hidden>
 
-			<label class="" style="font-weight: bold;">Nome Cliente</label>
-			<input name="txtNome" class="" required><br>
+            <label for="txtNome">Nome Cliente</label>
+            <input name="txtNome" id="txtNome" type="text" required>
 
-			<label class="" style="font-weight: bold;">CPF</label>
-			<input name="txtCpf" class="" required><br>
+            <div class="form-content">
+                <label for="txtCpf">CPF</label>
+                <input name="txtCpf" id="txtCpf" type="text" required>
 
-			<label class="" style="font-weight: bold;">Telefone</label>
-			<input name="txtTelefone" class="" required><br>
+                <label for="txtTelefone">Telefone</label>
+                <input name="txtTelefone" id="txtTelefone" type="text" required>
+            </div>
 
-			<label class="" style="font-weight: bold;">Email</label>
-			<input name="txtEmail" class="" required><br>
+            <div class="form-content">
+                <label for="txtEmail">Email</label>
+                <input name="txtEmail" id="txtEmail" type="email" required>
+	
+                <label for="txtEndereco">Endereço</label>
+                <input name="txtEndereco" id="txtEndereco" type="text" required>
+            </div>
 
-			<label class="" style="font-weight: bold;">Endereço</label>
-			<input name="txtEndereco" class="" required><br>
+            <div class="form-content">
+                <label for="txtNumero">Número</label>
+                <input name="txtNumero" id="txtNumero" type="number">
 
-			<label class="" style="font-weight: bold;">Número</label>
-			<input name="txtNumero" class="" type="number"><br>
+                <label for="txtComplemento">Complemento</label>
+                <input name="txtComplemento" id="txtComplemento" type="text">
+            </div>
 
-			<label class="" style="font-weight: bold;">Complemento</label>
-			<input name="txtComplemento" class=""><br>
+            <div class="form-content">
+                <label for="txtBairro">Bairro</label>
+                <input name="txtBairro" id="txtBairro" type="text" required>
 
-			<label class="" style="font-weight: bold;">Bairro</label>
-			<input name="txtBairro" class="" required><br>
+                <label for="txtCep">CEP</label>
+                <input name="txtCep" id="txtCep" type="text" required>
+            </div>
 
-			<label class="" style="font-weight: bold;">CEP</label>
-			<input name="txtCep" class="" required><br>
+            <div class="form-content">
+                <label for="txtCidade">Cidade</label>
+                <input name="txtCidade" id="txtCidade" type="text" required>
 
-			<label class="" style="font-weight: bold;">Cidade</label>
-			<input name="txtCidade" class="" required><br>
+                <label for="txtEstado">Estado</label>
+                <input name="txtEstado" id="txtEstado" type="text" required>
+            </div>
 
-			<label class="" style="font-weight: bold;">Estado</label>
-			<input name="txtEstado" class="" required><br>
-
-			<button name="btnAdicionar" class="">
-				<i class="fa fa-user-plus"></i> Adicionar
-			</button>
-		</form>
-	</div>
+            <button type="submit"><i class="fa fa-user-plus"></i> Adicionar</button>
+        </form>
+    </div>
+</div>

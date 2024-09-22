@@ -8,48 +8,60 @@ include 'header.php';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="officestyle.css">
 	<title>Cadastro Veterinário</title>
 </head>
 
 <body>
-	<div>
-		<h1 class="w">Cadastro de Veterinário</h1>
-		<form action="cadastroAction_veterinario.php" class="" method='post'>
-		<label class="" style="font-weight: bold;">Código</label>
-			<input name="txtID" class="" disabled><br>
+		<div class="container-centered">
+			<div class="form-container">
+				<h1 class="text-center">Cadastro de Veterinário</h1>
+				<form action="cadastroAction_veterinario.php" method="post">
+					<input type="text" name="txtID" hidden>
 
-			<label class="" style="font-weight: bold;">Nome Veterinário</label>
-			<input name="txtNome" class="" required><br>
+					<div class="form-content">
+						<label for="txtNome">Nome Veterinário</label>
+						<input type="text" name="txtNome" id="txtNome" required>
+					</div>
 
-			<label class="" style="font-weight: bold;">Telefone</label>
-			<input name="txtTelefone" class="" required><br>
+					<div class="form-content">
+						<label for="txtTelefone">Telefone</label>
+						<input type="text" name="txtTelefone" id="txtTelefone" required>
 
-			<label class="" style="font-weight: bold;">Email</label>
-			<input name="txtEmail" class="" required><br>
+						<label for="txtEmail">Email</label>
+						<input type="email" name="txtEmail" id="txtEmail" required>
+					</div>
 
-			<label class="" style="font-weight: bold;">Endereço</label>
-			<input name="txtEndereco" class="" required><br>
+					<div class="form-content">
+						<label for="txtEndereco">Endereço</label>
+						<input type="text" name="txtEndereco" id="txtEndereco" required>
 
-			<label class="" style="font-weight: bold;">Número</label>
-			<input name="txtNumero" class="" type="number"><br>
+						<label for="txtNumero">Número</label>
+						<input type="number" name="txtNumero" id="txtNumero">
+					</div>
 
-			<label class="" style="font-weight: bold;">Complemento</label>
-			<input name="txtComplemento" class=""><br>
+					<div class="form-content">
+						<label for="txtComplemento">Complemento</label>
+						<input type="text" name="txtComplemento" id="txtComplemento">
 
-			<label class="" style="font-weight: bold;">Bairro</label>
-			<input name="txtBairro" class="" required><br>
+						<label for="txtBairro">Bairro</label>
+						<input type="text" name="txtBairro" id="txtBairro" required>
+					</div>
 
-			<label class="" style="font-weight: bold;">CEP</label>
-			<input name="txtCep" class="" required><br>
+					<div class="form-content">
+						<label for="txtCep">CEP</label>
+						<input type="text" name="txtCep" id="txtCep" required>
 
-			<label class="" style="font-weight: bold;">Cidade</label>
-			<input name="txtCidade" class="" required><br>
+						<label for="txtCidade">Cidade</label>
+						<input type="text" name="txtCidade" id="txtCidade" required>
 
-			<label class="" style="font-weight: bold;">Estado</label>
-			<input name="txtEstado" class="" required><br>
+						<label for="txtEstado">Estado</label>
+						<input type="text" name="txtEstado" id="txtEstado" required>
+					</div>
 
-			<button name="btnAdicionar" class="">
-				<i class="fa fa-ambulance"></i> Adicionar
-			</button>
-		</form>
-	</div>
+					<button type="submit"><i class="fa fa-ambulance"></i> Adicionar</button>
+
+				</form>
+			</div>
+		</div>
+</body>

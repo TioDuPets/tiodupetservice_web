@@ -9,7 +9,7 @@
 	<title>Excluir</title>
 </head>
 <body>
-	<a href="cadastro.php" class="w3-display-topmiddle w3-red w3-center w3-padding w3-button"
+	<a href="listar_pet.php" class="w3-display-topmiddle w3-red w3-center w3-padding w3-button"
 		style="text-decoration:none; ">
 		<i class="fa fa-ban" style="font-size:5em"></i>
 		<p style="font-weight:bold;">CANCELAR EXCLUSÃO</p>
@@ -18,7 +18,7 @@
 		<h1 class="w3-center w3-teal w3-round-large w3-margin">EXCLUIR:
 			<?php echo " " . $_GET['id'] ?>
 		</h1>
-		<form action="excluirAction.php" class="w3-container w" method='post'>
+		<form action="excluirAction_pet.php" class="w3-container w" method='post'>
 			<input name="txtID" class="w3-input w3-grey w3-border" type="hidden" value="<?php echo $_GET['id'] ?>">
 			<br>
 			<label class="w3-text-teal" style="font-weight: bold;">Nome</label>

@@ -8,46 +8,56 @@ include 'header.php';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="officestyle.css">
 	<title>Cadastro Pet</title>
 
 
 </head>
 <body>
-	<div class="">
-		<h1 class="">Cadastro de Pet</h1>
-		<form action="cadastroAction_pet.php" class="" method='post'>
-			
-			<label class="" style="font-weight: bold;">Código</label>
-			<input name="txtID" class="" disabled><br>
 
-			<label class="" style="font-weight: bold;">Nome Pet</label>
-			<input name="txtNome" class="" required><br>
+<section>
+<div class="container-centered">
+    <div class="form-container">
+        <h1 class="text-center">Cadastro de Pet</h1>
+        <form action="cadastroAction_pet.php" method="post">
+            <label for="txtID"></label>
+            <input type="text" name="txtID" id="txtID" hidden>
 
-			<label class="" style="font-weight: bold;">Sexo</label>
-			<input name="txtSexo" class="" required><br>
+            <label for="txtNome">Nome Pet</label>
+            <input type="text" name="txtNome" id="txtNome" required>
 
-			<label class="" style="font-weight: bold;">Espécie</label>
-			<input name="txtEspecie" class="" required><br>
+            <div class="form-content">
+                <label for="txtSexo">Sexo</label>
+                <input type="text" name="txtSexo" id="txtSexo" required>
 
-			<label class="" style="font-weight: bold;">Raça</label>
-			<input name="txtRaca" class=""><br>
+                <label for="txtEspecie">Espécie</label>
+                <input type="text" name="txtEspecie" id="txtEspecie" required>
+            </div>
 
-			<label class="" style="font-weight: bold;">Cor</label>
-			<input name="txtCor" class=""><br>
+            <div class="form-content">
+                <label for="txtRaca">Raça</label>
+                <input type="text" name="txtRaca" id="txtRaca">
 
-			<label class="" style="font-weight: bold;">Idade</label>
-			<input name="txtIdade" class="" type="number"><br>
+                <label for="txtCor">Cor</label>
+                <input type="text" name="txtCor" id="txtCor">
+            </div>
 
-			<label class="" style="font-weight: bold;">Porte</label>
-			<input name="txtPorte" class=""><br>
+            <div class="form-content">
+                <label for="txtIdade">Idade</label>
+                <input type="number" name="txtIdade" id="txtIdade">
 
-			<label class="" style="font-weight: bold;">RGA</label>
-			<input name="txtRga" class=""><br>
+                <label for="txtPorte">Porte</label>
+                <input type="text" name="txtPorte" id="txtPorte">
+            </div>
 
-			<button name="btnAdicionar" class="">
-				<i class="fa fa-paw"></i> Adicionar
-			</button>
-		</form>
-	</div>
+            <label for="txtRga">RGA</label>
+            <input type="text" name="txtRga" id="txtRga">
+
+            <button type="submit" class="botao"><i class="fa fa-paw"></i> Adicionar</button>
+        </form>
+    </div>
+</div>
+
+</section>
 </body>
 </html>

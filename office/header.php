@@ -30,9 +30,8 @@ a:hover{
 }
 
 nav{
-    position:fixed;
     font-size: 20px;
-    width: 99%;
+    width: 100%;
     display: flex;
     justify-content:space-around;
     align-items: center;
@@ -114,7 +113,6 @@ nav{
                 <ul>
                     <li><a href="servico_hotel.php">Hotel</a></li>
                     <li><a href="servico_creche.php">Creche</a></li>
-                    <li><a href="servico_banho.php">Banho</a></li>
                     <li><a href="servico_pet_sitter.php">Pet Sitter</a></li>
                 </ul>
             </div>
@@ -136,6 +134,24 @@ nav{
 
             </div>
         </li>
+
+        <!-- Dropdown de Alteração -->
+        <li class="dropdown">
+
+            <a class="dropbtn">Atualização</a>
+
+            <div class="dropdown-content">
+
+                <ul>
+                    <li><a href="atualizar_pet.php">Atualizar Pet</a></li>
+                    <li><a href="atualizar_cliente.php">Atualizar Cliente</a></li>
+                    <li><a href="atualizar_veterinario.php">Atualizar Veterinário</a></li>
+                    <li><a href="atualizar_servico.php">Atualizar Serviço</a></li>
+                </ul>
+
+            </div>
+        </li>
+
     </ul>
 </nav>
 </header>
