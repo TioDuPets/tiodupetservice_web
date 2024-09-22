@@ -41,7 +41,7 @@ include 'header.php';
 				<button name="btnExcuir">
 				<i class="fa fa-check"></i> Confirmar Exclusão.
 				</button>
-		</div>
+			</div>
 		</form>
 		</div>
 		</div>
