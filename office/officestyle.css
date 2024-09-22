@@ -1,10 +1,11 @@
 .container-centered {
+    width: 200%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     display: flex;
-    margin: 20px auto;
+    margin: 200px auto;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10pt;
@@ -21,15 +22,16 @@
 
 /* Largura da div do formulário */
 .form-container {
-    width: 100%;
-    max-width: 1000px;
+    width: 200%;
+    max-width: 100px;
     background-color: #f8f9fa;
-    padding: 30px;
+    padding: 300px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-content {
+    
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -45,13 +47,22 @@
     flex: 0.5;
     display: flex;
     align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
 label {
     font-weight: bold;
     justify-content:baseline;
     display: flex;
+    
 }
+
 
 input[type="text"],
 input[type="number"],
@@ -89,6 +100,5 @@ button:hover {
 }
 
 .form-container button {
-    width: auto;
     margin-left: 0;
 }

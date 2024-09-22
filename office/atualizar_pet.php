@@ -16,42 +16,50 @@ include 'header.php';
 <section>
     <div class="container-centered">
         <div class="form-container">
-            <h1 class="text-center">Atualizar Pet ID: <?php echo $_GET['id']; ?></h1>
-            <form action="atualizarAction_pet.php" method="post">
-                
-		<input name="txtID" class="" type="hidden" value="<?php echo $_GET['id'] ?>">
-		<br>
-                <label for="txtNome">Nome Pet</label>
-                <input name="txtNome" value="<?php echo $_GET['nome']; ?>">
 
-                <div class="form-content">
-                    <label>Sexo</label>
-                    <input name="txtSexo" value="<?php echo $_GET['sexo']; ?>">
+        <h1 class="text-center">Atualizar Pet - ID:<?php echo " " . $_GET['id'] ?></h1>
+		<form action="atualizarAction_pet.php" method='post'>
 
-                    <label>Espécie</label>
-                    <input name="txtEspecie" value="<?php echo $_GET['especie']; ?>">
-                </div>
+			<input name="txtID" type="hidden" value="<?php echo $_GET['id'] ?>">
+			<br>
+            <div class="form-content">
+			<label type="text">Nome Pet</label>
+			<input name="txtNome"  value="<?php echo $_GET['nome'] ?>">
+			<br>
+            </div>
+            <div class="form-content">
+			<label type="text">Sexo</label>
+			<input name="txtSexo"  value="<?php echo $_GET['sexo'] ?>">
+			<br>
+			<label type="text">Espécie</label>
+			<input name="txtEspecie"  value="<?php echo $_GET['especie'] ?>">
+			<br>
+            </div>
+            <div class="form-content">
+			<label type="text">Raça</label>
+			<input name="txtRaca"  value="<?php echo $_GET['raca'] ?>">
+			<br>
+			<label type="text">Cor</label>
+			<input name="txtCor"  value="<?php echo $_GET['cor'] ?>">
+			<br>
+            </div>
+            <div class="form-content">
+			<label type="number">Idade</label>
+			<input name="txtIdade"  value="<?php echo $_GET['idade'] ?>">
+			<br>
+			<label type="text">Porte</label>
+			<input name="txtPorte"  value="<?php echo $_GET['porte'] ?>">
+			<br>
+            </div>
+            <div class="form-content">
+            <label type="number">RGA</label>
+			<input name="txtRga" value="<?php echo $_GET['rga'] ?>">
+			<br>
+            </div>
 
-                <div class="form-content">
-                    <label>Raça</label>
-                    <input name="txtRaca" value="<?php echo $_GET['raca']; ?>">
-
-                    <label>Cor</label>
-                    <input name="txtCor" value="<?php echo $_GET['cor']; ?>">
-                </div>
-
-                <div class="form-content">
-                    <label>Idade</label>
-                    <input name="txtIdade" value="<?php echo $_GET['idade']; ?>">
-
-                    <label>Porte</label>
-                    <input name="txtPorte"value="<?php echo $_GET['porte']; ?>">
-                </div>
-
-                <label>RGA</label>
-                <input name="txtRga" value="<?php echo $_GET['rga']; ?>">
-
-		<button name="btnAtualizar" class=""><i class="fa fa-paw"></i> Atualizar</button>
+			<button name="btnAtualizar" >
+				<i class="fa fa-paw"></i> Atualizar
+			</button>
 
             </form>
         </div>

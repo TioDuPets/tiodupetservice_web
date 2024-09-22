@@ -4,12 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Exclusão</title>
 </head>
 <body>
-	<div class="w3-padding w3-content w3-text-grey w3-third w3-display-middle" id="eProfissional">
+	<div class="" id="eProfissional">
 		<?php
 		$servername = "localhost";
 		$username = "root";
@@ -23,12 +22,12 @@
 		if ($conexao->query($sql) === TRUE) {
 			echo '
 					 <a href="listar_pet.php">
-					  <h1 class="w3-button w3-teal">Pet Excluido com sucesso! </h1>
+					  <h1 class="">Pet Excluido com sucesso! </h1>
 					   </a> 
 					   ';
 		} else {
 			echo ' <a href="listar_pet.php">
-						    <h1 class="w3-button w3-teal">ERRO! </h1>
+						    <h1 class="">ERRO! </h1>
 							 </a> 
 							 ';
 		}

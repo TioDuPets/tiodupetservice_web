@@ -23,9 +23,11 @@ include 'header.php';
             <label for="txtID"></label>
             <input type="text" name="txtID" id="txtID" hidden>
 
+            <div class="form-content">
             <label for="txtNome">Nome Pet</label>
             <input type="text" name="txtNome" id="txtNome" required>
 
+            </div>
             <div class="form-content">
                 <label for="txtSexo">Sexo</label>
                 <input type="text" name="txtSexo" id="txtSexo" required>
@@ -48,10 +50,12 @@ include 'header.php';
 
                 <label for="txtPorte">Porte</label>
                 <input type="text" name="txtPorte" id="txtPorte">
-            </div>
+                </div>
+                <div class="form-content">
 
             <label for="txtRga">RGA</label>
             <input type="text" name="txtRga" id="txtRga">
+            </div>
 
             <button type="submit" class="botao"><i class="fa fa-paw"></i> Adicionar</button>
         </form>

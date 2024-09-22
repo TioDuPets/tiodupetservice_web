@@ -9,6 +9,35 @@ include 'header.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="officestyle.css">
+    <style>
+
+    .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+
+    margin: 1px 0;
+    font-size: 18px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: arial;
+    text-align: center;
+}
+
+.table th {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    background-color: #007bff;
+    color: white;
+
+}
+
+
+
+    </style>
         <title>Listagem de Pets</title>
     </head>
     <body>
@@ -23,24 +52,31 @@ include 'header.php';
             die("Connection failed: " . $conexao->connect_error);
         }
         echo ' 
-                            <div class="w3-paddingw3-content w3-half w3-display-topmiddle w3-margin"> 
-                            <h1 class="w3-center w3-teal w3-round-large w3-margin">Listagem de Pets</h1>
-                             <table class="w3-table-all w3-centered"> 
+
+            <section>
+                <div class="container-centered">
+                    <div class="form-container">
+                            <h1 class="text-center">Listagem de Pets</h1>
+                            <table class="table table-striped table-hover">
                              <thead>
-                              <tr class="w3-center w3-teal">
+                              <tr>
                                <th>Código</th>
-                                <th>Nome Pet</th>
-                                 <th>Sexo</th>
-                                 <th>Espécie</th>
-                                    <th>Raça</th>
-                                        <th>Cor</th>
-                                            <th>Idade</th>
-                                                <th>Porte</th>
-                                                    <th>RGA</th>
-                                                      <th>Excluir</th>
-                                                        <th>Atualizar</th>
-                                                         </tr> 
-                                     <thead> ';
+                               <th>Nome Pet</th>
+                               <th>Sexo</th>
+                               <th>Espécie</th>
+                               <th>Raça</th>
+                               <th>Cor</th>
+                               <th>Idade</th>
+                               <th>Porte</th>
+                               <th>RGA</th>
+                               <th>Excluir</hd>
+                               <th>Atualizar</th>
+                               </tr>
+                             <thead>
+                        </div>
+                    </div>
+                </section> ';
+
         $sql = "SELECT * FROM pet";
         $resultado = $conexao->query($sql);
         if ($resultado != null)
@@ -55,8 +91,26 @@ include 'header.php';
                 echo '<td>' . $linha['idade'] . '</td>';
                 echo '<td>' . $linha['porte'] . '</td>';
                 echo '<td>' . $linha['rga'] . '</td>';
-                echo '<td><a href="excluir_pet.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '&rga=' . $linha['rga'] . '"><i class="fa fa-user-times w3-large w3-text-teal"></i></a></td></td>';
-                echo '<td><a href="atualizar_pet.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '&rga=' . $linha['rga'] . '"><i class="fa fa-refresh w3-large w3-text-teal""></i></a></td></td>';
+                echo '<td><a href="excluir_pet.php?id=' . $linha['id'] .
+                                             '&nome=' . $linha['nome'] .
+                                              '&sexo=' . $linha['sexo'] .
+                                               '&especie=' . $linha['especie'] .
+                                                '&raca=' . $linha['raca'] .
+                                                 '&cor=' . $linha['cor'] .
+                                                  '&idade=' . $linha['idade'] .
+                                                   '&porte=' . $linha['porte'] .
+                                                    '&rga=' . $linha['rga'] .
+                                                     '"><i class="fa fa-user-times"></i></a></td></td>';
+                echo '<td><a href="atualizar_pet.php?id=' . $linha['id'] .
+                                             '&nome=' . $linha['nome'] .
+                                              '&sexo=' . $linha['sexo'] .
+                                               '&especie=' . $linha['especie'] .
+                                                '&raca=' . $linha['raca'] .
+                                                 '&cor=' . $linha['cor'] .
+                                                  '&idade=' . $linha['idade'] .
+                                                   '&porte=' . $linha['porte'] .
+                                                    '&rga=' . $linha['rga'] .
+                                                     '"><i class="fa fa-refresh"></i></a></td></td>';
  
                 echo '</tr>';
             }

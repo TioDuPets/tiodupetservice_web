@@ -143,10 +143,10 @@ nav{
             <div class="dropdown-content">
 
                 <ul>
-                    <li><a href="atualizar_pet.php">Atualizar Pet</a></li>
-                    <li><a href="atualizar_cliente.php">Atualizar Cliente</a></li>
-                    <li><a href="atualizar_veterinario.php">Atualizar Veterinário</a></li>
-                    <li><a href="atualizar_servico.php">Atualizar Serviço</a></li>
+                    <li><a href="listar_pet.php">Atualizar Pet</a></li>
+                    <li><a href="listar_cliente.php">Atualizar Cliente</a></li>
+                    <li><a href="listar_veterinario.php">Atualizar Veterinário</a></li>
+                    <li><a href="listar_servico.php">Atualizar Serviço</a></li>
                 </ul>
 
             </div>
