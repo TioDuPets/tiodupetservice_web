@@ -31,7 +31,7 @@ a:hover{
 
 nav{
     position:fixed;
-    width: 99%;
+    width: 99% !important;
     display: flex;
     justify-content:space-around;
     align-items: center;
@@ -41,16 +41,7 @@ nav{
     border-radius: 10pt;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 10pt;
-}
-
-.imagem-fundo {
-    padding: 20px;
-    background-image: url('images/tiodumainimage.jpg');
-    background-size: cover;
-    background-position-x: center;
-    height: 120vh;
-    border-radius: 10pt;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* ou qualquer valor suficientemente alto */
 }
 
 
@@ -132,16 +123,16 @@ nav{
 }
 
 
-
 .container {
+    
     padding: 20px;
     align-items: center;
     display: flex;
-    justify-content: space-between;
-    margin: 20px auto; /* Adicione margem superior e inferior para criar espaço externo */
-    background-color: #fff; /* Cor de fundo para a sombra */
+    justify-content:center;
+    margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Cria uma sombra suave */
     border-radius: 10pt;
+    background-color: ghostwhite;
   }
 
 .texto{
@@ -259,3 +250,4 @@ span {
     content: '\2699';
     color: #ffffff;
 }
+

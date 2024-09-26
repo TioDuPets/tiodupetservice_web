@@ -6,7 +6,6 @@
     <title>Tio Du Pets</title>
     <style>
 
-
 .footer {
 	border: 3px solid;
     border-radius: 10pt;
@@ -26,11 +25,6 @@
     height: 2px;
     background-color: #ffffff;
 
-}
-
-span {
-    content: '\2699';
-    color: #ffffff;
 }
 
     </style>
