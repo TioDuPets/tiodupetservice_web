@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tio Du Pets</title>
     <link rel="stylesheet" href="assets/style.css">
-    <link href="assets/images/carousel/carousel.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 
@@ -30,11 +30,11 @@
         </ul>
     </nav>
 </header>
-<br><br><br><br>
+
+<div style="height: 12vh;"></div>
+
 <main>
 
-
-    <section class="container">
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/images/carousel/carousel3.jpg" class="d-flex w-100" alt="carousel-image"/>
+            <img src="assets/images/carousel/carousel3.webp" class="d-flex w-100" alt="carousel-image"/>
             <div class="carousel-caption d-none d-md-block">
             </div>
           </div>
@@ -69,99 +69,101 @@
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-      </section>
+          <span class="visually-hidden" id="sobre-nos">Next</span>
+        </button >
+      </div >
 
-        <section class="container">
+      <div style="height: 4vh;"></div>
 
-            <div class="texto" id="sobre-nos">
-            <h2>Sobre Nós</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nosso hotel oferece:</p>
-            <ul>
-                <li>Ambiente seguro e confortável</li>
-                <li>Diversas atividades</li>
-                <li>Alimentação balanceada</li>
-                <li>Equipe qualificada</li>
-            </ul>
-            </div>
 
-             <div class="cards">
-                <div class="card">
-                    <img src="assets/images/ambiente-seguro.jpg" alt="Ambiente seguro e confortável">
-                    <p>Ambiente seguro e confortável</p>
+        <section class="container-fluid">
+            <div class="box">
+
+                <div class="texto" >
+                    <h1>Bem-vindo ao Tio Du Pets</h1>
+                    <h2>O Melhor Cuidado para o Seu Pet!</h2>
+                    <p>Aqui no <strong>Tio Du Pets</strong>, acreditamos que seu pet merece o melhor. Oferecemos um ambiente seguro, confortável e cheio de carinho para garantir que seu animal de estimação se sinta em casa, seja para uma estadia no nosso hotel, um dia de diversão na creche ou para o serviço personalizado de pet sitter.</p>
+                    
                 </div>
-                <div class="card">
-                    <img src="assets/images/atividades.jpg" alt="Diversas atividades">
-                    <p>Diversas atividades</p>
-                </div>
-                <div class="card">
-                    <img src="assets/images/alimentacao.jpg" alt="Alimentação balanceada">
-                    <p>Alimentação balanceada</p>
-                </div>
-                <div class="card">
-                    <img src="assets/images/equipe.jpg" alt="Equipe qualificada">
-                    <p>Equipe qualificada</p>
+
+                <div class="cards-panel">
+                    <div class="card">
+                        <img src="assets/images/ambiente-seguro.jpg" alt="Ambiente confortável">
+                        <div class="image-label">Ambiente confortável</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/atividades.jpg" alt="Diversas atividades">
+                        <div class="image-label">Diversas atividades</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/equipe.jpg" alt="Equipe qualificada">
+                        <div class="image-label">Equipe qualificada</div>
+                    </div>
                 </div>
             </div>
 
         </section>
 
-        <section class="container">
+        <div style="height: 4vh;"></div>
 
-            <div class="cards"></div>
-                <div class="card">
-                    <img src="images/ambiente-seguro.jpg" alt="Ambiente seguro e confortável">
-                    <p>Ambiente seguro e confortável</p>
-                </div>
-                <div class="card">
-                    <img src="images/atividades.jpg" alt="Diversas atividades">
-                    <p>Diversas atividades</p>
-                </div>
-                <div class="card">
-                    <img src="images/alimentacao.jpg" alt="Alimentação balanceada">
-                    <p>Alimentação balanceada</p>
-                </div>
-                <div class="card">
-                    <img src="images/equipe.jpg" alt="Equipe qualificada">
-                    <p>Equipe qualificada</p>
-                </div>
-            </div>
-
+        <section class="container-fluid">
+            <div class="box">
             <div class="texto" id="Serviços e comodidades">
-            <h2>Serviços e comodidades</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nosso hotel oferece:</p>
-            <ul>
-                <li>Ambiente seguro e confortável</li>
-                <li>Diversas atividades</li>
-                <li>Alimentação balanceada</li>
-                <li>Equipe qualificada</li>
-            </ul>
+                <h1>Serviços e comodidades</h1>
+                <h2>Aqui no Tio Du Pets, seu pet receberá todo carinho que merece"</h2>
+                <h4 style="letter-spacing: 3px;">Nós oferecemos:</h4>
+                <ul style="list-style-position: inside; padding-left: 0;">
+                    <li>Serviço de Hotelaria Pet</li>
+                    <li>Creche Animal</li>
+                    <li>Pet Sitter</li>
+                </ul>
             </div>
+
+            <div style="height: 2vh;"></div>
+
+            <div class="row justify-content-md-around text-center">
+                <div class="col col-lg-2">
+                  <img src="assets/images/hotel_pet.jpg" alt="hotel_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Hotel</h2>
+                  <p>Um lar longe de casa, com todo o conforto e cuidado que seu pet merece!</p>
+                </div>
+                <div class="col col-lg-2">
+                  <img src="assets/images/creche_pet.jpg" alt="creche_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Creche</h2>
+                  <p>Diversão garantida enquanto você cuida da sua rotina!</p>
+                </div>
+                <div class="col col-lg-2">
+                  <img src="assets/images/petsitter_pet.jpg" alt="petsitter_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Pet Sitter</h2>
+                  <p>Seu pet nas melhores mãos para que você tenha total tranquilidade!</p>
+                </div>
+              </div>
 
         </section>
 
+        <div style="height: 4vh;"></div>
         
-        <section class="container">
+        <section class="container-fluid">
+            <div class="box">
 
-            <div class="texto" id="Acomodações">
-            <h2>Acomodações</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nossas acomodações</p>
-            </div>
+                <div class="texto" >
+                    <h1>Acomodações</h1>
+                    <h4 style="letter-spacing: 3px;">O lar perfeito para o seu pet enquanto você está fora!</h4>
+                </div>
 
-             <div class="cards">
-                <div class="card">
-                    <img src="assets/images/acomodacao (1).png" alt="Acomodação">
-                </div>
-                <div class="card">
-                    <img src="assets/images/acomodacao (2).png" alt="Acomodação">
-                </div>
-                <div class="card">
-                    <img src="assets/images/acomodacao (3).png" alt="Acomodação">
+                <div class="cards-panel">
+                    <div class="card">
+                        <img src="assets/images/acomodacao1.jpg" alt="acomodacao1">
+                        <div class="image-label">Carinho</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/acomodacao2.jpg" alt="acomodacao2">
+                        <div class="image-label">Amor</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/acomodacao3.jpg" alt="acomodacao3">
+                        <div class="image-label">Conforto</div>
+                    </div>
                 </div>
             </div>
 
@@ -178,18 +180,55 @@
             <div class="texto" id="Localização">
             <h2>Nossa Localização</h2>
             </div>
+        </div>
 
         </section>
 
 </main>
 
 <script src="assets/mobile-navbar.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 
-<footer class="footer">
-    <div><p>&copy; M.F.F Consultoria. 2024 | Orgulhosamente criado com AMOR.</p><hr></div>
+<div class="fusion-footer">
+    <footer class="fusion-footer-widget-area fusion-widget-area fusion-footer-widget-area-center">
+    <div class="fusion-row">
+    <div class="fusion-columns fusion-columns-1 fusion-widget-area">
+    <div class="fusion-column fusion-column-last col-lg-12 col-md-12 col-sm-12">
+    <section id="text-6" class="fusion-footer-widget-column widget widget_text"> <div class="textwidget"><div class="_5aj7 _3-8j _20ud">
+    <div class="_4bl9">
+    <div><span class="_2iem"><br>
+    <img decoding="async" class="alignnone size-thumbnail wp-image-45" src="/assets/images/LogoTioDu.png" alt="" width="150" height="58"><br>
+    Avenida Baden Powell, 1344, Jardim Nova Europa,&nbsp;</span><span class="_2iem">Campinas /SP</span></div>
+    </div>
+    <div class="_4bl7">Ligar (19) 3383-8187<p></p>
+    </div>
+    </div>
+    </div>
+    <div style="clear:both;"></div></section><section id="social_links-widget-4" class="fusion-footer-widget-column widget social_links"><h4 class="widget-title fusion-responsive-typography-calculated" data-fontsize="25" style="--fontSize: 25; line-height: 1.5;" data-lineheight="37.5px"> </h4>
+    <div class="fusion-social-networks">
+    <div class="fusion-social-networks-wrapper">
+    <a class="fusion-social-network-icon fusion-tooltip" target="_self" href="https://www.facebook.com/danidupet/" rel="" data-placement="top" data-title="" data-toggle="tooltip" data-original-title="" title="" style="font-size:40px;"><img src="" height="" width="" alt=""></a>
+    <a class="fusion-social-network-icon fusion-tooltip fusion-facebook awb-icon-facebook" href="https://www.facebook.com/danidupet/" data-placement="top" data-title="Facebook" data-toggle="tooltip" data-original-title="Facebook" title="" aria-label="Facebook" rel="noopener noreferrer" target="_self" style="font-size:40px;color:#ffffff;"></a>
+    <a class="fusion-social-network-icon fusion-tooltip fusion-instagram awb-icon-instagram" href="https://www.instagram.com/danidu.pet/" data-placement="top" data-title="Instagram" data-toggle="tooltip" data-original-title="Instagram" title="" aria-label="Instagram" rel="noopener noreferrer" target="_self" style="font-size:40px;color:#ffffff;"></a>
+    </div>
+    </div>
+    <div style="clear:both;"></div></section> </div>
+    <div class="fusion-clearfix"></div>
+    </div> 
+    </div> 
+    </footer> 
+    <footer id="footer" class="fusion-footer-copyright-area fusion-footer-copyright-center">
+    <div class="fusion-row">
+    <div class="fusion-copyright-content">
+    <div class="fusion-copyright-notice" style="padding-bottom: 0px;">
+    <div>
+    Tio Du Pet Serviçe - 2024 | Todos os Direitos reservados | Orgulhosamente desenvolvido com AMOR por &copy; M.F.F Consultoria. |</div>
+    </div>
     <a href="http://localhost/tiodupetservice_web/office/login.php"><div style="text-align:end;"><span>&#9881;</span></div>
-</footer>
+    <div class="fusion-social-links-footer" style="display: none;">
+    </div>
 
 </html>
