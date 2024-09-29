@@ -180,8 +180,6 @@ nav{
 }
 
 .mapa {
-    width:auto;
-    height:auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -189,6 +187,16 @@ nav{
     border-radius: 10px;
     padding: 2%; /* Espaçamento interno */
     text-align: center; /* Centraliza o texto */
+}
+
+@media (max-width: 999px) {
+
+    .mapa iframe {
+        width: auto;
+        height: auto;
+        border: 0;
+    }
+
 }
 
 .card {
