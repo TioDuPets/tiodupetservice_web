@@ -275,7 +275,6 @@ nav{
     .card {
         background-color: #f5f5f5;
         text-align: center;
-        background-color: #f5f5f5;
         border: 1px solid #ccc;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -283,6 +282,103 @@ nav{
 
 
 }
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    text-align: center;
+}
+
+.texto {
+    margin-bottom: 20px;
+}
+
+.rating {
+    background: #252d3d00;
+    display: flex;
+    justify-content: center;
+    transform: rotateY(180deg);
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    display: block;
+    cursor: pointer;
+    width: 50px;
+}
+
+.rating label:before {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 50px;
+    color: #c6c6c67e;
+}
+
+.rating label:after {
+    content: '\f005';
+    font-family: fontAwesome;
+    position: absolute;
+    display: block;
+    font-size: 50px;
+    color: #ffff00;
+    top: 0;
+    opacity: 0;
+    transition: .5;
+    text-shadow: 0 4px 5px rgba(167, 167, 167, 0.5);
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+    opacity: 1;
+}
+
+.avaliacao-card{
+    width: 50vh;
+background-color: #f5f5f5;
+text-align: center;
+border: 1px solid #ccc;
+border-radius: 10px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.avaliacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.comentario{
+    display: flex;
+    align-items:baseline;
+}
+
+.avaliacao-rating {
+    display: flex;
+    justify-content: center;
+    transform: rotateY(180deg);
+}
+
+.inputed {
+    display:contents; /* Oculta o input */
+
+    width: 50px;
+    font-size: 50px;
+    color: #ffff00; /* Cor fixa das estrelas preenchidas */
+    font-family: fontAwesome;
+    text-shadow: 0 4px 5px rgba(167, 167, 167, 0.5);
+}
+
 
 footer {
     justify-content:center;
