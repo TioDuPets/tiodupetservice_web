@@ -136,7 +136,7 @@ nav{
 /* Caixa flutuante abaixo da navbar */
 .floating-box {
             position: fixed;
-            top: 90px; /* Abaixo da navbar */
+            top: 100px; /* Abaixo da navbar */
             left: 50%;
             transform: translateX(-50%);
             background-color: #f8f9fa;

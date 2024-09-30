@@ -34,7 +34,7 @@
 <div class="floating-box">
     <div class="dropdown-center">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Solicite um agendamento
+            Solicite um serviço
         </button>
         <ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Hospedagem')">Hospedagem</a></li>
@@ -51,20 +51,25 @@
 
     <!-- Formulário -->
     <div class="form-popup" id="reservationForm">
-        <form class="form-container" action="process_reservation.php" method="POST">
+        <form class="form-container" action="agendamentoAction.php" method="POST"> 
             <h3>Solicitação de Agendamento</h3>
+            <label for="txtID" hidden></label>
+            <input name="txtID" id="txtID" type="text" hidden>
+
+            <input type="hidden" name="serviceTypeInput" id="serviceTypeInput">
+            <input type="hidden" name="selectedDate" id="selectedDate">
+
             <label for="name"><b>Nome</b></label>
-            <input type="text" placeholder="Digite seu nome" name="name" id="name" required class="form-control mb-2">
+            <input type="text" placeholder="Digite seu nome" name="txtNome" id="txtNome" required class="form-control mb-2">
         
             <label for="phone"><b>Telefone</b></label>
-            <input type="tel" placeholder="Digite seu telefone" name="phone" id="phone" required class="form-control mb-2">
+            <input type="tel" placeholder="Digite seu telefone" name="txtTelefone" id="txtTelefone" required class="form-control mb-2">
         
             <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Digite seu email" name="email" id="email" required class="form-control mb-2">
+            <input type="email" placeholder="Digite seu email" name="txtEmail" id="txtEmail" required class="form-control mb-2">
         
-            <input type="hidden" name="service" id="serviceTypeInput">
-            <input type="hidden" name="date" id="selectedDate">
-        
+            <input type="hidden" name="lead_contatado" id="lead_contatado" value="Não">
+
             <button type="submit" class="btn btn-primary mt-2">Enviar Solicitação</button>
             <button type="button" class="btn btn-secondary mt-2" onclick="closeForm()">Cancelar</button>
         </form>

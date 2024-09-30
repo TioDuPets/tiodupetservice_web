@@ -40,18 +40,16 @@ nav{
     height: 12vh;
     border-radius: 10pt;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-bottom: 10pt;
 }
 
 .navbar li {
     float: left;
+    
 }
 
 .navbar li a, .dropbtn {
     display: inline-block;
     color: rgb(7, 7, 7);
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
@@ -65,7 +63,7 @@ nav{
 /* Estilo do conteúdo do dropdown */
 .dropdown-content {
     text-align: center;
-    width:19vh;
+    width: auto;
     display: none;
     position: absolute;
     background-color: #f0f001;
@@ -147,6 +145,21 @@ nav{
                     <li><a href="listar_cliente.php">Consultar Cliente</a></li>
                     <li><a href="listar_veterinario.php">Consultar Veterinário</a></li>
                     <li><a href="listar_servico.php">Consultar Serviço</a></li>
+                </ul>
+
+            </div>
+        </li>
+
+        <li class="dropdown">
+
+            <a class="dropbtn">Leads</a>
+
+            <div class="dropdown-content">
+
+                <ul>
+                    <li><a href="listar_lead.php">Consultar Agendamento</a></li>
+                    <li><a href="listar_avaliacao.php">Consultar Avaliação</a></li>
+
                 </ul>
 
             </div>
