@@ -68,3 +68,7 @@ include 'header.php';
         </form>
     </div>
 </div>
+
+<?php
+include 'footer.php';
+?>

@@ -1,7 +1,3 @@
-<?php
-include 'header.php';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,12 +5,11 @@ include 'header.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Exclusão</title>
+	<title>Agendamento</title>
 </head>
 <body>
-	<div class="" id="eProfissional">
-		<?php
-		$servername = "localhost";
+	<div class="">
+		<?php $servername = "localhost";
 		$username = "root";
 		$password = "";
 		$dbname = "db_tiodupetservice";
@@ -22,22 +17,20 @@ include 'header.php';
 		if ($conexao->connect_error) {
 			die("Connection failed: " . $conexao->connect_error);
 		}
-		$sql = "DELETE FROM servico WHERE id = '" . $_POST['txtID'] . "';";
+		$sql = "INSERT INTO lead (servico, data_lead, nome, telefone, email, lead_contatado) VALUES ('" . $_POST['serviceTypeInput'] . "','" . $_POST['selectedDate'] . "','" . $_POST['txtNome'] . "', '" . $_POST['txtTelefone'] . "', '" . $_POST['txtEmail'] . "', '" . $_POST['lead_contatado'] . "')";
 		if ($conexao->query($sql) === TRUE) {
-			echo '
-					 <a href="listar_servico.php">
-					  <h1 class="">Serviço Excluido com sucesso! </h1>
-					   </a> 
-					   ';
+			echo ' 
+							<a href="index.html"> 
+							<h1 class="">Agendamento efetuado com sucesso! </h1> </a> ';
 		} else {
-			echo ' <a href="listar_servico.php">
-						    <h1 class="">ERRO! </h1>
-							 </a> 
-							 ';
+			echo '
+							 <a href="index.html">
+							 <h1 class="">ERRO! </h1>
+							  </a> 
+							  ';
 		}
 		$conexao->close();
 		?>
 	</div>
-	<?php
-include 'footer.php';
-?>
+</body>
+</html>

@@ -22,15 +22,15 @@ include 'header.php';
 		if ($conexao->connect_error) {
 			die("Connection failed: " . $conexao->connect_error);
 		}
-		$sql = "DELETE FROM servico WHERE id = '" . $_POST['txtID'] . "';";
+		$sql = "DELETE FROM lead WHERE id = '" . $_POST['txtID'] . "';";
 		if ($conexao->query($sql) === TRUE) {
 			echo '
-					 <a href="listar_servico.php">
-					  <h1 class="">Serviço Excluido com sucesso! </h1>
+					 <a href="listar_lead.php">
+					  <h1 class="">Lead Excluido com sucesso! </h1>
 					   </a> 
 					   ';
 		} else {
-			echo ' <a href="listar_servico.php">
+			echo ' <a href="listar_lead.php">
 						    <h1 class="">ERRO! </h1>
 							 </a> 
 							 ';

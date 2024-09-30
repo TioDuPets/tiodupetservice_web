@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tio Du Pets</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 
 <body>
+   
 <header>
     <nav>
-        <!--<a class="logo" href="#">Tio Du Pets</a> -->
         <a class="logo" href="#"><img src="assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
 
         <div class="mobile-menu">
@@ -28,125 +30,288 @@
         </ul>
     </nav>
 </header>
-    <br><br><br><br><br><br>
-    <div class="imagem-fundo"></div>
+
+<div class="floating-box">
+    <div class="dropdown-center">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Solicite um serviço
+        </button>
+        <ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Hospedagem')">Hospedagem</a></li>
+            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Creche')">Creche</a></li>
+            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Pet Sitter')">Pet Sitter</a></li>
+        </ul>
+    </div>
+
+    <!-- Calendário -->
+    <div id="calendar" style="display: none; margin-top: 15px;">
+        <h5>Selecione a data do serviço <span id="serviceType"></span>:</h5>
+        <input type="date" id="dateInput" class="form-control" onchange="openForm()">
+    </div>
+
+    <!-- Formulário -->
+    <div class="form-popup" id="reservationForm">
+        <form class="form-container" action="agendamentoAction.php" method="POST"> 
+            <h3>Solicitação de Agendamento</h3>
+            <label for="txtID" hidden></label>
+            <input name="txtID" id="txtID" type="text" hidden>
+
+            <input type="hidden" name="serviceTypeInput" id="serviceTypeInput">
+            <input type="hidden" name="selectedDate" id="selectedDate">
+
+            <label for="name"><b>Nome</b></label>
+            <input type="text" placeholder="Digite seu nome" name="txtNome" id="txtNome" required class="form-control mb-2">
+        
+            <label for="phone"><b>Telefone</b></label>
+            <input type="tel" placeholder="Digite seu telefone" name="txtTelefone" id="txtTelefone" required class="form-control mb-2">
+        
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Digite seu email" name="txtEmail" id="txtEmail" required class="form-control mb-2">
+        
+            <input type="hidden" name="lead_contatado" id="lead_contatado" value="Não">
+
+            <button type="submit" class="btn btn-primary mt-2">Enviar Solicitação</button>
+            <button type="button" class="btn btn-secondary mt-2" onclick="closeForm()">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div style="height: 12vh;"></div>
+
 <main>
 
-        <section class="container">
-
-            <div class="texto" id="sobre-nos">
-            <h2>Sobre Nós</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nosso hotel oferece:</p>
-            <ul>
-                <li>Ambiente seguro e confortável</li>
-                <li>Diversas atividades</li>
-                <li>Alimentação balanceada</li>
-                <li>Equipe qualificada</li>
-            </ul>
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/images/carousel/carousel1.jpg" class="d-flex w-100" alt="carousel-image" />
+            <div class="carousel-caption d-none d-md-block">
             </div>
+          </div>
+          <div class="carousel-item">
+            <img src="assets/images/carousel/carousel2.jpg" class="d-flex w-100" alt="carousel-image" />
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="assets/images/carousel/carousel3.webp" class="d-flex w-100" alt="carousel-image"/>
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" id="sobre-nos">Next</span>
+        </button >
+      </div >
 
-             <div class="cards">
-                <div class="card">
-                    <img src="assets/images/ambiente-seguro.jpg" alt="Ambiente seguro e confortável">
-                    <p>Ambiente seguro e confortável</p>
+      <div style="height: 4vh;"></div>
+
+
+        <section class="container-fluid">
+            <div class="box">
+
+                <div class="texto" >
+                    <h1>Bem-vindo ao Tio Du Pets</h1>
+                    <h2>O Melhor Cuidado para o Seu Pet!</h2>
+                    <p>Aqui no <strong>Tio Du Pets</strong>, acreditamos que seu pet merece o melhor. Oferecemos um ambiente seguro, confortável e cheio de carinho para garantir que seu animal de estimação se sinta em casa, seja para uma estadia no nosso hotel, um dia de diversão na creche ou para o serviço personalizado de pet sitter.</p>
+                    
                 </div>
-                <div class="card">
-                    <img src="assets/images/atividades.jpg" alt="Diversas atividades">
-                    <p>Diversas atividades</p>
-                </div>
-                <div class="card">
-                    <img src="assets/images/alimentacao.jpg" alt="Alimentação balanceada">
-                    <p>Alimentação balanceada</p>
-                </div>
-                <div class="card">
-                    <img src="assets/images/equipe.jpg" alt="Equipe qualificada">
-                    <p>Equipe qualificada</p>
+
+                <div class="cards-panel">
+                    <div class="card">
+                        <img src="assets/images/ambiente-seguro.jpg" alt="Ambiente confortável">
+                        <div class="image-label">Ambiente confortável</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/atividades.jpg" alt="Diversas atividades">
+                        <div class="image-label">Diversas atividades</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/equipe.jpg" alt="Equipe qualificada">
+                        <div class="image-label">Equipe qualificada</div>
+                    </div>
                 </div>
             </div>
 
         </section>
 
-        <section class="container">
+        <div style="height: 4vh;"></div>
 
-            <div class="cards"></div>
-                <div class="card">
-                    <img src="images/ambiente-seguro.jpg" alt="Ambiente seguro e confortável">
-                    <p>Ambiente seguro e confortável</p>
-                </div>
-                <div class="card">
-                    <img src="images/atividades.jpg" alt="Diversas atividades">
-                    <p>Diversas atividades</p>
-                </div>
-                <div class="card">
-                    <img src="images/alimentacao.jpg" alt="Alimentação balanceada">
-                    <p>Alimentação balanceada</p>
-                </div>
-                <div class="card">
-                    <img src="images/equipe.jpg" alt="Equipe qualificada">
-                    <p>Equipe qualificada</p>
-                </div>
-            </div>
-
+        <section class="container-fluid">
+            <div class="box">
             <div class="texto" id="Serviços e comodidades">
-            <h2>Serviços e comodidades</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nosso hotel oferece:</p>
-            <ul>
-                <li>Ambiente seguro e confortável</li>
-                <li>Diversas atividades</li>
-                <li>Alimentação balanceada</li>
-                <li>Equipe qualificada</li>
-            </ul>
+                <h1>Serviços e comodidades</h1>
+                <h2>Aqui no Tio Du Pets, seu pet receberá todo carinho que merece"</h2>
+                <h4 style="letter-spacing: 3px;">Nós oferecemos:</h4>
+                <ul style="list-style-position: inside; padding-left: 0;">
+                    <li>Serviço de Hotelaria Pet</li>
+                    <li>Creche Animal</li>
+                    <li>Pet Sitter</li>
+                </ul>
             </div>
+
+            <div style="height: 2vh;"></div>
+
+            <div class="row justify-content-md-around text-center">
+                <div class="col col-lg-2">
+                  <img src="assets/images/hotel_pet.jpg" alt="hotel_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Hotel</h2>
+                  <p>Um lar longe de casa, com todo o conforto e cuidado que seu pet merece!</p>
+                </div>
+                <div class="col col-lg-2">
+                  <img src="assets/images/creche_pet.jpg" alt="creche_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Creche</h2>
+                  <p>Diversão garantida enquanto você cuida da sua rotina!</p>
+                </div>
+                <div class="col col-lg-2">
+                  <img src="assets/images/petsitter_pet.jpg" alt="petsitter_pet" class="img-fluid rounded-circle" width="200" height="200">
+                  <h2>Pet Sitter</h2>
+                  <p>Seu pet nas melhores mãos para que você tenha total tranquilidade!</p>
+                </div>
+              </div>
 
         </section>
 
+        <div style="height: 4vh;"></div>
         
-        <section class="container">
+        <section class="container-fluid">
+            
+            <div class="box">
 
-            <div class="texto" id="Acomodações">
-            <h2>Acomodações</h2>
-            <p>Bem-vindo ao Hotel Pet Feliz! Aqui, seu pet terá uma estadia inesquecível.</p>
-            <p>Nossas acomodações</p>
-            </div>
+                <div class="texto" >
+                    <h1>Acomodações</h1>
+                    <h4 style="letter-spacing: 3px;">O lar perfeito para o seu pet enquanto você está fora!</h4>
+                </div>
 
-             <div class="cards">
-                <div class="card">
-                    <img src="assets/images/acomodacao (1).png" alt="Acomodação">
-                </div>
-                <div class="card">
-                    <img src="assets/images/acomodacao (2).png" alt="Acomodação">
-                </div>
-                <div class="card">
-                    <img src="assets/images/acomodacao (3).png" alt="Acomodação">
+                <div class="cards-panel">
+                    <div class="card">
+                        <img src="assets/images/acomodacao1.jpg" alt="acomodacao1">
+                        <div class="image-label">Carinho</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/acomodacao2.jpg" alt="acomodacao2">
+                        <div class="image-label">Amor</div>
+                    </div>
+                    <div class="card">
+                        <img src="assets/images/acomodacao3.jpg" alt="acomodacao3">
+                        <div class="image-label">Conforto</div>
+                    </div>
                 </div>
             </div>
 
         </section>
 
-        <section class="container">
+<div style="height: 4vh;"></div>
 
-            <div class="cards"></div>
-             <div class="cards">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14705.551338323445!2d-47.0990599!3d-22.8621273!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c701b143b069%3A0x590087383e5521b4!2sFatec%20Campinas%20-%20Faculdade%20de%20Tecnologia%20de%20Campinas!5e0!3m2!1spt-BR!2sbr!4v1726487989244!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+
+<section class="container-fluid">
+    <div class="box">
+        <div class="texto" >
+            <h1>Avalie nossos serviços!</h1>
+      
+
+            <div class="rating">
+                <input class="star" type="radio" name="star" id="star1"><label for="star1"></label>
+                <input class="star" type="radio" name="star" id="star2"><label for="star2"></label>
+                <input class="star" type="radio" name="star" id="star3"><label for="star3"></label>
+                <input class="star" type="radio" name="star" id="star4"><label for="star4"></label>
+                <input class="star" type="radio" name="star" id="star5"><label for="star5"></label>
             </div>
+        </div>
+
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+              <div class="row justify-content-md-around text-center">
+                    <div class="col col-lg-2">
+                        <div class="avaliacao-card">
+                            
+                            <div class="avaliacao">
+                                    <img src="assets/images/comentario1.jpg" alt="hotel_pet" class="img-fluid rounded-circle" width="80" height="80">
+                                    <p><b>Chuck</b></p>
+                            </div>
+          
+                        <div class="avaliacao-rating">
+                            <input class="inputed" type="radio" name="star" id="star1"><label class="inputed" for="star1">&#xf005;</label>
+                            <input class="inputed" type="radio" name="star" id="star2"><label class="inputed" for="star2">&#xf005;</label>
+                            <input class="inputed" type="radio" name="star" id="star3"><label class="inputed" for="star3">&#xf005;</label>
+                            <input class="inputed" type="radio" name="star" id="star4"><label class="inputed" for="star4">&#xf005;</label>
+                            <input class="inputed" type="radio" name="star" id="star5"><label class="inputed" for="star5">&#xf005;</label>
+                        </div>
+                        <div class="comentario">
+                            <p><b>Comentario: </b>Atendimento atencioso e profissional comigo</p>
+                        </div>
+    </div>
+
+</section>
+
+<div style="height: 4vh;"></div>
+
+<section class="container-fluid">
+            
+    <div class="box">
 
             <div class="texto" id="Localização">
-            <h2>Nossa Localização</h2>
+                <h2>Nossa Localização</h2>
             </div>
 
-        </section>
+    
+             <element class="mapa">
+		        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14705.551338323445!2d-47.0990599!3d-22.8621273!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c701b143b069%3A0x590087383e5521b4!2sFatec%20Campinas%20-%20Faculdade%20de%20Tecnologia%20de%20Campinas!5e0!3m2!1spt-BR!2sbr!4v1726487989244!5m2!1spt-BR!2sbr" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+             </element>
+
+    </div>
+
+</section>
+
+<div style="height: 4vh;"></div>
 
 </main>
 
 <script src="assets/mobile-navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 
-<footer class="footer">
-    <div><p>&copy; M.F.F Consultoria. 2024 | Orgulhosamente criado com AMOR.</p><hr></div>
-    <a href="http://localhost/tiodupetservice_web/office/login.php"><div style="text-align:end;"><span>&#9881;</span></div>
-</footer>
+
+
+<div class="footer">
+    <footer class="py-1">
+
+          <div class="row">
+            <img src="assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets" width="150px" height="150px" align-item="center" justify-content="center">
+          </div>
+          
+          <div class="custom-border-top">
+            <h6> &nbsp © Tio Du Pet Serviçe - 2024 | Todos os Direitos reservados.</h6>
+        </div>
+
+    </footer>
+</div>
+
+<div class="MFF">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center py-1 my-1 OFFICE">
+        <h6>&nbsp | Orgulhosamente desenvolvido com AMOR por &copy; M.F.F Consultoria. |</h6>
+        <a href="http://localhost/tiodupetservice_web/office/login.php">
+            <div><span>&#9881;</span></div>
+        </a>
+    </div>
+</div>
+
 
 </html>

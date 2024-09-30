@@ -38,3 +38,6 @@ include 'header.php';
 		$conexao->close();
 		?>
 	</div>
+	<?php
+include 'footer.php';
+?>

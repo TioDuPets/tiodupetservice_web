@@ -38,7 +38,7 @@ include 'header.php';
 
 
     </style>
-        <title>Listagem de Pets</title>
+        <title>Listagem de Leads</title>
     </head>
     <body>
 
@@ -56,19 +56,17 @@ include 'header.php';
             <section>
                 <div class="container-centered">
                     <div class="form-container">
-                            <h1 class="text-center">Listagem de Pets</h1>
+                            <h1 class="text-center">Listagem de Leads</h1>
                             <table class="table table-striped table-hover">
                              <thead>
                               <tr>
                                <th>Código</th>
-                               <th>Nome Pet</th>
-                               <th>RGA</th>
-                               <th>Sexo</th>
-                               <th>Espécie</th>
-                               <th>Raça</th>
-                               <th>Cor</th>
-                               <th>Idade</th>
-                               <th>Porte</th>
+                               <th>Serviço</th>
+                               <th>Data</th>
+                               <th>Nome</th>
+                               <th>Telefone</th>
+                               <th>Email</th>
+                               <th>Contatado?</th>
                                <th>Excluir</hd>
                                <th>Atualizar</th>
                                </tr>
@@ -77,40 +75,34 @@ include 'header.php';
                     </div>
                 </section> ';
 
-        $sql = "SELECT * FROM pet";
+        $sql = "SELECT * FROM lead";
         $resultado = $conexao->query($sql);
         if ($resultado != null)
             foreach ($resultado as $linha) {
                 echo '<tr>';
                 echo '<td>' . $linha['id'] . '</td>';
+                echo '<td>' . $linha['servico'] . '</td>';
+                echo '<td>' . $linha['data_lead'] . '</td>';
                 echo '<td>' . $linha['nome'] . '</td>';
-                echo '<td>' . $linha['rga'] . '</td>';
-                echo '<td>' . $linha['sexo'] . '</td>';
-                echo '<td>' . $linha['especie'] . '</td>';
-                echo '<td>' . $linha['raca'] . '</td>';
-                echo '<td>' . $linha['cor'] . '</td>';
-                echo '<td>' . $linha['idade'] . '</td>';
-                echo '<td>' . $linha['porte'] . '</td>';
+                echo '<td>' . $linha['telefone'] . '</td>';
+                echo '<td>' . $linha['email'] . '</td>';
+                echo '<td>' . $linha['lead_contatado'] . '</td>';
 
-                echo '<td><a href="excluir_pet.php?id=' . $linha['id'] .
+                echo '<td><a href="excluir_lead.php?id=' . $linha['id'] .
+                                        '&servico=' . $linha['servico'] .
+                                            '&data_lead=' . $linha['data_lead'] .
                                              '&nome=' . $linha['nome'] .
-                                             '&rga=' . $linha['rga'] .
-                                              '&sexo=' . $linha['sexo'] .
-                                               '&especie=' . $linha['especie'] .
-                                                '&raca=' . $linha['raca'] .
-                                                 '&cor=' . $linha['cor'] .
-                                                  '&idade=' . $linha['idade'] .
-                                                   '&porte=' . $linha['porte'] .
+                                               '&telefone=' . $linha['telefone'] .
+                                                '&email=' . $linha['email'] .
+                                                    '&lead_contatado=' . $linha['lead_contatado'] .
                                                      '"><i class="fa fa-user-times"></i></a></td></td>';
-                echo '<td><a href="atualizar_pet.php?id=' . $linha['id'] .
-                                             '&nome=' . $linha['nome'] .
-                                              '&rga=' . $linha['rga'] .
-                                              '&sexo=' . $linha['sexo'] .
-                                               '&especie=' . $linha['especie'] .
-                                                '&raca=' . $linha['raca'] .
-                                                 '&cor=' . $linha['cor'] .
-                                                  '&idade=' . $linha['idade'] .
-                                                   '&porte=' . $linha['porte'] .
+                echo '<td><a href="atualizar_lead.php?id=' . $linha['id'] .
+                                                    '&servico=' . $linha['servico'] .
+                                                      '&data_lead=' . $linha['data_lead'] .
+                                                         '&nome=' . $linha['nome'] .
+                                                            '&telefone=' . $linha['telefone'] .
+                                                                '&email=' . $linha['email'] .
+                                                                   '&lead_contatado=' . $linha['lead_contatado'] .
                                                      '"><i class="fa fa-refresh"></i></a></td></td>';
  
                 echo '</tr>';
