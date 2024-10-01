@@ -38,7 +38,7 @@ include 'header.php';
 
 
     </style>
-        <title>Listagem de Pets</title>
+        <title>Listagem de Serviços</title>
     </head>
     <body>
 
@@ -56,7 +56,7 @@ include 'header.php';
             <section>
                 <div class="container-centered">
                     <div class="form-container">
-                            <h1 class="text-center">Listagem de Pets</h1>
+                            <h1 class="text-center">Listagem de Serviços</h1>
                             <table class="table table-striped table-hover">
                              <thead>
                               <tr>

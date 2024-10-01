@@ -104,14 +104,14 @@ nav{
         <!-- Dropdown de Serviços -->
         <li class="dropdown">
 
-            <a class="dropbtn">Serviços</a>
+            <a class="dropbtn">Agendamento</a>
 
             <div class="dropdown-content">
 
                 <ul>
-                    <li><a href="servico_hotel.php">Hotel</a></li>
-                    <li><a href="servico_creche.php">Creche</a></li>
-                    <li><a href="servico_pet_sitter.php">Pet Sitter</a></li>
+                    <li><a href="agendamento_hospedagem.php">Hotel</a></li>
+                    <li><a href="agendamento_creche.php">Creche</a></li>
+                    <li><a href="agendamento_pet_sitter.php">Pet Sitter</a></li>
                 </ul>
             </div>
         </li>
