@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/10/2024 às 18:11
+-- Tempo de geração: 05/10/2024 às 19:56
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -182,7 +182,7 @@ CREATE TABLE `matricula_creche` (
   `id_pet` int(11) DEFAULT NULL,
   `id_veterinario` int(11) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
-  `data_matricula` datetime DEFAULT current_timestamp(),
+  `data_matricula` date DEFAULT current_timestamp(),
   `status` varchar(20) DEFAULT NULL,
   `horario_entrada` time DEFAULT NULL,
   `horario_saida` time DEFAULT NULL,
@@ -237,7 +237,7 @@ CREATE TABLE `servico` (
 --
 
 INSERT INTO `servico` (`id`, `servico`, `tipo`, `preco`) VALUES
-(4, 'Creche', 'Cuidados', 80.00),
+(4, 'Creche', 'Cuidados', 500.00),
 (5, 'Pet Sitter', 'Cuidados', 100.00),
 (6, 'Pet Taxi', 'Transporte', 60.00),
 (7, 'Adestramento', 'Treinamento', 180.00);
@@ -267,11 +267,7 @@ CREATE TABLE `veterinario` (
 --
 
 INSERT INTO `veterinario` (`id`, `nome`, `telefone`, `email`, `endereco`, `numero`, `complemento`, `bairro`, `cep`, `cidade`, `estado`) VALUES
-(4, 'Ana Costa', '(71) 99876-54', 'ana.costa@email.com', 'Av. Atlântica', '321', 'Casa', 'Barra', '45678-901', 'Salvador', 'BA'),
-(5, 'Bruno Lima', '(41) 97654-32', 'bruno.lima@email.com', 'Rua da Paz', '654', 'Bloco B', 'Centro', '56789-012', 'Curitiba', 'PR'),
-(6, 'Juliana Rocha', '(51) 98765-43', 'juliana.rocha@email.com', 'Rua das Oliveiras', '987', 'Apto 303', 'Jardim Botânico', '67890-123', 'Porto Alegre', 'RS'),
-(7, 'Fernando Alves', '(21) 91234-56', 'fernando.alves@email.com', 'Av. Getúlio Vargas', '852', 'Sala 12', 'Copacabana', '78901-234', 'Rio de Janeiro', 'RJ'),
-(8, 'Paula Mendes', '(11) 92345-67', 'paula.mendes@email.com', 'Rua das Acácias', '753', 'Casa', 'Moema', '89012-345', 'São Paulo', 'SP');
+(4, 'VeterinárioTeste', '(71) 99876-54', 'ana.costa@email.com', 'Av. Atlântica', '321', 'Casa', 'Barra', '45678-901', 'Salvador', 'BA');
 
 --
 -- Índices para tabelas despejadas
@@ -328,11 +324,7 @@ ALTER TABLE `lead`
 -- Índices de tabela `matricula_creche`
 --
 ALTER TABLE `matricula_creche`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pet` (`id_pet`),
-  ADD KEY `id_veterinario` (`id_veterinario`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_servico` (`id_servico`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `pet`
@@ -439,15 +431,6 @@ ALTER TABLE `agendamento_hospedagem`
 ALTER TABLE `agendamento_petsitter`
   ADD CONSTRAINT `agendamento_petsitter_ibfk_1` FOREIGN KEY (`pet_id`) REFERENCES `pet` (`id`),
   ADD CONSTRAINT `agendamento_petsitter_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`);
-
---
--- Restrições para tabelas `matricula_creche`
---
-ALTER TABLE `matricula_creche`
-  ADD CONSTRAINT `matricula_creche_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`),
-  ADD CONSTRAINT `matricula_creche_ibfk_2` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinario` (`id`),
-  ADD CONSTRAINT `matricula_creche_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
-  ADD CONSTRAINT `matricula_creche_ibfk_4` FOREIGN KEY (`id_servico`) REFERENCES `servico` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

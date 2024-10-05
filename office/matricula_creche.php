@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'header.php';
 ?>
 
@@ -10,123 +10,139 @@ include 'header.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
-    <title>Matrícula Creche</title>
+    <title>Matrícula na Creche</title>
 </head>
 <body>
+    <div class="container-centered container d-flex justify-content-center align-items-center">
+        <div class="form-container col-md-6 bg-light p-4 rounded shadow">
+            <h1 class="text-center mb-4 display-4">Matrícula na Creche</h1>
+            <form action="matriculaAction_creche.php" method="post">
 
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_tiodupetservice";
-$conexao = new mysqli($servername, $username, $password, $dbname);
+                <!-- Serviço -->
+                <div class="mb-3">
+                    <label for="id_servico" class="form-label">Selecione o Serviço</label>
+                    <select name="id_servico" id="id_servico" class="form-select">
+                        <?php
+                        include 'conexaoAction.php';
 
-if ($conexao->connect_error) {
-    die("Connection failed: " . $conexao->connect_error);
-}
+                        // Buscando serviços disponíveis
+                        $result = mysqli_query($conexao, "SELECT id, servico FROM servico");
 
-// Supondo que o ID do pet e do cliente sejam passados via GET
-$id_pet = $_GET['id_pet'];
-$id_cliente = $_GET['id_cliente'];
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['servico']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum serviço encontrado</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
-// Buscando informações do pet
-$sql_pet = "SELECT * FROM pet WHERE id = $id_pet";
-$resultado_pet = $conexao->query($sql_pet);
-$pet = $resultado_pet->fetch_assoc();
+                <!-- Pet -->
+                <div class="mb-3">
+                    <label for="id_pet" class="form-label">Selecione o Pet</label>
+                    <select name="id_pet" id="id_pet" class="form-select" required>
+                        <?php
+                        // Buscando pets cadastrados
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
 
-// Buscando informações do cliente
-$sql_cliente = "SELECT * FROM cliente WHERE id = $id_cliente";
-$resultado_cliente = $conexao->query($sql_cliente);
-$cliente = $resultado_cliente->fetch_assoc();
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum pet encontrado</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
-echo ' 
-<section>
-    <div class="container-centered">
-        <div class="form-container">
-            <div class="bg-light p-4 rounded shadow">
-                <h1 class="text-center mb-4 display-4">Confirmação de Matrícula</h1>
-                <h2>Informações do Pet</h2>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>ID</th>
-                        <td>' . $pet['id'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Nome</th>
-                        <td>' . $pet['nome'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Sexo</th>
-                        <td>' . $pet['sexo'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Espécie</th>
-                        <td>' . $pet['especie'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Raça</th>
-                        <td>' . $pet['raca'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Cor</th>
-                        <td>' . $pet['cor'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Idade</th>
-                        <td>' . $pet['idade'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Porte</th>
-                        <td>' . $pet['porte'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>RGA</th>
-                        <td>' . $pet['rga'] . '</td>
-                    </tr>
-                </table>
-                
-                <h2>Informações do Cliente</h2>
-                <table class="table table-bordered">
-                    <tr>
-                        <th>ID</th>
-                        <td>' . $cliente['id'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Nome</th>
-                        <td>' . $cliente['nome'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>CPF</th>
-                        <td>' . $cliente['cpf'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Telefone</th>
-                        <td>' . $cliente['telefone'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>' . $cliente['email'] . '</td>
-                    </tr>
-                    <tr>
-                        <th>Endereço</th>
-                        <td>' . $cliente['endereco'] . ', ' . $cliente['numero'] . ' ' . $cliente['complemento'] . ', ' . $cliente['bairro'] . ', ' . $cliente['cep'] . ', ' . $cliente['cidade'] . ' - ' . $cliente['estado'] . '</td>
-                    </tr>
-                </table>
+                <!-- Veterinário -->
+                <div class="mb-3">
+                    <label for="id_veterinario" class="form-label">Selecione o Veterinário</label>
+                    <select name="id_veterinario" id="id_veterinario" class="form-select" required>
+                        <?php
+                        // Buscando veterinários cadastrados
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM veterinario");
 
-                <form action="processar_matricula.php" method="post">
-                    <input type="hidden" name="id_pet" value="' . $pet['id'] . '">
-                    <input type="hidden" name="id_cliente" value="' . $cliente['id'] . '">
-                    <button type="submit" class="btn btn-primary">Confirmar Matrícula</button>
-                </form>
-            </div>
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum veterinário encontrado</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <!-- Cliente -->
+                <div class="mb-3">
+                    <label for="id_cliente" class="form-label">Selecione o Cliente</label>
+                    <select name="id_cliente" id="id_cliente" class="form-select" required>
+                        <?php
+                        // Buscando clientes cadastrados
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum cliente encontrado</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <!-- Data de Matrícula -->
+                <div class="mb-3">
+                    <label for="data_matricula" class="form-label">Data da Matrícula</label>
+                    <input type="date" class="form-control" name="data_matricula" id="data_matricula" required>
+                </div>
+
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select" required>
+                        <option value="Ativa">Matrícula Ativa</option>
+                        <option value="Inativa">Matrícula Inativa</option>
+                    </select>
+                </div>
+
+                <!-- Horário de Entrada e Saída -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="horario_entrada" class="form-label">Horário de Entrada</label>
+                        <input type="time" class="form-control" name="horario_entrada" id="horario_entrada" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="horario_saida" class="form-label">Horário de Saída</label>
+                        <input type="time" class="form-control" name="horario_saida" id="horario_saida" required>
+                    </div>
+                </div>
+
+                <!-- Data Fim -->
+                    <input type="date" class="form-control" name="data_fim" id="data_fim" hidden>
+
+                <!-- Observações -->
+                <div class="mb-3">
+                    <label for="observacao" class="form-label">Observação</label>
+                    <textarea name="observacao" id="observacao" class="form-control" rows="2"></textarea>
+                </div>
+
+                <!-- Botão de Matrícula -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa fa-check-circle"></i> Confirmar Matrícula
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-</section>';
-
-$conexao->close();
-?>
-
 </body>
+
 <?php
 include 'footer.php';
 ?>
