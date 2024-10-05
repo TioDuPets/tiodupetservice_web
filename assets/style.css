@@ -26,12 +26,13 @@ a:hover{
     letter-spacing: 4px;
     padding-left: 15px;
     align-items: normal;
+    width: 150px;
+    height: 150px;
 }
 
 .logo img {
-    width:13vh;
-    height: auto;
-    display: block;
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 50pt;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

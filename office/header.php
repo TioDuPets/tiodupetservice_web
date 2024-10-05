@@ -36,7 +36,7 @@ nav{
     justify-content:space-around;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: #f0f001;
+    background-color: #f0f001;
     height: 12vh;
     border-radius: 10pt;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);

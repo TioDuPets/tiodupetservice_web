@@ -15,7 +15,6 @@ include 'header.php';
 </head>
 <body>
 
-<section>
 <div class="container-centered">
     <div class="form-container">
         <h1 class="text-center">Cadastro de Pet</h1>
@@ -60,7 +59,6 @@ include 'header.php';
     </div>
 </div>
 
-</section>
 </body>
 <?php
 include 'footer.php';
