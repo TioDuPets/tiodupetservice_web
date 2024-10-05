@@ -36,7 +36,7 @@ nav{
     justify-content:space-around;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: #f0f001;
+    background-color: #f0f001;
     height: 12vh;
     border-radius: 10pt;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -100,18 +100,32 @@ nav{
    
     <a class="logo" href="http://localhost/tiodupetservice_web/office/main.php"><img src="../assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
     <ul class="navbar">
-        
+
         <!-- Dropdown de Serviços -->
         <li class="dropdown">
 
-            <a class="dropbtn">Serviços</a>
+            <a class="dropbtn">Creche</a>
 
             <div class="dropdown-content">
 
                 <ul>
-                    <li><a href="servico_hotel.php">Hotel</a></li>
-                    <li><a href="servico_creche.php">Creche</a></li>
-                    <li><a href="servico_pet_sitter.php">Pet Sitter</a></li>
+                    <li><a href="matricula_creche.php">Matrícula</a></li>
+                    <li><a href="matricula_consulta_creche.php">Consulta</a></li>
+                    <li><a href="matricula_listagem_creche.php">Listagem</a></li>
+                </ul>
+            </div>
+        </li>
+        
+        <!-- Dropdown de Serviços -->
+        <li class="dropdown">
+
+            <a class="dropbtn">Agendamento</a>
+
+            <div class="dropdown-content">
+
+                <ul>
+                    <li><a href="agendamento_hospedagem.php">Hotel</a></li>
+                    <li><a href="agendamento_petsitter.php">Pet Sitter</a></li>
                 </ul>
             </div>
         </li>

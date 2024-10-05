@@ -7,24 +7,19 @@
     <style>
 
 .footer {
-	border: 3px solid;
+    letter-spacing: 4px;
+    font-size: 20px;
     border-radius: 10pt;
-    background-color: #010193;
+    background-color: #f0f001;
     padding: 10px;
 }
 
-.footer p {
-    text-align: center;
-    font-size: large;
-    color: #ffffff;
-}
-
-.footer hr {
-    text-align: center;
-    border: 0;
-    height: 2px;
-    background-color: #ffffff;
-
+.MFF{
+    border-radius: 10pt;
+    background-color: #f0f001;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
 }
 
     </style>
@@ -34,7 +29,8 @@
 
 </body>
 
-
+<div class="MFF">
 <footer class="footer">
-    <div><p>&copy; M.F.F Consultoria. 2024 | Orgulhosamente criado com AMOR.</p><hr></div>
+    <div><p>&copy; M.F.F Consultoria. 2024 | Orgulhosamente criado com AMOR.</p></div>
+</div>
 </footer>

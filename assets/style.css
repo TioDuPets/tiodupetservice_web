@@ -29,9 +29,6 @@ a:hover{
 }
 
 .logo img {
-    width:13vh;
-    height: auto;
-    display: block;
     border-radius: 50pt;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
