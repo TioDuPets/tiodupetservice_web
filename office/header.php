@@ -100,6 +100,19 @@ nav{
    
     <a class="logo" href="http://localhost/tiodupetservice_web/office/main.php"><img src="../assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
     <ul class="navbar">
+
+        <!-- Dropdown de Serviços -->
+        <li class="dropdown">
+
+            <a class="dropbtn">Matricula</a>
+
+            <div class="dropdown-content">
+
+                <ul>
+                    <li><a href="matricula_creche.php">Creche</a></li>
+                </ul>
+            </div>
+        </li>
         
         <!-- Dropdown de Serviços -->
         <li class="dropdown">
@@ -110,8 +123,7 @@ nav{
 
                 <ul>
                     <li><a href="agendamento_hospedagem.php">Hotel</a></li>
-                    <li><a href="agendamento_creche.php">Creche</a></li>
-                    <li><a href="agendamento_pet_sitter.php">Pet Sitter</a></li>
+                    <li><a href="agendamento_petsitter.php">Pet Sitter</a></li>
                 </ul>
             </div>
         </li>

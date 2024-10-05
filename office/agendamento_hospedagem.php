@@ -17,6 +17,34 @@ include 'header.php';
     <div class="form-container">
         <h1 class="text-center">Agendar Hospedagem</h1>
         <form action="agendamentoAction_hospedagem.php" method="post">
+            <!-- Seleção do pet -->
+            <div class="form-content">
+                <label for="petID">Selecione o Pet</label>
+                <select name="petID" id="petID" required>
+                    <?php
+                    // Buscando pets cadastrados no banco de dados
+                    include 'conexaoAction.php'; // Inclua a conexão com o banco
+                    $result = mysqli_query($conn, "SELECT id, nome FROM pets");
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Seleção do cliente (tutor) -->
+            <div class="form-content">
+                <label for="clienteID">Selecione o Cliente</label>
+                <select name="clienteID" id="clienteID" required>
+                    <?php
+                    // Buscando clientes cadastrados no banco de dados
+                    $result = mysqli_query($conn, "SELECT id, nome FROM clientes");
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
 
             <!-- Datas de check-in e check-out -->
             <div class="form-content">
@@ -25,54 +53,6 @@ include 'header.php';
 
                 <label for="checkout">Data de Check-out</label>
                 <input type="date" name="checkout" id="checkout" required>
-            </div>
-
-            <!-- Seleção do pet -->
-            <div class="form-content">
-                <label for="pet_ID">Selecione o Pet</label>
-                <select name="pet_ID" id="pet_ID" required>
-                    <?php
-                    // Buscando pets cadastrados no banco de dados
-                    include 'conexaoAction.php'; // Inclui a conexão com o banco
-
-                    // Executa a consulta para buscar o id e nome dos pets
-                    $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
-
-                    // Verifica se a consulta retornou algum resultado
-                    if (mysqli_num_rows($result) > 0) {
-                        // Percorre os resultados e exibe cada pet como uma opção no select
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='{$row['id']}'>{$row['nome']}</option>";
-                        }
-                    } else {
-                        echo "<option value=''>Nenhum pet encontrado</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-
-            <!-- Seleção do cliente (tutor) -->
-            <div class="form-content">
-                <label for="cliente_ID">Selecione o Cliente</label>
-                <select name="cliente_ID" id="cliente_ID" required>
-                    <?php
-                    // Inclua a conexão com o banco de dados
-                    include 'conexaoAction.php';
-
-                    // Buscando clientes cadastrados no banco de dados
-                    $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
-
-                    // Verifica se a consulta retornou resultados
-                    if (mysqli_num_rows($result) > 0) {
-                        // Exibe os clientes como opções no select
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='{$row['id']}'>{$row['nome']}</option>";
-                        }
-                    } else {
-                        echo "<option value=''>Nenhum cliente encontrado</option>";
-                    }
-                    ?>
-                </select>
             </div>
 
             <!-- Observações adicionais -->

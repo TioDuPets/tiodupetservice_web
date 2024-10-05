@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($checkin >= $checkout) {
         echo "A data de check-out deve ser posterior à de check-in.";
     } else {
-        $sql = "INSERT INTO agendamentos (pet_id, cliente_id, checkin, checkout, observacoes) 
+        $sql = "INSERT INTO agendamento_hospedagem (pet_id, cliente_id, checkin, checkout, observacoes) 
                 VALUES ('$pet_ID', '$cliente_ID', '$checkin', '$checkout', '$observacoes')";
 
         if (mysqli_query($conexao, $sql)) {
