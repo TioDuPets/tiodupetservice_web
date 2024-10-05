@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/10/2024 às 03:56
+-- Tempo de geração: 05/10/2024 às 18:11
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -71,7 +71,8 @@ CREATE TABLE `agendamento_petsitter` (
 INSERT INTO `agendamento_petsitter` (`id`, `data_hora`, `pet_id`, `cliente_id`, `observacoes`) VALUES
 (1, '2024-10-05 08:00:00', 6, 5, ''),
 (2, '2024-10-06 08:00:00', 6, 5, ''),
-(3, '2024-10-05 22:43:00', 6, 5, '');
+(3, '2024-10-05 22:43:00', 6, 5, ''),
+(4, '2024-10-05 22:57:00', 6, 5, '');
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,28 @@ CREATE TABLE `lead` (
 --
 
 INSERT INTO `lead` (`id`, `servico`, `data_lead`, `nome`, `telefone`, `email`, `lead_contatado`) VALUES
-(16, 'Hospedagem', '2024-10-31', 'Seiya', '19991229845', 'lineu@doidao.com.br', 'Não');
+(17, 'Hospedagem', '2024-10-11', 'Seiya', '19991229845', 'asdfs@dgd.com', 'Não'),
+(18, '', '0000-00-00', 'Jardel Lezier Foresto', '19991234567', 'jardel@fatec.com.br', 'Não');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `matricula_creche`
+--
+
+CREATE TABLE `matricula_creche` (
+  `id` int(11) NOT NULL,
+  `id_servico` int(11) DEFAULT NULL,
+  `id_pet` int(11) DEFAULT NULL,
+  `id_veterinario` int(11) DEFAULT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `data_matricula` datetime DEFAULT current_timestamp(),
+  `status` varchar(20) DEFAULT NULL,
+  `horario_entrada` time DEFAULT NULL,
+  `horario_saida` time DEFAULT NULL,
+  `data_fim` date DEFAULT NULL,
+  `observacao` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -303,6 +325,16 @@ ALTER TABLE `lead`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `matricula_creche`
+--
+ALTER TABLE `matricula_creche`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `id_veterinario` (`id_veterinario`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_servico` (`id_servico`);
+
+--
 -- Índices de tabela `pet`
 --
 ALTER TABLE `pet`
@@ -334,7 +366,7 @@ ALTER TABLE `agendamento_hospedagem`
 -- AUTO_INCREMENT de tabela `agendamento_petsitter`
 --
 ALTER TABLE `agendamento_petsitter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao_aprovadas`
@@ -364,7 +396,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de tabela `matricula_creche`
+--
+ALTER TABLE `matricula_creche`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pet`
@@ -401,6 +439,15 @@ ALTER TABLE `agendamento_hospedagem`
 ALTER TABLE `agendamento_petsitter`
   ADD CONSTRAINT `agendamento_petsitter_ibfk_1` FOREIGN KEY (`pet_id`) REFERENCES `pet` (`id`),
   ADD CONSTRAINT `agendamento_petsitter_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`);
+
+--
+-- Restrições para tabelas `matricula_creche`
+--
+ALTER TABLE `matricula_creche`
+  ADD CONSTRAINT `matricula_creche_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`),
+  ADD CONSTRAINT `matricula_creche_ibfk_2` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinario` (`id`),
+  ADD CONSTRAINT `matricula_creche_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `matricula_creche_ibfk_4` FOREIGN KEY (`id_servico`) REFERENCES `servico` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

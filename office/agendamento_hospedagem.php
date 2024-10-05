@@ -7,86 +7,91 @@ include 'header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
     <title>Agendamento de Hospedagem</title>
 </head>
 <body>
-<section>
-<div class="container-centered">
-    <div class="form-container">
-        <h1 class="text-center">Agendar Hospedagem</h1>
-        <form action="agendamentoAction_hospedagem.php" method="post">
+    <div class="container-centered container d-flex justify-content-center align-items-center">
+        <div class="form-container col-md-6 bg-light p-4 rounded shadow">
+            <h1 class="text-center mb-4 display-4">Agendar Hospedagem</h1>
+            <form action="agendamentoAction_hospedagem.php" method="post">
 
-            <!-- Datas de check-in e check-out -->
-            <div class="form-content">
-                <label for="checkin">Data de Check-in</label>
-                <input type="date" name="checkin" id="checkin" required>
+                <!-- Datas de check-in e check-out -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="checkin" class="form-label">Data de Check-in</label>
+                        <input type="date" class="form-control" name="checkin" id="checkin" required>
+                    </div>
 
-                <label for="checkout">Data de Check-out</label>
-                <input type="date" name="checkout" id="checkout" required>
-            </div>
+                    <div class="col-md-6">
+                        <label for="checkout" class="form-label">Data de Check-out</label>
+                        <input type="date" class="form-control" name="checkout" id="checkout" required>
+                    </div>
+                </div>
 
-            <!-- Seleção do pet -->
-            <div class="form-content">
-                <label for="pet_ID">Selecione o Pet</label>
-                <select name="pet_ID" id="pet_ID" required>
-                    <?php
-                    // Buscando pets cadastrados no banco de dados
-                    include 'conexaoAction.php'; // Inclui a conexão com o banco
+            <div class="row mb-3">
+                <!-- Seleção do pet -->
+                <div class="col-md-6">
+                    <label for="pet_ID" class="form-label">Selecione o Pet</label>
+                    <select name="pet_ID" id="pet_ID" class="form-select" required>
+                        <?php
+                        include 'conexaoAction.php'; // Inclui a conexão com o banco
 
-                    // Executa a consulta para buscar o id e nome dos pets
-                    $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
+                        // Executa a consulta para buscar o id e nome dos pets
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
 
-                    // Verifica se a consulta retornou algum resultado
-                    if (mysqli_num_rows($result) > 0) {
-                        // Percorre os resultados e exibe cada pet como uma opção no select
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum pet encontrado</option>";
                         }
-                    } else {
-                        echo "<option value=''>Nenhum pet encontrado</option>";
-                    }
-                    ?>
-                </select>
-            </div>
+                        ?>
+                    </select>
+                </div>
 
-            <!-- Seleção do cliente (tutor) -->
-            <div class="form-content">
-                <label for="cliente_ID">Selecione o Cliente</label>
-                <select name="cliente_ID" id="cliente_ID" required>
-                    <?php
-                    // Inclua a conexão com o banco de dados
-                    include 'conexaoAction.php';
+                <!-- Seleção do cliente (tutor) -->
+                <div class="col-md-6">
+                    <label for="cliente_ID" class="form-label">Selecione o Cliente</label>
+                    <select name="cliente_ID" id="cliente_ID" class="form-select" required>
+                        <?php
+                        include 'conexaoAction.php'; // Inclui a conexão com o banco
 
-                    // Buscando clientes cadastrados no banco de dados
-                    $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
+                        // Buscando clientes cadastrados no banco de dados
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
 
-                    // Verifica se a consulta retornou resultados
-                    if (mysqli_num_rows($result) > 0) {
-                        // Exibe os clientes como opções no select
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum cliente encontrado</option>";
                         }
-                    } else {
-                        echo "<option value=''>Nenhum cliente encontrado</option>";
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select>
+                </div>
             </div>
 
-            <!-- Observações adicionais -->
-            <div class="form-content">
-                <label for="observacoes">Observações</label>
-                <textarea name="observacoes" id="observacoes" rows="4"></textarea>
-            </div>
+                <!-- Observações adicionais -->
+                <div class="mb-3">
+                    <label for="observacoes" class="form-label">Observações</label>
+                    <textarea name="observacoes" id="observacoes" class="form-control" rows="2"></textarea>
+                </div>
 
-            <button type="submit" class="botao"><i class="fa fa-calendar-check-o"></i> Agendar</button>
-        </form>
+                <!-- Botão de Agendamento -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa fa-calendar-check-o"></i> Agendar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-</section>
 </body>
+
 <?php
 include 'footer.php';
 ?>

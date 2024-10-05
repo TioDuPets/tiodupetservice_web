@@ -5,103 +5,88 @@ include 'header.php';
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="officestyle.css">
-    <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="officestyle.css">
+    <title>Listagem de Serviços</title>
+</head>
+<body>
 
-    .table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
+$conexao = new mysqli($servername, $username, $password, $dbname);
 
-    margin: 1px 0;
-    font-size: 18px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: arial;
-    text-align: center;
+if ($conexao->connect_error) {
+    die("Connection failed: " . $conexao->connect_error);
 }
 
-.table th {
-    padding: 12px 15px;
-    text-align: center;
-    border-bottom: 1px solid #fff;
-    background-color: #007bff;
-    color: white;
+echo ' 
+<section>
+    <div class="container-centered">
+        <div class="form-container">
+            <div class="bg-light p-4 rounded shadow">
+                <h1 class="text-center mb-4 display-4">Listagem de Serviços</h1>
+                <table class="table table-sm table-striped table-hover border-primary">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Código</th>
+                            <th>Serviço</th>
+                            <th>Tipo</th>
+                            <th>Preço</th>
+                            <th>Excluir</th>
+                            <th>Atualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
+$sql = "SELECT * FROM servico";
+$resultado = $conexao->query($sql);
+if ($resultado != null) {
+    foreach ($resultado as $linha) {
+        echo '<tr>';
+        echo '<td>' . $linha['id'] . '</td>';
+        echo '<td>' . $linha['servico'] . '</td>';
+        echo '<td>' . $linha['tipo'] . '</td>';
+        echo '<td>' . number_format($linha['preco'], 2, ',', '.') . '</td>'; // Formatação de preço
+
+        echo '<td>
+                <a href="excluir_servico.php?id=' . $linha['id'] .
+                     '&servico=' . $linha['servico'] .
+                     '&tipo=' . $linha['tipo'] .
+                     '&preco=' . $linha['preco'] . '">
+                    <i class="fa fa-user-times"></i>
+                </a>
+              </td>';
+        
+        echo '<td>
+                <a href="atualizar_servico.php?id=' . $linha['id'] .
+                     '&servico=' . $linha['servico'] .
+                     '&tipo=' . $linha['tipo'] .
+                     '&preco=' . $linha['preco'] . '">
+                    <i class="fa fa-refresh"></i>
+                </a>
+              </td>';
+        
+        echo '</tr>';
+    }
 }
 
-
-
-    </style>
-        <title>Listagem de Serviços</title>
-    </head>
-    <body>
-
-        <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "db_tiodupetservice";
-        $conexao = new mysqli($servername, $username, $password, $dbname);
-        if ($conexao->connect_error) {
-            die("Connection failed: " . $conexao->connect_error);
-        }
-        echo ' 
-
-            <section>
-                <div class="container-centered">
-                    <div class="form-container">
-                            <h1 class="text-center">Listagem de Serviços</h1>
-                            <table class="table table-striped table-hover">
-                             <thead>
-                              <tr>
-                               <th>Código</th>
-                               <th>Serviço</th>
-                               <th>Tipo</th>
-                               <th>Preço</th>
-                               <th>Excluir</hd>
-                               <th>Atualizar</th>
-                               </tr>
-                             <thead>
-                        </div>
-                    </div>
-                </section> ';
-
-        $sql = "SELECT * FROM servico";
-        $resultado = $conexao->query($sql);
-        if ($resultado != null)
-            foreach ($resultado as $linha) {
-                echo '<tr>';
-                echo '<td>' . $linha['id'] . '</td>';
-                echo '<td>' . $linha['servico'] . '</td>';
-                echo '<td>' . $linha['tipo'] . '</td>';
-                echo '<td>' . $linha['preco'] . '</td>';
-                echo '<td><a href="excluir_servico.php?id=' . $linha['id'] .
-                                             '&servico=' . $linha['servico'] .
-                                              '&tipo=' . $linha['tipo'] .
-                                               '&preco=' . $linha['preco'] .
-                                                     '"><i class="fa fa-user-times"></i></a></td></td>';
-                echo '<td><a href="atualizar_servico.php?id=' . $linha['id'] .
-                                             '&servico=' . $linha['servico'] .
-                                              '&tipo=' . $linha['tipo'] .
-                                               '&preco=' . $linha['preco'] .
-                                                     '"><i class="fa fa-refresh"></i></a></td></td>';
- 
-                echo '</tr>';
-            }
-        echo ' 
-       </table>
-        </div>';
-        $conexao->close();
-        ?>
+echo '          </tbody>
+            </table>
         </div>
-    </body>
-    <?php
+    </div>
+</section>';
+
+$conexao->close();
+?>
+
+</body>
+<?php
 include 'footer.php';
 ?>
-    </html>
+</html>
