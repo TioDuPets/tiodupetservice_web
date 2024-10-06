@@ -94,8 +94,8 @@ if (isset($_GET['id'])) {
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
                         <select class="form-control" id="status" name="status" required>
-                            <option value="Ativo" <?php echo ($dados['status'] == 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
-                            <option value="Inativo" <?php echo ($dados['status'] == 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
+                            <option value="Ativa" <?php echo ($dados['status'] == 'Ativa') ? 'selected' : ''; ?>>Ativa</option>
+                            <option value="Inativa" <?php echo ($dados['status'] == 'Inativa') ? 'selected' : ''; ?>>Inativa</option>
                         </select>
                     </div>
 

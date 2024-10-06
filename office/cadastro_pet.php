@@ -11,14 +11,12 @@ include 'header.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="officestyle.css">
 	<title>Cadastro Pet</title>
-
-
 </head>
 <body>
 <div class="container-centered container d-flex justify-content-center align-items-center">
     <div class="form-container col-md-6 bg-light p-4 rounded shadow">
         <h1 class="text-center mb-4 display-4">Cadastro de Pet</h1>
-        <form action="cadastroAction_pet.php" method="post">
+        <form action="cadastroAction_pet.php" method="post" enctype="multipart/form-data">
 
             <!-- Campo oculto ID -->
             <input type="text" name="txtID" id="txtID" hidden>
@@ -71,6 +69,15 @@ include 'header.php';
                 </div>
             </div>
 
+            <div class="form-group mb-3">
+    <label for="foto_pet" class="form-label">Foto do Pet</label>
+    <div class="input-group">
+        <input type="file" class="form-control" name="foto_pet" id="foto_pet" accept="image/*" required>
+        <label class="input-group-text" for="foto_pet">
+            <i class="fa fa-upload"></i>
+        </label>
+    </div>
+</div>
             <!-- Botão de Enviar -->
             <div class="text-center">
                 <button type="submit" class="btn btn-primary w-100">

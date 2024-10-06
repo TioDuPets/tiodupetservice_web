@@ -28,7 +28,7 @@ echo '
 <section>
     <div class="container-centered">
         <div class="form-container">
-        <div class="bg-light p-4 rounded shadow">
+<div class="container mt-5">
             <h1 class="text-center mb-4 display-4">Listagem de Pets</h1>
             <table class="table table-sm table-striped table-hover border-primary">
             <thead class="table-primary">

@@ -1,4 +1,5 @@
 body{overflow-x:hidden;}
+
 h1, h2, p {
     font-family: Arial, sans-serif;
     line-height: 2;
@@ -42,7 +43,7 @@ nav{
     justify-content:space-around;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: rgb(240, 240, 1);
+    background: #f0f001;
     height: 12vh;
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -436,7 +437,7 @@ footer {
 
 .MFF{
     position:sticky;
-    border-top:2px solid #4a4a4a;
-    background-color:#b6b4b49b;
+    border-top:2px solid #797904;
+    background-color:#f0f001;
     height: 6vh;
 }
