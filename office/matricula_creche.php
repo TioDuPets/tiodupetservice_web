@@ -15,7 +15,7 @@ include 'header.php';
 <body>
     <div class="container-centered container d-flex justify-content-center align-items-center">
         <div class="form-container col-md-6 bg-light p-4 rounded shadow">
-            <h1 class="text-center mb-4 display-4">Matrícula na Creche</h1>
+            <h1 class="text-center mb-4 display-4">Matrícula Creche</h1>
             <form action="matriculaAction_creche.php" method="post">
 
                 <!-- Serviço -->

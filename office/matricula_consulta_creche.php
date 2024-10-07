@@ -10,148 +10,139 @@ include 'header.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
-    <title>Consulta de Matrículas Creche</title>
+    <title>Consulta de Matrículas na Creche</title>
 </head>
 <body>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
+$conexao = new mysqli($servername, $username, $password, $dbname);
 
+if ($conexao->connect_error) {
+    die("Connection failed: " . $conexao->connect_error);
+}
+
+echo '
 <section>
     <div class="container-centered">
-        <div class="form-container bg-light p-4 rounded shadow">
-            <h1 class="text-center mb-4 display-4">Consulta de Matrículas na Creche</h1>
-            
-            <!-- Formulário de pesquisa -->
-            <form method="GET" action="">
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label for="id_pet" class="form-label">Nome do Pet</label>
-                        <input type="text" class="form-control" id="id_pet" name="id_pet" placeholder="Nome do Pet">
+        <div class="form-container">
+            <div class="bg-light p-4 rounded shadow">
+                <h1 class="text-center mb-4 display-4">Consulta de Matrículas na Creche</h1>
+                
+                <!-- Formulário de pesquisa -->
+                <form method="GET" action="">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="pet" class="form-label">Nome do Pet</label>
+                            <input type="text" class="form-control" id="pet" name="pet" placeholder="Digite o nome do pet">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="cliente" class="form-label">Nome do Cliente</label>
+                            <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Digite o nome do cliente">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="veterinario" class="form-label">Nome do Veterinário</label>
+                            <input type="text" class="form-control" id="veterinario" name="veterinario" placeholder="Digite o nome do veterinário">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="">Selecione</option>
+                                <option value="Ativa">Ativa</option>
+                                <option value="Inativa">Inativa</option>
+                            </select>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-primary btn-lg w-50">Pesquisar</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="id_cliente" class="form-label">Nome do Cliente</label>
-                        <input type="text" class="form-control" id="id_cliente" name="id_cliente" placeholder="Nome do Cliente">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="id_veterinario" class="form-label">Nome do Veterinário</label>
-                        <input type="text" class="form-control" id="id_veterinario" name="id_veterinario" placeholder="Nome do Veterinário">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-control" id="status" name="status">
-                            <option value="">Selecione</option>
-                            <option value="Ativo">Ativo</option>
-                            <option value="Inativo">Inativo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label for="id_servico" class="form-label">Serviço</label>
-                        <input type="text" class="form-control" id="id_servico" name="id_servico" placeholder="Serviço">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="data_matricula" class="form-label">Data da Matrícula</label>
-                        <input type="date" class="form-control" id="data_matricula" name="data_matricula">
-                    </div>
-                    <div class="col-md-3 align-self-end">
-                        <button type="submit" class="btn btn-primary w-100">Pesquisar</button>
-                    </div>
-                </div>
-            </form>
+                </form>';
 
-            <!-- Tabela de resultados -->
-            <table class="table table-sm table-striped table-hover border-primary">
-                <thead class="table-primary">
-                    <tr>
-                        <th>ID</th>
-                        <th>Pet</th>
-                        <th>Cliente</th>
-                        <th>Veterinário</th>
-                        <th>Serviço</th>
-                        <th>Status</th>
-                        <th>Data Matrícula</th>
-                        <th>Atualizar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Conexão com o banco de dados
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "db_tiodupetservice";
-                    $conexao = new mysqli($servername, $username, $password, $dbname);
+// Verificando se há pesquisa a ser realizada
+if (!isset($_GET['pet']) && !isset($_GET['cliente']) && !isset($_GET['veterinario']) && !isset($_GET['status'])) {
+    echo '<div class="alert alert-info text-center">Aguardando pesquisa...</div>';
+} else {
+    // Construindo a query SQL com filtros dinâmicos
+    $sql = "SELECT m.id, p.nome AS nome_pet, v.nome AS nome_veterinario, c.nome AS nome_cliente, 
+            m.data_matricula, m.status
+            FROM matricula_creche m
+            JOIN pet p ON m.id_pet = p.id
+            JOIN veterinario v ON m.id_veterinario = v.id
+            JOIN cliente c ON m.id_cliente = c.id
+            WHERE 1=1";
 
-                    if ($conexao->connect_error) {
-                        die("Connection failed: " . $conexao->connect_error);
-                    }
+    // Filtros dinâmicos
+    if (!empty($_GET['pet'])) {
+        $pet = $conexao->real_escape_string($_GET['pet']);
+        $sql .= " AND p.nome LIKE '%$pet%'";
+    }
 
-                    // Construção da query de busca
-                    $sql = "SELECT matricula_creche.*, pet.nome AS nome_pet, cliente.nome AS nome_cliente, veterinario.nome AS nome_veterinario, servico.nome AS nome_servico
-                            FROM matricula_creche
-                            JOIN pet ON matricula_creche.id_pet = pet.id
-                            JOIN cliente ON matricula_creche.id_cliente = cliente.id
-                            JOIN veterinario ON matricula_creche.id_veterinario = veterinario.id
-                            JOIN servico ON matricula_creche.id_servico = servico.id
-                            WHERE 1=1";
+    if (!empty($_GET['cliente'])) {
+        $cliente = $conexao->real_escape_string($_GET['cliente']);
+        $sql .= " AND c.nome LIKE '%$cliente%'";
+    }
 
-                    // Filtrando a pesquisa pelos campos
-                    if (isset($_GET['id_pet']) && $_GET['id_pet'] != '') {
-                        $id_pet = $_GET['id_pet'];
-                        $sql .= " AND pet.nome LIKE '%$id_pet%'";
-                    }
+    if (!empty($_GET['veterinario'])) {
+        $veterinario = $conexao->real_escape_string($_GET['veterinario']);
+        $sql .= " AND v.nome LIKE '%$veterinario%'";
+    }
 
-                    if (isset($_GET['id_cliente']) && $_GET['id_cliente'] != '') {
-                        $id_cliente = $_GET['id_cliente'];
-                        $sql .= " AND cliente.nome LIKE '%$id_cliente%'";
-                    }
+    if (!empty($_GET['status'])) {
+        $status = $conexao->real_escape_string($_GET['status']);
+        $sql .= " AND m.status = '$status'";
+    }
 
-                    if (isset($_GET['id_veterinario']) && $_GET['id_veterinario'] != '') {
-                        $id_veterinario = $_GET['id_veterinario'];
-                        $sql .= " AND veterinario.nome LIKE '%$id_veterinario%'";
-                    }
+    $resultado = $conexao->query($sql);
 
-                    if (isset($_GET['status']) && $_GET['status'] != '') {
-                        $status = $_GET['status'];
-                        $sql .= " AND matricula_creche.status = '$status'";
-                    }
+    // Exibindo os resultados
+    if ($resultado && $resultado->num_rows > 0) {
+        echo '
+        <table class="table table-sm table-striped table-hover border-primary mt-4">
+            <thead class="table-primary">
+                <tr>
+                    <th>Pet</th>
+                    <th>Cliente</th>
+                    <th>Veterinário</th>
+                    <th>Data Matrícula</th>
+                    <th>Status</th>
+                    <th>Atualizar</th>
+                </tr>
+            </thead>
+            <tbody>';
+        while ($linha = $resultado->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>' . $linha['nome_pet'] . '</td>';
+            echo '<td>' . $linha['nome_cliente'] . '</td>';
+            echo '<td>' . $linha['nome_veterinario'] . '</td>';
+            echo '<td>' . $linha['data_matricula'] . '</td>';
+            echo '<td>' . $linha['status'] . '</td>';
+            echo '<td>
+                    <a href="matricula_atualizar_creche.php?id=' . $linha['id'] . '">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                  </td>';
+            echo '</tr>';
+        }
+        echo '
+            </tbody>
+        </table>';
+    } else {
+        echo '<div class="alert alert-warning text-center">Nenhuma matrícula encontrada.</div>';
+    }
+}
 
-                    if (isset($_GET['id_servico']) && $_GET['id_servico'] != '') {
-                        $id_servico = $_GET['id_servico'];
-                        $sql .= " AND servico.nome LIKE '%$id_servico%'";
-                    }
-
-                    if (isset($_GET['data_matricula']) && $_GET['data_matricula'] != '') {
-                        $data_matricula = $_GET['data_matricula'];
-                        $sql .= " AND matricula_creche.data_matricula = '$data_matricula'";
-                    }
-
-                    $resultado = $conexao->query($sql);
-
-                    // Exibindo os resultados da consulta
-                    if ($resultado && $resultado->num_rows > 0) {
-                        while ($linha = $resultado->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $linha['id'] . "</td>";
-                            echo "<td>" . $linha['nome_pet'] . "</td>";
-                            echo "<td>" . $linha['nome_cliente'] . "</td>";
-                            echo "<td>" . $linha['nome_veterinario'] . "</td>";
-                            echo "<td>" . $linha['nome_servico'] . "</td>";
-                            echo "<td>" . $linha['status'] . "</td>";
-                            echo "<td>" . $linha['data_matricula'] . "</td>";
-                            echo '<td><a href="matricula_atualizar_creche.php?id=' . $linha['id'] . '"><i class="fa fa-refresh"></i> Atualizar</a></td>';
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='8' class='text-center'>Nenhuma matrícula encontrada.</td></tr>";
-                    }
-
-                    $conexao->close();
-                    ?>
-                </tbody>
-            </table>
+echo '
+            </div>
         </div>
     </div>
-</section>
+</section>';
+
+$conexao->close();
+?>
 
 </body>
 <?php

@@ -155,10 +155,10 @@ nav{
             <div class="dropdown-content">
 
                 <ul>
-                    <li><a href="listar_pet.php">Consultar Pet</a></li>
-                    <li><a href="listar_cliente.php">Consultar Cliente</a></li>
-                    <li><a href="listar_veterinario.php">Consultar Veterinário</a></li>
-                    <li><a href="listar_servico.php">Consultar Serviço</a></li>
+                <li><a href="listar_pet.php">Listagem Pet</a></li>
+                    <li><a href="listar_cliente.php">Listagem Cliente</a></li>
+                    <li><a href="listar_veterinario.php">Listagem Veterinário</a></li>
+                    <li><a href="listar_servico.php">Listagem Serviço</a></li>
                 </ul>
 
             </div>

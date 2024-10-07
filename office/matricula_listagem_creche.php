@@ -33,16 +33,11 @@ echo '
                 <table class="table table-sm table-striped table-hover border-primary">
                     <thead class="table-primary">
                         <tr>
-                            <th>ID</th>
-                            <th>Serviço</th>
                             <th>Pet</th>
-                            <th>Veterinário</th>
                             <th>Cliente</th>
+                            <th>Veterinário</th>
                             <th>Data de Matrícula</th>
                             <th>Status</th>
-                            <th>Horário de Entrada</th>
-                            <th>Horário de Saída</th>
-                            <th>Data de Término</th>
                             <th>Observação</th>
                             <th>Atualizar</th>
                         </tr>
@@ -62,16 +57,11 @@ $resultado = $conexao->query($sql);
 if ($resultado != null) {
     foreach ($resultado as $linha) {
         echo '<tr>';
-        echo '<td>' . $linha['id'] . '</td>';
-        echo '<td>' . $linha['servico'] . '</td>';
         echo '<td>' . $linha['nome_pet'] . '</td>';
         echo '<td>' . $linha['nome_veterinario'] . '</td>';
         echo '<td>' . $linha['nome_cliente'] . '</td>';
         echo '<td>' . $linha['data_matricula'] . '</td>';
         echo '<td>' . $linha['status'] . '</td>';
-        echo '<td>' . $linha['horario_entrada'] . '</td>';
-        echo '<td>' . $linha['horario_saida'] . '</td>';
-        echo '<td>' . $linha['data_fim'] . '</td>';
         echo '<td>' . $linha['observacao'] . '</td>';
 
         echo '<td>
