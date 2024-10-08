@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/10/2024 às 20:49
+-- Tempo de geração: 08/10/2024 às 05:44
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -36,13 +36,6 @@ CREATE TABLE `agendamento_hospedagem` (
   `observacoes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `agendamento_hospedagem`
---
-
-INSERT INTO `agendamento_hospedagem` (`id`, `pet_id`, `cliente_id`, `checkin`, `checkout`, `observacoes`) VALUES
-(8, 6, 5, '2024-10-04', '2024-10-26', '');
-
 -- --------------------------------------------------------
 
 --
@@ -56,14 +49,6 @@ CREATE TABLE `agendamento_petsitter` (
   `cliente_id` int(11) NOT NULL,
   `observacoes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `agendamento_petsitter`
---
-
-INSERT INTO `agendamento_petsitter` (`id`, `data_hora`, `pet_id`, `cliente_id`, `observacoes`) VALUES
-(1, '2024-10-05 08:00:00', 6, 5, ''),
-(2, '2024-10-06 08:00:00', 6, 5, '');
 
 -- --------------------------------------------------------
 
@@ -125,14 +110,6 @@ CREATE TABLE `cliente` (
   `estado` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `cliente`
---
-
-INSERT INTO `cliente` (`id`, `nome`, `cpf`, `telefone`, `email`, `endereco`, `numero`, `complemento`, `bairro`, `cep`, `cidade`, `estado`) VALUES
-(5, 'Bruno Lima', '789.123.456-00', '(41) 97654-32', 'bruno.lima@email.com', 'Rua da Paz', '654', 'Bloco B', 'Centro', '56789-012', 'Curitiba', 'PR'),
-(6, 'Juliana Rocha', '456.789.123-00', '(51) 98765-43', 'juliana.rocha@email.com', 'Rua das Oliveiras', '987', 'Apto 303', 'Jardim Botânico', '67890-123', 'Porto Alegre', 'RS');
-
 -- --------------------------------------------------------
 
 --
@@ -148,13 +125,6 @@ CREATE TABLE `lead` (
   `email` varchar(100) NOT NULL,
   `lead_contatado` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `lead`
---
-
-INSERT INTO `lead` (`id`, `servico`, `data_lead`, `nome`, `telefone`, `email`, `lead_contatado`) VALUES
-(17, 'Hospedagem', '2024-10-11', 'Seiya', '19991229845', 'asdfs@dgd.com', 'Não');
 
 -- --------------------------------------------------------
 
@@ -176,13 +146,6 @@ CREATE TABLE `matricula_creche` (
   `observacao` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `matricula_creche`
---
-
-INSERT INTO `matricula_creche` (`id`, `id_servico`, `id_pet`, `id_veterinario`, `id_cliente`, `data_matricula`, `status`, `horario_entrada`, `horario_saida`, `data_fim`, `observacao`) VALUES
-(1, 4, 6, 4, 5, NULL, 'Inativo', '07:07:00', '17:08:00', '2024-10-06', '');
-
 -- --------------------------------------------------------
 
 --
@@ -201,14 +164,6 @@ CREATE TABLE `pet` (
   `rga` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `pet`
---
-
-INSERT INTO `pet` (`id`, `nome`, `sexo`, `especie`, `raca`, `cor`, `idade`, `porte`, `rga`) VALUES
-(6, 'Bella', 'Fêmea', 'Cachorro', 'Poodle', 'Branco', 1, 'Pequeno', '123789'),
-(7, 'Max', 'Macho', 'Cachorro', 'Bulldog', 'Cinza', 3, 'Médio', '456789');
-
 -- --------------------------------------------------------
 
 --
@@ -221,16 +176,6 @@ CREATE TABLE `servico` (
   `tipo` varchar(50) NOT NULL,
   `preco` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `servico`
---
-
-INSERT INTO `servico` (`id`, `servico`, `tipo`, `preco`) VALUES
-(4, 'Creche', 'Cuidados', 500.00),
-(5, 'Pet Sitter', 'Cuidados', 100.00),
-(6, 'Pet Taxi', 'Transporte', 60.00),
-(7, 'Adestramento', 'Treinamento', 180.00);
 
 -- --------------------------------------------------------
 
@@ -251,13 +196,6 @@ CREATE TABLE `veterinario` (
   `cidade` varchar(50) NOT NULL,
   `estado` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `veterinario`
---
-
-INSERT INTO `veterinario` (`id`, `nome`, `telefone`, `email`, `endereco`, `numero`, `complemento`, `bairro`, `cep`, `cidade`, `estado`) VALUES
-(4, 'VeterinárioTeste', '(71) 99876-54', 'ana.costa@email.com', 'Av. Atlântica', '321', 'Casa', 'Barra', '45678-901', 'Salvador', 'BA');
 
 --
 -- Índices para tabelas despejadas
@@ -342,19 +280,19 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de tabela `agendamento_hospedagem`
 --
 ALTER TABLE `agendamento_hospedagem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `agendamento_petsitter`
 --
 ALTER TABLE `agendamento_petsitter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao_aprovadas`
 --
 ALTER TABLE `avaliacao_aprovadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao_recusadas`
@@ -366,43 +304,43 @@ ALTER TABLE `avaliacao_recusadas`
 -- AUTO_INCREMENT de tabela `avaliacao_solicitadas`
 --
 ALTER TABLE `avaliacao_solicitadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `matricula_creche`
 --
 ALTER TABLE `matricula_creche`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de tabela `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restrições para tabelas despejadas

@@ -21,7 +21,7 @@
 		if ($conexao->query($sql) === TRUE) {
 			echo ' 
 							<a href="main.php"> 
-							<h1 class="">Cliente Salvo com sucesso! </h1> </a> ';
+							<h1 class="">Veterinário Salvo com sucesso! </h1> </a> ';
 		} else {
 			echo '
 							 <a href="main.php">

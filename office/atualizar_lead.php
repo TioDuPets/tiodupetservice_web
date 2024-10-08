@@ -7,134 +7,70 @@ include 'header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
     <title>Atualizar Lead</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e9ecef;
-            margin: 0;
-            padding: 0;
-        }
-        .container-centered {
-            max-width: 800px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transition: box-shadow 0.3s;
-        }
-        .container-centered:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #007BFF;
-            font-size: 24px;
-        }
-        .form-content {
-            margin-bottom: 20px;
-        }
-        .form-content label {
-            display: block;
-            margin-bottom: 5px;
-            color: #495057;
-            font-weight: bold;
-        }
-        .form-content input[type="text"], 
-        .form-content input[type="date"],
-        .form-content input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-        .form-content input[type="text"]:focus, 
-        .form-content input[type="date"]:focus,
-        .form-content input[type="number"]:focus {
-            border-color: #007BFF;
-            outline: none;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 48%;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-        button a {
-            color: white;
-            text-decoration: none;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .text-center {
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 
-<section>
-    <div class="container-centered">
-        <div class="form-container">
+<div class="container-centered container d-flex justify-content-center align-items-center">
+    <div class="form-container col-md-8 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4 display-4">Atualizar Lead - ID: <?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?></h1>
 
-        <h1 class="text-center">Atualizar Lead - ID: <?php echo " " . $_GET['id']; ?></h1>
-		<form action="atualizarAction_lead.php" method='post'>
+        <form action="atualizarAction_lead.php" method="post">
 
-			<input name="txtID" type="hidden" value="<?php echo $_GET['id']; ?>">
-			
-            <div class="form-content">
-				<label>Serviço</label>
-				<input name="serviceTypeInput" value="<?php echo $_GET['servico']; ?>" required>
+            <input name="txtID" type="hidden" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
 
-				<label>Data Solicitada</label>
-				<input name="selectedDate" type="date" value="<?php echo $_GET['data_lead']; ?>" required>
-			</div>
+            <!-- Serviço e Data Solicitada -->
+            <div class="form-content mb-3">
+                <label for="serviceTypeInput">Serviço</label>
+                <input name="serviceTypeInput" id="serviceTypeInput" type="text" class="form-control" value="<?php echo isset($_GET['servico']) ? htmlspecialchars($_GET['servico']) : ''; ?>" required>
+            </div>
 
-            <div class="form-content">
-				<label>Nome Cliente</label>
-				<input name="txtNome" value="<?php echo $_GET['nome']; ?>" required>
+            <div class="form-content mb-3">
+                <label for="selectedDate">Data Solicitada</label>
+                <input name="selectedDate" id="selectedDate" type="date" class="form-control" value="<?php echo isset($_GET['data_lead']) ? $_GET['data_lead'] : ''; ?>" required>
+            </div>
 
-				<label>Telefone</label>
-				<input name="txtTelefone" value="<?php echo $_GET['telefone']; ?>" required>
+            <!-- Dados do Cliente -->
+            <div class="form-content mb-3">
+                <label for="txtNome">Nome Cliente</label>
+                <input name="txtNome" id="txtNome" type="text" class="form-control" value="<?php echo isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : ''; ?>" required>
+            </div>
 
-				<label>Email</label>
-				<input name="txtEmail" value="<?php echo $_GET['email']; ?>" required>
-			</div>
+            <div class="form-content mb-3">
+                <label for="txtTelefone">Telefone</label>
+                <input name="txtTelefone" id="txtTelefone" type="text" class="form-control" value="<?php echo isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : ''; ?>" required>
+            </div>
 
-            <div class="form-content">
-				<label>Lead contatado?</label>
-				<input name="lead_contatado" value="<?php echo $_GET['lead_contatado']; ?>" required>
-			</div>
+            <div class="form-content mb-3">
+                <label for="txtEmail">Email</label>
+                <input name="txtEmail" id="txtEmail" type="email" class="form-control" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" required>
+            </div>
 
-			<div class="form-content text-center">
-				<button name="btnCancelar"><a href="listar_lead.php">
-					<i class="fa fa-ban"></i> Cancelar Atualização</a>
-				</button>
+            <!-- Lead Contatado -->
+            <div class="form-content mb-3">
+                <label for="lead_contatado">Lead Contatado?</label>
+                <input name="lead_contatado" id="lead_contatado" type="text" class="form-control" value="<?php echo isset($_GET['lead_contatado']) ? htmlspecialchars($_GET['lead_contatado']) : ''; ?>" required>
+            </div>
 
-				<button name="btnAtualizar">
-					<i class="fa fa-user"></i> Atualizar
-				</button>
-			</div>
+            <!-- Botões -->
+            <div class="text-center">
+                <a href="listar_lead.php" class="btn btn-warning w-100 mb-2">
+                    <i class="fa fa-ban"></i> Cancelar Atualização
+                </a>
+                <button type="submit" name="btnAtualizar" class="btn btn-primary w-100">
+                    <i class="fa fa-user"></i> Atualizar
+                </button>
+            </div>
 
-            </form>
-        </div>
+        </form>
     </div>
-</section>
+</div>
 
 </body>
+
 <?php
 include 'footer.php';
 ?>
