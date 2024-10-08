@@ -1,5 +1,34 @@
 <?php
 include 'header.php';
+
+// Conexão ao banco de dados
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
+
+// Cria a conexão
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se há erros na conexão
+if ($conexao->connect_error) {
+    die("Connection failed: " . $conexao->connect_error);
+}
+
+// Pega o ID do cliente
+$cliente_id = $_GET['id'];
+
+// Busca os dados do cliente
+$sql = "SELECT * FROM cliente WHERE id = $cliente_id";
+$resultado = $conexao->query($sql);
+
+if ($resultado->num_rows > 0) {
+    // Pega os dados do cliente
+    $row = $resultado->fetch_assoc();
+} else {
+    echo "<div class='container'><p class='text-danger text-center'>cliente não encontrado.</p></div>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -7,156 +36,103 @@ include 'header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
-    <title>Atualizar Cliente</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container-centered {
-            max-width: 700px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-        }
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-        .form-content {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .form-content label {
-            flex: 0 0 45%; /* Largura do rótulo */
-            margin-bottom: 5px;
-        }
-        .form-content input[type="text"], 
-        .form-content input[type="number"], 
-        .form-content input[type="email"] {
-            flex: 1; /* O input ocupará o espaço restante */
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 48%;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-        button a {
-            color: white;
-            text-decoration: none;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .text-center {
-            text-align: center;
-        }
-    </style>
+    <title>Atualizar cliente</title>
 </head>
 <body>
 
-<section>
-    <div class="container-centered">
-        <div class="form-container">
-            <h1 class="text-center">Atualizar Cliente - ID: <?php echo " " . (isset($_GET['id']) ? $_GET['id'] : ''); ?></h1>
-            <form action="atualizarAction_cliente.php" method="post">
+<div class="container-centered container d-flex justify-content-center align-items-center">
+    <div class="form-container col-md-8 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4 display-4">Atualizar cliente - ID: <?php echo $cliente_id; ?></h1>
 
-                <input name="txtID" type="hidden" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
+        <form action="atualizarAction_cliente.php" method="post">
+            <input name="txtID" type="hidden" value="<?php echo $cliente_id; ?>">
 
-                <div class="form-content">
-                    <label>Nome Cliente</label>
-                    <input name="txtNome" type="text" value="<?php echo isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : ''; ?>" required>
+
+            <!-- Nome e CPF -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtNome" class="form-label">Nome cliente</label>
+                    <input name="txtNome" id="txtNome" type="text" class="form-control" value="<?php echo htmlspecialchars($row['nome']); ?>" required>
                 </div>
-
-                <div class="form-content">
-                    <label>CPF</label>
-                    <input name="txtCpf" type="text" value="<?php echo isset($_GET['cpf']) ? htmlspecialchars($_GET['cpf']) : ''; ?>" required>
+                <div class="col-md-6">
+                    <label for="txtCpf" class="form-label">CPF</label>
+                    <input name="txtCpf" id="txtCpf" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cpf']); ?>" required>
                 </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Telefone</label>
-                    <input name="txtTelefone" type="text" value="<?php echo isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : ''; ?>" required>
+
+            <!-- Telefone e Email -->
+            <div class="row mb-1">
+		        <div class="col-md-6">
+                    <label for="txtTelefone" class="form-label">Telefone</label>
+                    <input name="txtTelefone" id="txtTelefone" type="text" class="form-control" value="<?php echo htmlspecialchars($row['telefone']); ?>" required>
                 </div>
-
-                <div class="form-content">
-                    <label>Email</label>
-                    <input name="txtEmail" type="email" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" required>
+                <div class="col-md-6">
+                    <label for="txtEmail" class="form-label">Email</label>
+                    <input name="txtEmail" id="txtEmail" type="email" class="form-control" value="<?php echo htmlspecialchars($row['email']); ?>" required>
                 </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Endereço</label>
-                    <input name="txtEndereco" type="text" value="<?php echo isset($_GET['endereco']) ? htmlspecialchars($_GET['endereco']) : ''; ?>" required>
+            <!-- Endereço e Número -->
+            <div class="row mb-1">
+                <div class="col-md-8">
+                    <label for="txtEndereco" class="form-label">Endereço</label>
+                    <input name="txtEndereco" id="txtEndereco" type="text" class="form-control" value="<?php echo htmlspecialchars($row['endereco']); ?>" required>
                 </div>
-
-                <div class="form-content">
-                    <label>Número</label>
-                    <input name="txtNumero" type="number" value="<?php echo isset($_GET['numero']) ? htmlspecialchars($_GET['numero']) : ''; ?>" required>
+                <div class="col-md-4">
+                    <label for="txtNumero" class="form-label">Número</label>
+                    <input name="txtNumero" id="txtNumero" type="number" class="form-control" value="<?php echo htmlspecialchars($row['numero']); ?>" required>
                 </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Complemento</label>
-                    <input name="txtComplemento" type="text" value="<?php echo isset($_GET['complemento']) ? htmlspecialchars($_GET['complemento']) : ''; ?>">
+            <!-- Complemento e Bairro -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtComplemento" class="form-label">Complemento</label>
+                    <input name="txtComplemento" id="txtComplemento" type="text" class="form-control" value="<?php echo htmlspecialchars($row['complemento']); ?>">
                 </div>
-
-                <div class="form-content">
-                    <label>Bairro</label>
-                    <input name="txtBairro" type="text" value="<?php echo isset($_GET['bairro']) ? htmlspecialchars($_GET['bairro']) : ''; ?>" required>
+                <div class="col-md-6">
+                    <label for="txtBairro" class="form-label">Bairro</label>
+                    <input name="txtBairro" id="txtBairro" type="text" class="form-control" value="<?php echo htmlspecialchars($row['bairro']); ?>" required>
                 </div>
+            </div>
 
-                <div class="form-content">
-                    <label>CEP</label>
-                    <input name="txtCep" type="text" value="<?php echo isset($_GET['cep']) ? htmlspecialchars($_GET['cep']) : ''; ?>" required>
+            <!-- CEP, Cidade e Estado -->
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label for="txtCep" class="form-label">CEP</label>
+                    <input name="txtCep" id="txtCep" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cep']); ?>" required>
                 </div>
-
-                <div class="form-content">
-                    <label>Cidade</label>
-                    <input name="txtCidade" type="text" value="<?php echo isset($_GET['cidade']) ? htmlspecialchars($_GET['cidade']) : ''; ?>" required>
+                <div class="col-md-4">
+                    <label for="txtCidade" class="form-label">Cidade</label>
+                    <input name="txtCidade" id="txtCidade" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cidade']); ?>" required>
                 </div>
-
-                <div class="form-content">
-                    <label>Estado</label>
-                    <input name="txtEstado" type="text" value="<?php echo isset($_GET['estado']) ? htmlspecialchars($_GET['estado']) : ''; ?>" required>
+                <div class="col-md-4">
+                    <label for="txtEstado" class="form-label">Estado</label>
+                    <input name="txtEstado" id="txtEstado" type="text" class="form-control" value="<?php echo htmlspecialchars($row['estado']); ?>" required>
                 </div>
+            </div>
 
-                <div class="text-center">
-                    <button name="btnCancelar">
-                        <a href="listar_cliente.php">
-                            <i class="fa fa-ban"></i> Cancelar Atualização
-                        </a>
-                    </button>
-
-                    <button name="btnAtualizar">
-                        <i class="fa fa-user"></i> Atualizar
-                    </button>
-                </div>
-            </form>
-        </div>
+            <!-- Botões de Ação -->
+            <div class="text-center">
+                <a href="listar_cliente.php" class="btn btn-warning w-100 mb-2">
+                    <i class="fa fa-ban"></i> Cancelar Atualização
+                </a>
+                <button type="submit" name="btnAtualizar" class="btn btn-primary w-100">
+                    <i class="fa fa-user"></i> Atualizar
+                </button>
+            </div>
+        </form>
     </div>
-</section>
+</div>
 
 </body>
+
 <?php
-include 'footer.php';
+// Fecha a conexão
+$conexao->close();
 ?>
 </html>

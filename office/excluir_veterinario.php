@@ -1,53 +1,132 @@
 <?php
 include 'header.php';
+
+// Conexão ao banco de dados
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
+
+// Cria a conexão
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se há erros na conexão
+if ($conexao->connect_error) {
+    die("Connection failed: " . $conexao->connect_error);
+}
+
+// Pega o ID do veterinário
+$veterinario_id = $_GET['id'];
+
+// Busca os dados do veterinário
+$sql = "SELECT * FROM veterinario WHERE id = $veterinario_id";
+$resultado = $conexao->query($sql);
+
+if ($resultado->num_rows > 0) {
+    // Pega os dados do veterinário
+    $row = $resultado->fetch_assoc();
+} else {
+    echo "<div class='container'><p class='text-danger text-center'>Veterinário não encontrado.</p></div>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="officestyle.css">
-	<title>Excluir Veterinário</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="officestyle.css">
+    <title>Excluir Veterinário</title>
 </head>
 <body>
 
-	<section>
-      <div class="container-centered">
-        <div class="form-container">
+<div class="container-centered container d-flex justify-content-center align-items-center">
+    <div class="form-container col-md-8 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4 display-4">Excluir Veterinário - ID: <?php echo $veterinario_id; ?></h1>
 
-                            <h1 class="text-center">EXCLUIR VETERINÁRIO:<?php echo " " . $_GET['id'] ?></h1>
+        <form action="excluirAction_veterinario.php" method="post">
+            <input name="txtID" type="hidden" value="<?php echo $veterinario_id; ?>">
 
-		<form action="excluirAction_veterinario.php" method='post'>
-			<input name="txtID" type="hidden" value="<?php echo $_GET['id'] ?>">
-			<br>
-			<label >Nome</label>
-			<input name="txtNome" disabled value="<?php echo $_GET['nome'] ?>">
-			<br>
-			<label >Telefone</label>
-			<input name="txtTelefone" disabled value="<?php echo $_GET['telefone'] ?>">
-			<br>
-			<label >Email</label>
-			<input name="txtEmail" disabled value="<?php echo $_GET['email'] ?>">
-			<br>
+            <!-- Nome e Telefone -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtNome" class="form-label">Nome Veterinário</label>
+                    <input name="txtNome" id="txtNome" type="text" class="form-control" value="<?php echo htmlspecialchars($row['nome']); ?>" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtTelefone" class="form-label">Telefone</label>
+                    <input name="txtTelefone" id="txtTelefone" type="text" class="form-control" value="<?php echo htmlspecialchars($row['telefone']); ?>" disabled>
+                </div>
+            </div>
 
-            <div class="form-content">
-				<button name="btnCancelar"><a href="listar_veterinario.php">
-				<i class="fa fa-ban"></i> Cancelar Exclusão.</a>
-				</button>
+            <!-- Email -->
+            <div class="row mb-1">
+                <div class="col-md-12">
+                    <label for="txtEmail" class="form-label">Email</label>
+                    <input name="txtEmail" id="txtEmail" type="email" class="form-control" value="<?php echo htmlspecialchars($row['email']); ?>" disabled>
+                </div>
+            </div>
 
-				<button name="btnExcuir">
-				<i class="fa fa-check"></i> Confirmar Exclusão.
-				</button>
-		</div>
-		</form>
-		</div>
-		</div>
-</section>
+            <!-- Endereço e Número -->
+            <div class="row mb-1">
+                <div class="col-md-8">
+                    <label for="txtEndereco" class="form-label">Endereço</label>
+                    <input name="txtEndereco" id="txtEndereco" type="text" class="form-control" value="<?php echo htmlspecialchars($row['endereco']); ?>" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label for="txtNumero" class="form-label">Número</label>
+                    <input name="txtNumero" id="txtNumero" type="number" class="form-control" value="<?php echo htmlspecialchars($row['numero']); ?>" disabled>
+                </div>
+            </div>
+
+            <!-- Complemento e Bairro -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtComplemento" class="form-label">Complemento</label>
+                    <input name="txtComplemento" id="txtComplemento" type="text" class="form-control" value="<?php echo htmlspecialchars($row['complemento']); ?>" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtBairro" class="form-label">Bairro</label>
+                    <input name="txtBairro" id="txtBairro" type="text" class="form-control" value="<?php echo htmlspecialchars($row['bairro']); ?>" disabled>
+                </div>
+            </div>
+
+            <!-- CEP, Cidade e Estado -->
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <label for="txtCep" class="form-label">CEP</label>
+                    <input name="txtCep" id="txtCep" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cep']); ?>" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label for="txtCidade" class="form-label">Cidade</label>
+                    <input name="txtCidade" id="txtCidade" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cidade']); ?>" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label for="txtEstado" class="form-label">Estado</label>
+                    <input name="txtEstado" id="txtEstado" type="text" class="form-control" value="<?php echo htmlspecialchars($row['estado']); ?>" disabled>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="text-center">
+                <a href="listar_veterinario.php" class="btn btn-warning w-100 mb-2">
+                    <i class="fa fa-ban"></i> Cancelar Exclusão
+                </a>
+                <button type="submit" name="btnExcluir" class="btn btn-danger w-100">
+                    <i class="fa fa-trash"></i> Confirmar Exclusão
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
+
 <?php
-include 'footer.php';
+// Fecha a conexão
+$conexao->close();
 ?>
 </html>

@@ -36,167 +36,101 @@ if ($resultado->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="officestyle.css">
     <title>Atualizar Pet</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container-centered {
-            max-width: 700px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-        }
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-        .form-content {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .form-content label {
-            flex: 0 0 45%; /* Largura do rótulo */
-        }
-        .form-content input[type="text"], 
-        .form-content input[type="number"], 
-        .form-content input[type="file"] {
-            flex: 1; /* O input ocupará o espaço restante */
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .form-content img {
-            display: block;
-            max-width: 400px;
-            max-height: 300px;
-            width: 100%;
-            height: auto;
-            margin: 20px auto;
-            border-radius: 10px;
-            border: 2px solid #ddd;
-        }
-        button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 48%;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-        button a {
-            color: white;
-            text-decoration: none;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .error-message {
-            color: red;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 
-<section>
-    <div class="container-centered">
-        <div class="form-container">
-            <h1>Atualizar Pet - ID: <?php echo $pet_id; ?></h1>
+<div class="container-centered container d-flex justify-content-center align-items-center">
+    <div class="form-container col-md-8 bg-light p-4 rounded shadow">
+        <h1 class="text-center mb-4 display-4">Atualizar Pet - ID: <?php echo $pet_id; ?></h1>
 
-            <!-- Exibe a imagem do pet -->
-            <div class="text-center">
-                <?php if (!empty($row['foto_pet'])): ?>
-                    <img src="uploads/<?php echo $row['foto_pet']; ?>" alt="Foto do Pet">
-                <?php else: ?>
-                    <p>Sem foto disponível.</p>
-                <?php endif; ?>
+        <!-- Exibe a imagem do pet -->
+        <div class="text-center mb-3">
+            <?php if (!empty($row['foto_pet'])): ?>
+                <img src="uploads/<?php echo $row['foto_pet']; ?>" alt="Foto do Pet" class="img-fluid rounded">
+            <?php else: ?>
+                <p class="text-muted">Sem foto disponível.</p>
+            <?php endif; ?>
+        </div>
+
+        <form action="atualizarAction_pet.php" method="post" enctype="multipart/form-data">
+            <!-- Campo oculto ID -->
+            <input name="txtID" type="hidden" value="<?php echo $pet_id; ?>">
+
+            <!-- Nome e RGA -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtNome" class="form-label">Nome do Pet</label>
+                    <input name="txtNome" id="txtNome" type="text" class="form-control" value="<?php echo htmlspecialchars($row['nome']); ?>" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtRga" class="form-label">RGA</label>
+                    <input name="txtRga" id="txtRga" type="text" class="form-control" value="<?php echo htmlspecialchars($row['rga']); ?>">
+                </div>
             </div>
 
-            <form action="atualizarAction_pet.php" method="post" enctype="multipart/form-data">
-                <input name="txtID" type="hidden" value="<?php echo $pet_id; ?>">
-
-                <div class="form-content">
-                    <label>Nome do Pet</label>
-                    <input name="txtNome" type="text" value="<?php echo htmlspecialchars($row['nome']); ?>" required>
+            <!-- Sexo e Espécie -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtSexo" class="form-label">Sexo</label>
+                    <input name="txtSexo" id="txtSexo" type="text" class="form-control" value="<?php echo htmlspecialchars($row['sexo']); ?>">
                 </div>
-
-                <div class="form-content">
-                    <label>RGA</label>
-                    <input name="txtRga" type="text" value="<?php echo htmlspecialchars($row['rga']); ?>">
+                <div class="col-md-6">
+                    <label for="txtEspecie" class="form-label">Espécie</label>
+                    <input name="txtEspecie" id="txtEspecie" type="text" class="form-control" value="<?php echo htmlspecialchars($row['especie']); ?>">
                 </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Sexo</label>
-                    <input name="txtSexo" type="text" value="<?php echo htmlspecialchars($row['sexo']); ?>">
+            <!-- Raça e Cor -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtRaca" class="form-label">Raça</label>
+                    <input name="txtRaca" id="txtRaca" type="text" class="form-control" value="<?php echo htmlspecialchars($row['raca']); ?>">
                 </div>
+                <div class="col-md-6">
+                    <label for="txtCor" class="form-label">Cor</label>
+                    <input name="txtCor" id="txtCor" type="text" class="form-control" value="<?php echo htmlspecialchars($row['cor']); ?>">
+                </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Espécie</label>
-                    <input name="txtEspecie" type="text" value="<?php echo htmlspecialchars($row['especie']); ?>">
+            <!-- Idade e Porte -->
+            <div class="row mb-1">
+                <div class="col-md-6">
+                    <label for="txtIdade" class="form-label">Idade</label>
+                    <input name="txtIdade" id="txtIdade" type="number" class="form-control" value="<?php echo htmlspecialchars($row['idade']); ?>" required>
                 </div>
+                <div class="col-md-6">
+                    <label for="txtPorte" class="form-label">Porte</label>
+                    <input name="txtPorte" id="txtPorte" type="text" class="form-control" value="<?php echo htmlspecialchars($row['porte']); ?>">
+                </div>
+            </div>
 
-                <div class="form-content">
-                    <label>Raça</label>
-                    <input name="txtRaca" type="text" value="<?php echo htmlspecialchars($row['raca']); ?>">
-                </div>
+            <!-- Campo para atualizar a foto do pet -->
+            <div class="mb-3">
+                <label for="foto_pet" class="form-label">Atualizar Foto do Pet</label>
+                <input type="file" name="foto_pet" id="foto_pet" class="form-control" accept="image/*">
+            </div>
 
-                <div class="form-content">
-                    <label>Cor</label>
-                    <input name="txtCor" type="text" value="<?php echo htmlspecialchars($row['cor']); ?>">
-                </div>
-
-                <div class="form-content">
-                    <label>Idade</label>
-                    <input name="txtIdade" type="number" value="<?php echo htmlspecialchars($row['idade']); ?>" required>
-                </div>
-
-                <div class="form-content">
-                    <label>Porte</label>
-                    <input name="txtPorte" type="text" value="<?php echo htmlspecialchars($row['porte']); ?>">
-                </div>
-
-                <!-- Campo para atualizar a foto do pet -->
-                <div class="form-content">
-                    <label for="foto_pet">Atualizar Foto do Pet</label>
-                    <input type="file" name="foto_pet" id="foto_pet" accept="image/*">
-                </div>
-
-                <div class="form-content text-center">
-                    <button name="btnCancelar">
-                        <a href="listar_pet.php"><i class="fa fa-ban"></i> Cancelar Atualização</a>
-                    </button>
-                    <button name="btnAtualizar">
-                        <i class="fa fa-paw"></i> Atualizar
-                    </button>
-                </div>
-            </form>
-        </div>
+            <!-- Botões -->
+            <div class="text-center">
+                <a href="listar_pet.php" class="btn btn-warning w-100 mb-2">
+                    <i class="fa fa-ban"></i> Cancelar Atualização
+                </a>
+                <button type="submit" name="btnAtualizar" class="btn btn-primary w-100">
+                    <i class="fa fa-paw"></i> Atualizar
+                </button>
+            </div>
+        </form>
     </div>
-</section>
+</div>
 
 </body>
-</html>
 
 <?php
 // Fecha a conexão
 $conexao->close();
 ?>
+</html>
