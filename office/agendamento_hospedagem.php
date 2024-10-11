@@ -22,12 +22,12 @@ include 'header.php';
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="checkin" class="form-label">Data de Check-in</label>
-                        <input type="date" class="form-control" name="checkin" id="checkin" required>
+                        <input type="date" class="form-control" name="checkin" id="star" required>
                     </div>
 
                     <div class="col-md-6">
                         <label for="checkout" class="form-label">Data de Check-out</label>
-                        <input type="date" class="form-control" name="checkout" id="checkout" required>
+                        <input type="date" class="form-control" name="checkout" id="end" required>
                     </div>
                 </div>
 

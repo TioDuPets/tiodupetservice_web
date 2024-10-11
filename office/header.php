@@ -40,10 +40,12 @@ nav{
     height: 12vh;
     border-radius: 10pt;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 999;
 }
 
 .navbar li {
     float: left;
+    z-index: 999;
     
 }
 
@@ -51,6 +53,7 @@ nav{
     display: inline-block;
     color: rgb(7, 7, 7);
     text-decoration: none;
+    z-index: 999;
 }
 
 .dropdown {
@@ -68,6 +71,7 @@ nav{
     position: absolute;
     background-color: #f0f001;
     box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+
 }
 
 .dropdown-content ul {
@@ -85,10 +89,12 @@ nav{
     color: rgb(1, 1, 1);
     text-decoration: none;
     display: block;
+
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    z-index: 999;
 }
     </style>
 </head>
@@ -101,7 +107,16 @@ nav{
     <a class="logo" href="http://localhost/tiodupetservice_web/office/main.php"><img src="../assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
     <ul class="navbar">
 
-        <!-- Dropdown de Serviços -->
+    
+
+           <!-- Dropdown Matrícula -->
+           <li class="dropdown">
+
+            <a href="calendario.php" class="dropbtn">Calendário</a>
+
+            </li>
+
+        <!-- Dropdown Matrícula -->
         <li class="dropdown">
 
             <a class="dropbtn">Creche</a>
@@ -126,6 +141,7 @@ nav{
                 <ul>
                     <li><a href="agendamento_hospedagem.php">Hotel</a></li>
                     <li><a href="agendamento_petsitter.php">Pet Sitter</a></li>
+                    <li><a href="listar_agendamento.php">Agenda</a></li>
                 </ul>
             </div>
         </li>

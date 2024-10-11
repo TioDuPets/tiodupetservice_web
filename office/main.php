@@ -42,7 +42,7 @@ include 'header.php';
     
     <br>
     <div class="box-search">
-        <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
+        <input type="search" class="form-control w-25" placeholder="Pesquisar Pet" id="pesquisar">
         <button onclick="searchData()" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -51,22 +51,23 @@ include 'header.php';
     </div>
     <div class="m-5">
         <table class="table text-white table-bg">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome_pet</th>
-                    <th scope="col">Idade</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Raca</th>
-                    <th scope="col">Porte</th>
-                    <th scope="col">Nome_tutor</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">...</th>
-                </tr>
+            <form method="post" action="/tiodupetservice_web/office/contatos.php">
+                <label for="data">Data:</label>
+                <input type="date" name="data" value="" required>
+                <br></br>
+                <label for="horario">Horário:</label>
+                <input type="time" name="horario" required>
+                <br></br>
+                <label for="tipo_servico">Tipo de Serviço:</label>
+                <br></br>
+                <select name="tipo_servico">
+                    <option value="Hotel">Hotel</option>
+                    <option value="Creche">Creche</option>
+                    <option value="Passeio">Passeio</option>
+                </select>
+                <br></br>
+                <input type="submit" value="Agendar Contato">
+            </form>
             </thead>
             <tbody>
                 <?php 
@@ -128,13 +129,8 @@ include 'header.php';
 
     function searchData()
     {
-        window.location = 'contatos.php?search='+search.value;
+        window.location = '/tiodupetservice_web/office/listar_pet.php?search='+search.value;
     }
 </script>
-
-
-    <?php
-include 'footer.php';
-?>
-    </html>
+</html>
 

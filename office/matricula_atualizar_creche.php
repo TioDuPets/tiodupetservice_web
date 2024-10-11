@@ -88,7 +88,7 @@ if (isset($_GET['id'])) {
 
                     <div class="mb-3">
                         <label for="data_matricula" class="form-label">Data de Matrícula</label>
-                        <input type="date" class="form-control" id="data_matricula" name="data_matricula" value="<?php echo $dados['data_matricula']; ?>" disabled>
+                        <input type="date" class="form-control" id="data_matricula" name="data_matricula" value="<?php echo $dados['data_matricula']; ?>">
                     </div>
 
                     <div class="mb-3">

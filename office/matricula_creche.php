@@ -141,6 +141,17 @@ include 'header.php';
             </form>
         </div>
     </div>
+
+    <script>
+        // Definindo a data atual como padrão
+        const dataMatricula = document.getElementById('data_matricula');
+        const hoje = new Date().toISOString().split('T')[0];
+        dataMatricula.value = hoje;
+
+        // Definindo os horários padrão
+        document.getElementById('horario_entrada').value = '08:00';
+        document.getElementById('horario_saida').value = '17:00';
+    </script>
 </body>
 
 <?php
