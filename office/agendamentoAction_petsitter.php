@@ -24,10 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Executa a consulta e verifica se a inserção foi bem-sucedida
         if (mysqli_query($conexao, $sql)) {
-            echo "<script>alert('Agendamento de Pet Sitter realizado com sucesso!');window.location.href='agendamento_petsitter.php';</script>";
+            echo json_encode(['status' => 'success', 'message' => 'Agendamento realizado com sucesso!']);
         } else {
-            echo "<script>alert('Erro ao agendar. Por favor, tente novamente.');window.location.href='agendamento_petsitter.php';</script>";
+            echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir agendamento: ' . mysqli_error($conexao)]);
         }
+
 
     } else {
         // Mensagem de erro caso algum campo obrigatório esteja vazio

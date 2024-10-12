@@ -16,7 +16,7 @@ include 'header.php';
     <div class="container-centered container d-flex justify-content-center align-items-center">
         <div class="form-container col-md-6 bg-light p-4 rounded shadow">
             <h1 class="text-center mb-4 display-4">Matrícula Creche</h1>
-            <form action="matriculaAction_creche.php" method="post">
+            <form id="matriculaForm">
 
                 <!-- Serviço -->
                 <div class="mb-3">
@@ -58,6 +58,25 @@ include 'header.php';
                     </select>
                 </div>
 
+                                <!-- Cliente -->
+                                <div class="mb-3">
+                    <label for="id_cliente" class="form-label">Selecione o Cliente</label>
+                    <select name="id_cliente" id="id_cliente" class="form-select" required>
+                        <?php
+                        // Buscando clientes cadastrados
+                        $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Nenhum cliente encontrado</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
                 <!-- Veterinário -->
                 <div class="mb-3">
                     <label for="id_veterinario" class="form-label">Selecione o Veterinário</label>
@@ -77,25 +96,6 @@ include 'header.php';
                     </select>
                 </div>
 
-                <!-- Cliente -->
-                <div class="mb-3">
-                    <label for="id_cliente" class="form-label">Selecione o Cliente</label>
-                    <select name="id_cliente" id="id_cliente" class="form-select" required>
-                        <?php
-                        // Buscando clientes cadastrados
-                        $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
-
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>Nenhum cliente encontrado</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-
                 <!-- Data de Matrícula -->
                 <div class="mb-3">
                     <label for="data_matricula" class="form-label">Data da Matrícula</label>
@@ -103,13 +103,13 @@ include 'header.php';
                 </div>
 
                 <!-- Status -->
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <select name="status" id="status" class="form-select" required>
+                <!--div class="mb-3"-->
+                    <label for="status" class="form-label"></label>
+                    <select name="status" id="status" class="form-select" hidden>
                         <option value="Ativa">Matrícula Ativa</option>
                         <option value="Inativa">Matrícula Inativa</option>
                     </select>
-                </div>
+                <!--/div-->
 
                 <!-- Horário de Entrada e Saída -->
                 <div class="row mb-3">
@@ -122,9 +122,6 @@ include 'header.php';
                         <input type="time" class="form-control" name="horario_saida" id="horario_saida" required>
                     </div>
                 </div>
-
-                <!-- Data Fim -->
-                    <input type="date" class="form-control" name="data_fim" id="data_fim" hidden>
 
                 <!-- Observações -->
                 <div class="mb-3">
@@ -142,13 +139,48 @@ include 'header.php';
         </div>
     </div>
 
-    <script>
-        // Definindo a data atual como padrão
-        const dataMatricula = document.getElementById('data_matricula');
-        const hoje = new Date().toISOString().split('T')[0];
-        dataMatricula.value = hoje;
+    <!-- Modal do Bootstrap -->
+    <div class="modal fade" id="matriculaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Matrícula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage">Matrícula realizada com sucesso!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Definindo os horários padrão
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+        document.getElementById('matriculaForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('matriculaAction_creche.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('matriculaModal'));
+                matriculaModal.show();
+            })
+            .catch(error => console.error('Erro:', error));
+        };
+
+        // Definindo data e horário padrão
+        document.getElementById('data_matricula').value = new Date().toISOString().split('T')[0];
         document.getElementById('horario_entrada').value = '08:00';
         document.getElementById('horario_saida').value = '17:00';
     </script>

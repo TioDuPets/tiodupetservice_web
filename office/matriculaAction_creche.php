@@ -20,13 +20,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql_matricula = "INSERT INTO matricula_creche (id_servico, id_pet, id_veterinario, id_cliente, data_matricula, status, horario_entrada, horario_saida, observacao, data_fim) 
                       VALUES ('$id_servico', '$id_pet', '$id_veterinario', '$id_cliente', '$data_matricula', '$status', '$horario_entrada', '$horario_saida', '$observacao', '$data_fim')";
 
-    if (mysqli_query($conexao, $sql_matricula)) {
-        // Pegando o último ID da matrícula inserida
-        $matricula_id = mysqli_insert_id($conexao);
+    // Define o cabeçalho para resposta JSON
+    header('Content-Type: application/json');
 
-        echo "Matrícula realizada com sucesso!";
+    // Validação e inserção da matrícula
+    if (mysqli_query($conexao, $sql_matricula)) {
+        // Retorna uma resposta JSON de sucesso
+        echo json_encode(['status' => 'success', 'message' => 'Matrícula realizada com sucesso!']);
     } else {
-        echo "Erro ao inserir matrícula: " . mysqli_error($conexao);
+        // Retorna uma resposta JSON de erro
+        echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir matrícula: ' . mysqli_error($conexao)]);
     }
 }
 ?>

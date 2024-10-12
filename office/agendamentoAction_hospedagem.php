@@ -48,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_bind_param($stmt_insert, "sssiss", $tipo, $checkin, $checkout, $pet_ID, $cliente_ID, $observacoes);
 
             if (mysqli_stmt_execute($stmt_insert)) {
-                echo "<script>alert('Agendamento realizado com sucesso!');window.location.href='agendamento_hospedagem.php';</script>";
+                echo json_encode(['status' => 'success', 'message' => 'Agendamento realizado com sucesso!']);
             } else {
-                echo "<script>alert('Erro ao agendar: " . mysqli_error($conexao) . "');window.location.href='agendamento_hospedagem.php';</script>";
+                echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir agendamento: ' . mysqli_error($conexao)]);
             }
 
             // Fechar statement de inserção
