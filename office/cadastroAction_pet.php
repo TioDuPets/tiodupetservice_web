@@ -1,104 +1,52 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Cadastro de Pets</title>
-</head>
-<body>
-	<div class="">
-		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db_tiodupetservice";
+<?php
+header('Content-Type: application/json'); // Define o conteúdo como JSON
 
-		// Cria a conexão
-		$conexao = new mysqli($servername, $username, $password, $dbname);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
 
-		// Verifica se há erros na conexão
-		if ($conexao->connect_error) {
-			die("Connection failed: " . $conexao->connect_error);
-		}
+// Cria a conexão
+$conexao = new mysqli($servername, $username, $password, $dbname);
 
-		// Primeiro, insere os dados sem a imagem para obter o ID gerado
-		$sql = "INSERT INTO pet (nome, sexo, especie, raca, cor, idade, porte, rga) VALUES (
-			'" . $_POST['txtNome'] . "',
-			'" . $_POST['txtSexo'] . "',
-			'" . $_POST['txtEspecie'] . "',
-			'" . $_POST['txtRaca'] . "',
-			'" . $_POST['txtCor'] . "',
-			'" . $_POST['txtIdade'] . "',
-			'" . $_POST['txtPorte'] . "',
-			'" . $_POST['txtRga'] . "')";
+// Verifica se há erros na conexão
+if ($conexao->connect_error) {
+    echo json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]);
+    exit();
+}
 
-		// Verifica se a inserção foi bem-sucedida
-		if ($conexao->query($sql) === TRUE) {
-			// Obtém o último ID inserido
-			$pet_id = $conexao->insert_id;
-			$pet_nome = $_POST['txtNome'];
-		} else {
-			echo '<h1 class="">ERRO ao salvar no banco de dados: ' . $conexao->error . '</h1>';
-			exit();
-		}
+// Prepara a query SQL para inserir o registro
+$stmt = $conexao->prepare("INSERT INTO pet (nome, sexo, especie, raca, cor, idade, porte, rga, foto_pet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-		// Agora faz o upload da imagem
-		$uploadOk = 1;
-		$target_dir = "uploads/";
-		$foto_nome = "";
+// Obtém os valores do formulário
+$nome = $_POST['txtNome'];
+$sexo = $_POST['txtSexo'];
+$especie = $_POST['txtEspecie'];
+$raca = $_POST['txtRaca'];
+$cor = $_POST['txtCor'];
+$idade = $_POST['txtIdade'];
+$porte = $_POST['txtPorte'];
+$rga = $_POST['txtRga'];
 
-		if (isset($_FILES['foto_pet']) && $_FILES['foto_pet']['error'] == 0) {
-			// Define o novo nome da imagem: pet_ID (ex: pet_01.jpg)
-			$imageFileType = strtolower(pathinfo($_FILES['foto_pet']['name'], PATHINFO_EXTENSION));
-			$novo_nome_foto = "pet_" . $pet_id . "." . $imageFileType;
-			$target_file = $target_dir . $novo_nome_foto;
+// Verifica se há uma imagem enviada
+if (isset($_FILES['foto_pet']) && $_FILES['foto_pet']['error'] == 0) {
+    // Lê o conteúdo da imagem em binário
+    $foto_pet = file_get_contents($_FILES['foto_pet']['tmp_name']);
 
-			// Verifica se o arquivo é uma imagem
-			$check = getimagesize($_FILES['foto_pet']['tmp_name']);
-			if ($check !== false) {
-				echo "Arquivo é uma imagem - " . $check["mime"] . ".<br>";
-			} else {
-				echo "Arquivo não é uma imagem.<br>";
-				$uploadOk = 0;
-			}
+    // Associa os parâmetros ao comando SQL
+    $stmt->bind_param("sssssisss", $nome, $sexo, $especie, $raca, $cor, $idade, $porte, $rga, $foto_pet);
 
-			// Verifica o tamanho do arquivo (limite de 2MB)
-			if ($_FILES['foto_pet']['size'] > 2000000) {
-				echo "Desculpe, o arquivo é muito grande. Tamanho máximo permitido: 2MB.<br>";
-				$uploadOk = 0;
-			}
+    // Executa a query e verifica se foi bem-sucedida
+    if ($stmt->execute()) {
+        echo json_encode(['status' => 'success', 'message' => 'Cadastro de pet realizado com sucesso!']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir dados: ' . $conexao->error]);
+    }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Nenhuma imagem foi enviada ou ocorreu um erro.']);
+}
 
-			// Limita os formatos permitidos
-			if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-				echo "Desculpe, apenas arquivos JPG, JPEG, PNG e GIF são permitidos.<br>";
-				$uploadOk = 0;
-			}
-
-			// Verifica se o upload foi permitido e move o arquivo
-			if ($uploadOk == 1) {
-				if (move_uploaded_file($_FILES['foto_pet']['tmp_name'], $target_file)) {
-					echo "O arquivo foi enviado com sucesso.<br>";
-
-					// Atualiza o registro do pet com o nome da imagem
-					$sql_update = "UPDATE pet SET foto_pet = '$novo_nome_foto' WHERE id = $pet_id";
-					if ($conexao->query($sql_update) === TRUE) {
-						echo '<a href="main.php"><h1 class="">Pet salvo com sucesso!</h1></a>';
-					} else {
-						echo "Erro ao atualizar o registro com a imagem: " . $conexao->error . "<br>";
-					}
-				} else {
-					echo "Desculpe, houve um erro ao enviar sua imagem.<br>";
-				}
-			}
-		} else {
-			echo "Nenhuma imagem enviada ou ocorreu um erro durante o envio.<br>";
-		}
-
-		// Fecha a conexão
-		$conexao->close();
-		?>
-	</div>
-</body>
-</html>
+// Fecha a conexão
+$stmt->close();
+$conexao->close();
+?>
