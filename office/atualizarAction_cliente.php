@@ -1,55 +1,45 @@
 <?php
-include 'header.php';
-?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="officestyle.css">
-	<title>Atualizar</title>
-</head>
-<body>
-	<div>
-		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db_tiodupetservice";
-		$conexao = new mysqli($servername, $username, $password, $dbname);
-		if ($conexao->connect_error) {
-			die("Connection failed: " . $conexao->connect_error);
-		}
-		$sql = "UPDATE cliente SET nome = '" . $_POST['txtNome'] . "',
-								cpf = '" . $_POST['txtCpf'] . "',
-								telefone = '" . $_POST['txtTelefone'] . "',
-								email = '" . $_POST['txtEmail'] . "',
-								endereco = '" . $_POST['txtEndereco'] . "',
-								numero = '" . $_POST['txtNumero'] . "',
-								complemento = '" . $_POST['txtComplemento'] . "',
-								bairro='" . $_POST['txtBairro'] . "',
-								cep='" . $_POST['txtCep'] . "',
-								cidade='" . $_POST['txtCidade'] . "',
-								estado='" . $_POST['txtEstado'] . "'
-									WHERE id =" . $_POST['txtID'] . ";";
-		if ($conexao->query($sql) === TRUE) {
-			echo ' 
-						<a href="listar_cliente.php"> <h1>Cliente Atualizado com sucesso! </h1> </a> 
-						';
-			$id = mysqli_insert_id($conexao);
-		} else {
-			echo ' 
-							<a href="listar_cliente.php"> <h1>ERRO! </h1> </a>
-							 ';
-		}
-		$conexao->close();
-		?>
-	</div>
-</body>
-<?php
-include 'footer.php';
+// Cria a conexão com o banco de dados
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se houve erro na conexão
+if ($conexao->connect_error) {
+    die(json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]));
+}
+
+// Prepara a consulta SQL para atualizar o cliente
+$stmt = $conexao->prepare("UPDATE cliente SET nome = ?, cpf = ?, telefone = ?, email = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ? WHERE id = ?");
+
+// Obtém os valores do formulário
+$nome = $_POST['txtNome'];
+$cpf = $_POST['txtCpf'];
+$telefone = $_POST['txtTelefone'];
+$email = $_POST['txtEmail'];
+$endereco = $_POST['txtEndereco'];
+$numero = $_POST['txtNumero'];
+$complemento = $_POST['txtComplemento'];
+$bairro = $_POST['txtBairro'];
+$cep = $_POST['txtCep'];
+$cidade = $_POST['txtCidade'];
+$estado = $_POST['txtEstado'];
+$id = $_POST['txtID']; // Supondo que você está passando o ID do cliente
+
+// Associa os parâmetros à consulta
+$stmt->bind_param("sssssssssssi", $nome, $cpf, $telefone, $email, $endereco, $numero, $complemento, $bairro, $cep, $cidade, $estado, $id);
+
+// Executa a consulta e verifica se foi bem-sucedida
+if ($stmt->execute()) {
+    echo json_encode(['status' => 'success', 'message' => 'Cliente atualizado com sucesso!']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao atualizar dados: ' . $stmt->error]);
+}
+
+// Fecha a declaração e a conexão
+$stmt->close();
+$conexao->close();
 ?>
-</html>

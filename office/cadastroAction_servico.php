@@ -1,39 +1,36 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Cadastro de Serviço</title>
-</head>
-<body>
-	<div class="">
-		<?php $servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db_tiodupetservice";
-		$conexao = new mysqli($servername, $username, $password, $dbname);
-		if ($conexao->connect_error) {
-			die("Connection failed: " . $conexao->connect_error);
-		}
-		$sql = "INSERT INTO servico (servico, tipo, preco) VALUES ('" . $_POST['txtServico'] . "', '" . $_POST['txtTipo'] . "', '" . $_POST['txtPreco'] . "')";
-		if ($conexao->query($sql) === TRUE) {
-			echo '
-							<a href="main.php">
-							<h1 class="">Serviço Salvo com sucesso! </h1> </a> ';
-		} else {
-			echo '
-							 <a href="main.php">
-							 <h1 class="">ERRO! </h1>
-							  </a> 
-							  ';
-		}
-		$conexao->close();
-		?>
-	</div>
-</body>
 <?php
-include 'footer.php';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
+
+// Cria a conexão com o banco de dados
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se houve erro na conexão
+if ($conexao->connect_error) {
+    die(json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]));
+}
+
+// Prepara a consulta SQL para inserir o novo serviço
+$stmt = $conexao->prepare("INSERT INTO servico (servico, tipo, preco) VALUES (?, ?, ?)");
+
+// Obtém os valores do formulário
+$servico = $_POST['txtServico'];
+$tipo = $_POST['txtTipo'];
+$preco = (float)$_POST['txtPreco']; // Converte o preço para float
+
+// Associa os parâmetros à consulta
+$stmt->bind_param("ssd", $servico, $tipo, $preco); // "ssd" indica: string, string, double
+
+// Executa a consulta e verifica se foi bem-sucedida
+if ($stmt->execute()) {
+    echo json_encode(['status' => 'success', 'message' => 'Cadastro de Serviço realizado com sucesso!']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir dados: ' . $stmt->error]);
+}
+
+// Fecha a declaração e a conexão
+$stmt->close();
+$conexao->close();
 ?>
-</html>

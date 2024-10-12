@@ -47,7 +47,7 @@ if ($resultado->num_rows > 0) {
     <div class="form-container col-md-8 bg-light p-4 rounded shadow">
         <h1 class="text-center mb-4 display-4">Atualizar cliente - ID: <?php echo $cliente_id; ?></h1>
 
-        <form action="atualizarAction_cliente.php" method="post">
+        <form id="atualizarclienteForm">
             <input name="txtID" type="hidden" value="<?php echo $cliente_id; ?>">
 
 
@@ -128,11 +128,51 @@ if ($resultado->num_rows > 0) {
         </form>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Cadastro Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Cadastro de Cliente realizado com sucesso!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+          document.getElementById('atualizarclienteForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('atualizarAction_cliente.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+                matriculaModal.show();
+            })
+            .catch(error => console.error('Erro:', error));
+        };
+    </script>
 
 </body>
 
 <?php
-// Fecha a conexão
-$conexao->close();
+include 'footer.php';
 ?>
-</html>
