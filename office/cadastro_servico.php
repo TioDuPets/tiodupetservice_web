@@ -51,13 +51,19 @@ include 'header.php';
             </div>
 
             <div class="row mb-1">
-                <div class="col-md-6">
-                    <label for="txtTipo" class="form-label">Tipo</label>
-                    <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
+            <div class="col-md-6">
+                <label for="txtTipo" class="form-label">Tipo</label>
+                <select name="txtTipo" id="txtTipo" class="form-control" required>
+                    <option value="">Selecione o tipo de serviço</option> <!-- Placeholder -->
+                    <option value="Hospedagem">Hospedagem</option>
+                    <option value="Pet Sitter">Pet Sitter</option>
+                    <option value="Creche">Creche</option>
+                </select>
                 </div>
+
                 <div class="col-md-6">
                     <label for="txtPreco" class="form-label">Preço</label>
-                    <input type="text" name="txtPreco" id="txtPreco" class="form-control" required>
+                    <input type="double" name="txtPreco" id="txtPreco" class="form-control" required>
                 </div>
             </div>
 
@@ -75,11 +81,11 @@ include 'header.php';
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalTitle">Cadastro Cliente</h5>
+            <h5 class="modal-title" id="modalTitle">Cadastro Serviço</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p id="modalMessage">Cadastro de Cliente realizado com sucesso!</p>
+            <p id="modalMessage">Serviço cadastrado com sucesso!</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
@@ -90,7 +96,7 @@ include 'header.php';
 
     <script src='bootstrap.bundle.min.js'></script>
     <script>
-          document.getElementById('cadastroservicoForm').onsubmit = function(event) {
+            document.getElementById('cadastroservicoForm').onsubmit = function(event) {
             event.preventDefault();
 
             var formData = new FormData(this);
@@ -101,10 +107,12 @@ include 'header.php';
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data); // Verifique o que está sendo retornado pelo servidor
+
                 document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
                 document.getElementById('modalMessage').innerText = data.message;
 
-                 // Limpa os campos do formulário após o envio
+                // Limpa os campos do formulário após o envio
                 if (data.status === 'success') {
                     this.reset(); // Reseta todos os campos do formulário
                 }
@@ -112,8 +120,17 @@ include 'header.php';
                 var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
                 matriculaModal.show();
             })
-            .catch(error => console.error('Erro:', error));
-        };
+            .catch(error => {
+                console.error('Erro:', error);
+
+                document.getElementById('modalTitle').innerText = 'Erro';
+                document.getElementById('modalMessage').innerText = 'Ocorreu um erro ao processar a solicitação.';
+                
+                var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
+                errorModal.show();
+            });
+            };
+
     </script>
 
 </body>

@@ -20,9 +20,14 @@ $servico = $_POST['txtServico'];
 $tipo = $_POST['txtTipo'];
 $preco = (float)$_POST['txtPreco']; // Converte o preço para float
 
+// Verifica se os dados foram recebidos corretamente
+if (empty($servico) || empty($tipo) || empty($preco)) {
+    echo json_encode(['status' => 'error', 'message' => 'Todos os campos são obrigatórios!']);
+    exit;
+}
+
 // Associa os parâmetros à consulta
-$stmt->bind_param("ssd
-", $servico, $tipo, $preco); // "ssd" indica: string, string, double
+$stmt->bind_param("ssd", $servico, $tipo, $preco); // "ssd" indica: string, string, double
 
 // Executa a consulta e verifica se foi bem-sucedida
 if ($stmt->execute()) {

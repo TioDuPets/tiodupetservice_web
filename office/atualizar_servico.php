@@ -48,8 +48,15 @@ include 'header.php';
 
             <!-- Campo Tipo -->
             <div class="form-content mb-3">
-                <label for="txtTipo">Tipo</label>
-                <input name="txtTipo" id="txtTipo" type="text" class="form-control" value="<?php echo isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : ''; ?>" required>
+
+                <label for="txtTipo" class="form-label">Tipo</label>
+                <select name="txtTipo" id="txtTipo" class="form-control" required>
+                    <option value="">Selecione o tipo de serviço</option>
+                    <option value="Hospedagem" <?php echo isset($_GET['tipo']) && $_GET['tipo'] == 'Hospedagem' ? 'selected' : ''; ?>>Hospedagem</option>
+                    <option value="Pet Sitter" <?php echo isset($_GET['tipo']) && $_GET['tipo'] == 'Pet Sitter' ? 'selected' : ''; ?>>Pet Sitter</option>
+                    <option value="Creche" <?php echo isset($_GET['tipo']) && $_GET['tipo'] == 'Creche' ? 'selected' : ''; ?>>Creche</option>
+                </select>
+
             </div>
 
             <!-- Campo Preço -->

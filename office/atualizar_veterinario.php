@@ -141,7 +141,7 @@ if ($resultado->num_rows > 0) {
         </form>
     </div>
 </div>
-!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
