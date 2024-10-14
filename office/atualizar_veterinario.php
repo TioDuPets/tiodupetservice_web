@@ -134,7 +134,7 @@ if ($resultado->num_rows > 0) {
                 <a href="listar_veterinario.php" class="btn btn-warning w-100 mb-2">
                     <i class="fa fa-ban"></i> Cancelar Atualização
                 </a>
-                <button type="submit" name="btnAtualizar" class="btn btn-success w-100">
+                <button type="submit" name="btnAtualizar" class="btn btn-primary w-100">
                     <i class="fa fa-ambulance"></i> Atualizar
                 </button>
             </div>

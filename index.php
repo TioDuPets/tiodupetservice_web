@@ -13,51 +13,11 @@ include 'header.php';
 </head>
 
 <body>
-   
-<div class="floating-box">
-    <div class="dropdown-center">
-        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Solicite um serviço
-        </button>
-        <ul class="dropdown-menu p-1" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Hospedagem')">Hospedagem</a></li>
-            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Creche')">Creche</a></li>
-            <li><a class="dropdown-item text-primary" href="#" onclick="openCalendar('Pet Sitter')">Pet Sitter</a></li>
-        </ul>
-    </div>
 
-    <!-- Calendário -->
-    <div id="calendar" style="display: none; margin-top: 15px;">
-        <h5>Selecione a data do serviço <span id="serviceType"></span>:</h5>
-        <input type="date" id="dateInput" class="form-control" onchange="openForm()">
-    </div>
+<?php
+include 'agendamento.php';
+?>
 
-    <!-- Formulário -->
-    <div class="form-popup" id="reservationForm">
-        <form class="form-container" action="agendamentoAction.php" method="POST"> 
-            <h3>Solicitação de Agendamento</h3>
-            <label for="txtID" hidden></label>
-            <input name="txtID" id="txtID" type="text" hidden>
-
-            <input type="hidden" name="serviceTypeInput" id="serviceTypeInput">
-            <input type="hidden" name="selectedDate" id="selectedDate">
-
-            <label for="name"><b>Nome</b></label>
-            <input type="text" placeholder="Digite seu nome" name="txtNome" id="txtNome" required class="form-control mb-2">
-        
-            <label for="phone"><b>Telefone</b></label>
-            <input type="tel" placeholder="Digite seu telefone" name="txtTelefone" id="txtTelefone" required class="form-control mb-2">
-        
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Digite seu email" name="txtEmail" id="txtEmail" required class="form-control mb-2">
-        
-            <input type="hidden" name="lead_contatado" id="lead_contatado" value="Não">
-
-            <button type="submit" class="btn btn-primary mt-2">Enviar Solicitação</button>
-            <button type="button" class="btn btn-secondary mt-2" onclick="closeForm()">Cancelar</button>
-        </form>
-    </div>
-</div>
 
 <div style="height: 12vh;"></div>
 
@@ -298,6 +258,7 @@ include 'header.php';
 </main>
 
 <script src="assets/mobile-navbar.js"></script>
+<script src="assets/agendamento.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>

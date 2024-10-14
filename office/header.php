@@ -104,7 +104,7 @@ nav{
 <header>
     <nav>
    
-    <a class="logo" href="http://localhost/tiodupetservice_web/office/main.php"><img src="../assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
+    <a class="logo" href="http://localhost/tiodupetservice_web"><img src="../assets/images/LogoTioDu.svg" alt="Logo Tio Du Pets"></a>
     <ul class="navbar">
 
     

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12/10/2024 às 05:00
+-- Tempo de geração: 13/10/2024 às 23:28
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -49,6 +49,13 @@ CREATE TABLE `avaliacao_aprovadas` (
   `estrelas` int(11) DEFAULT NULL CHECK (`estrelas` between 1 and 5),
   `descricao` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `avaliacao_aprovadas`
+--
+
+INSERT INTO `avaliacao_aprovadas` (`id`, `nome_avaliador`, `estrelas`, `descricao`) VALUES
+(6, 'Jardel', 5, 'top');
 
 -- --------------------------------------------------------
 
@@ -104,13 +111,19 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `lead` (
-  `id` int(10) NOT NULL,
-  `servico` varchar(10) NOT NULL,
-  `data_lead` date NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `telefone` varchar(13) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `lead_contatado` varchar(3) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `servico` varchar(255) NOT NULL,
+  `data_lead` datetime DEFAULT current_timestamp(),
+  `nome` varchar(255) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contato_prefere` enum('email','telefone','whatsapp') NOT NULL,
+  `horario_prefere` enum('manha','tarde') NOT NULL,
+  `receber_novidades` tinyint(1) DEFAULT 0,
+  `consentimento_dados` tinyint(1) DEFAULT 0,
+  `data_consentimento` datetime NOT NULL,
+  `politica_privacidade` varchar(255) NOT NULL,
+  `lead_contatado` enum('Sim','Não') DEFAULT 'Não'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -165,12 +178,28 @@ CREATE TABLE `servico` (
   `preco` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Despejando dados para a tabela `servico`
+-- Estrutura para tabela `usuarios`
 --
 
-INSERT INTO `servico` (`id`, `servico`, `tipo`, `preco`) VALUES
-(13, 'Creche-Mensal', 'Creche', 500.00);
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `usuario` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `funcao` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `senha`, `funcao`) VALUES
+(18, 'admin', 'admin', 'senha123', 'admin'),
+(19, 'Teste Usuário', 'teste', '$2y$10$/HEgd0MtiZUESjpci1ahmO/seiJRh570HRb/HeryczBaPpG8GGZxW', 'admin'),
+(20, 'Avaliador', 'Avaliador', '$2y$10$/bG4l2.Jvd4XlF.rDWzalu4cIa2v5b6siCjbFUH/t4suQqKuWl5pW', 'usuario');
 
 -- --------------------------------------------------------
 
@@ -254,6 +283,13 @@ ALTER TABLE `servico`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
+
+--
 -- Índices de tabela `veterinario`
 --
 ALTER TABLE `veterinario`
@@ -267,13 +303,13 @@ ALTER TABLE `veterinario`
 -- AUTO_INCREMENT de tabela `agendamentos`
 --
 ALTER TABLE `agendamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao_aprovadas`
 --
 ALTER TABLE `avaliacao_aprovadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao_recusadas`
@@ -285,19 +321,19 @@ ALTER TABLE `avaliacao_recusadas`
 -- AUTO_INCREMENT de tabela `avaliacao_solicitadas`
 --
 ALTER TABLE `avaliacao_solicitadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `matricula_creche`
@@ -309,19 +345,25 @@ ALTER TABLE `matricula_creche`
 -- AUTO_INCREMENT de tabela `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `veterinario`
 --
 ALTER TABLE `veterinario`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Restrições para tabelas despejadas
