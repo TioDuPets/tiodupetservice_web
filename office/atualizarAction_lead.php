@@ -18,19 +18,47 @@ $stmt = $conexao->prepare("UPDATE lead SET
                                 servico = ?, 
                                 telefone = ?, 
                                 email = ?, 
+                                data_lead = ?, 
+                                contato_prefere = ?, 
+                                horario_prefere = ?, 
+                                receber_novidades = ?, 
+                                consentimento_dados = ?, 
+                                data_consentimento = ?, 
+                                politica_privacidade = ?, 
                                 lead_contatado = ? 
                             WHERE id = ?");
 
 // Obtém os valores do formulário
-$nome = $_POST['txtNome'];
-$servico = $_POST['txtServico'];
-$telefone = $_POST['txtTelefone'];
-$email = $_POST['txtEmail'];
+$nome = $_POST['nome'];
+$servico = $_POST['servico'];
+$telefone = $_POST['telefone'];
+$email = $_POST['email'];
+$data_lead = $_POST['data_lead'];
+$contato_prefere = $_POST['contato_prefere'];
+$horario_prefere = $_POST['horario_prefere'];
+$receber_novidades = isset($_POST['receber_novidades']) ? 1 : 0; // checkbox: 1 para marcado, 0 para não marcado
+$consentimento_dados = isset($_POST['consentimento_dados']) ? 1 : 0;
+$data_consentimento = $_POST['data_consentimento'];
+$politica_privacidade = isset($_POST['politica_privacidade']) ? 1 : 0;
 $lead_contatado = $_POST['lead_contatado'];
 $id = (int)$_POST['txtID']; // Obtém o ID do lead a ser atualizado
 
 // Associa os parâmetros à consulta
-$stmt->bind_param("sssssi", $nome, $servico, $telefone, $email, $lead_contatado, $id); // "sssssi" indica: string, string, string, string, string, integer
+$stmt->bind_param("ssssssssssssi", 
+    $nome, 
+    $servico, 
+    $telefone, 
+    $email, 
+    $data_lead, 
+    $contato_prefere, 
+    $horario_prefere, 
+    $receber_novidades, 
+    $consentimento_dados, 
+    $data_consentimento, 
+    $politica_privacidade, 
+    $lead_contatado, 
+    $id
+);
 
 // Executa a consulta e verifica se foi bem-sucedida
 if ($stmt->execute()) {

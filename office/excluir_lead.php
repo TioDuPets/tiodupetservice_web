@@ -37,7 +37,7 @@ include 'header.php';
     <div class="form-container col-md-8 bg-light p-4 rounded shadow">
         <h1 class="text-center mb-4 display-4">EXCLUIR LEAD: <?php echo " " . (isset($_GET['id']) ? $_GET['id'] : ''); ?></h1>
 
-        <form action="excluirAction_lead.php" method="post">
+        <form id="excluirleadForm">
             <input name="txtID" type="hidden" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
 
             <div class="form-content mb-3">
@@ -84,10 +84,73 @@ include 'header.php';
         </form>
     </div>
 </div>
+ <!-- Modal -->
+ <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Exclusão Lead</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Lead excluído com sucesso!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="closeButton" class="btn btn-primary">
+                <i class="fa fa-times"></i> Fechar
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <script src='bootstrap.bundle.min.js'></script>
+        <script>
+        document.getElementById('excluirleadForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('excluirAction_lead.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+            document.getElementById('modalMessage').innerText = data.message;
+
+            var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+            matriculaModal.show();
+
+            // Após o fechamento do modal, redirecionar para listar_veterinario.php
+            document.getElementById('closeButton').addEventListener('click', function() {
+                window.location.href = 'listar_lead.php';
+            });
+            })
+            .catch(error => {
+            console.error('Erro:', error);
+
+            // Exibir o modal com mensagem de erro
+            document.getElementById('modalTitle').innerText = 'Erro';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir lead. Tente novamente.';
+
+            var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
+            errorModal.show();
+            });
+        };
+        </script>
+
 
 </body>
 
+
+
+<?php
+// Fecha a conexão
+$conexao->close();
+?>
+</html>
 <?php
 include 'footer.php';
 ?>
-</html>
