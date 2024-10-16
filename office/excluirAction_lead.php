@@ -1,43 +1,41 @@
 <?php
-include 'header.php';
-?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Exclusão</title>
-</head>
-<body>
-	<div class="" id="eProfissional">
-		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db_tiodupetservice";
-		$conexao = new mysqli($servername, $username, $password, $dbname);
-		if ($conexao->connect_error) {
-			die("Connection failed: " . $conexao->connect_error);
-		}
-		$sql = "DELETE FROM lead WHERE id = '" . $_POST['txtID'] . "';";
-		if ($conexao->query($sql) === TRUE) {
-			echo '
-					 <a href="listar_lead.php">
-					  <h1 class="">Lead Excluido com sucesso! </h1>
-					   </a> 
-					   ';
-		} else {
-			echo ' <a href="listar_lead.php">
-						    <h1 class="">ERRO! </h1>
-							 </a> 
-							 ';
-		}
-		$conexao->close();
-		?>
-	</div>
-	<?php
-include 'footer.php';
+// Cria a conexão com o banco de dados
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se houve erro na conexão
+if ($conexao->connect_error) {
+    die(json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]));
+}
+
+// Obtém o ID do veterinário a ser excluído
+$id = (int)$_POST['txtID'];
+
+// Prepara a consulta SQL para excluir o veterinário
+$sql = "DELETE FROM lead WHERE id = ?";
+
+// Prepara a consulta
+$stmt = $conexao->prepare($sql);
+
+// Verifica se a preparação foi bem-sucedida
+if (!$stmt) {
+    die(json_encode(['status' => 'error', 'message' => 'Erro ao preparar a exclusão: ' . $conexao->error]));
+}
+
+// Associa o parâmetro ID à consulta
+$stmt->bind_param("i", $id);
+
+// Executa a consulta e verifica se foi bem-sucedida
+if ($stmt->execute()) {
+    echo json_encode(['status' => 'success', 'message' => 'Lead excluído com sucesso!']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao excluir o Lead: ' . $stmt->error]);
+}
+
+// Fecha a conexão
+$conexao->close();
 ?>

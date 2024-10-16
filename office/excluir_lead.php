@@ -106,7 +106,7 @@ include 'header.php';
 
         <script src='bootstrap.bundle.min.js'></script>
         <script>
-        document.getElementById('excluirleadForm').onsubmit = function(event) {
+            document.getElementById('excluirleadForm').onsubmit = function(event) {
             event.preventDefault();
 
             var formData = new FormData(this);
@@ -133,7 +133,7 @@ include 'header.php';
 
             // Exibir o modal com mensagem de erro
             document.getElementById('modalTitle').innerText = 'Erro';
-            document.getElementById('modalMessage').innerText = 'Erro ao excluir lead. Tente novamente.';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir o Lead. O lead que você está tentando excluir está associado a eventos existentes. Para excluir, por favor, cancele ou remova os eventos relacionados primeiro.';
 
             var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
             errorModal.show();
@@ -148,7 +148,10 @@ include 'header.php';
 
 <?php
 // Fecha a conexão
-$conexao->close();
+if (isset($conexao)) {
+    $conexao->close();
+}
+
 ?>
 </html>
 <?php

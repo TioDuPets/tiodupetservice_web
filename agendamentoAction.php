@@ -47,11 +47,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Executa a consulta e verifica se foi bem-sucedida
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Agendamento efetuado com sucesso!!']);
+        echo "<script>
+                alert('Agendamento efetuado com sucesso!!');
+                window.location.href = 'index.php';
+              </script>";
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Erro ao efetuar Agendamento: ' . $stmt->error]);
+        echo "<script>
+                alert('Erro ao efetuar Agendamento: " . $stmt->error . "');
+                window.location.href = 'index.php';
+              </script>";
     }
-
+    
+    
+    
+    
     // Fecha a consulta e a conexão
     $stmt->close();
     $conexao->close();
@@ -59,3 +68,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['status' => 'error', 'message' => 'Método de solicitação inválido.']);
 }
 ?>
+
+

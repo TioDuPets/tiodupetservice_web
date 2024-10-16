@@ -15,8 +15,8 @@ if ($conexao->connect_error) {
 
 // Dados do usuário de teste
 $nome = "Teste Usuário";
-$usuario = "teste";
-$senha = password_hash("senha123", PASSWORD_DEFAULT); // Criptografa a senha
+$usuario = "master";
+$senha = password_hash("master", PASSWORD_DEFAULT); // Criptografa a senha
 $funcao = "admin";
 
 

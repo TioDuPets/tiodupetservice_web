@@ -53,7 +53,7 @@
             <!-- Autorização para Tratamento de Dados -->
             <label class="checkbox">
                 <input type="checkbox" name="autorizacao" id="autorizacao" required> 
-                Autorizo o uso de meus dados conforme a <a href="politica_privacidade.html" target="_blank">Política de Privacidade</a>.
+                Autorizo o uso de meus dados conforme a <a href="politica_privacidade.php" target="_blank">Política de Privacidade</a>.
             </label>
             </fieldset>
 

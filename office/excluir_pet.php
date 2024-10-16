@@ -146,8 +146,9 @@ if ($resultado->num_rows > 0) {
         </div>
 
         <script src='bootstrap.bundle.min.js'></script>
+
         <script>
-        document.getElementById('excluirpetForm').onsubmit = function(event) {
+            document.getElementById('excluirpetForm').onsubmit = function(event) {
             event.preventDefault();
 
             var formData = new FormData(this);
@@ -174,7 +175,7 @@ if ($resultado->num_rows > 0) {
 
             // Exibir o modal com mensagem de erro
             document.getElementById('modalTitle').innerText = 'Erro';
-            document.getElementById('modalMessage').innerText = 'Erro ao excluir o veterinário. Tente novamente.';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir o Pet. O pet que você está tentando excluir está associado a agendamentos existentes. Para excluir o pet, por favor, cancele ou remova os agendamentos relacionados primeiro.';
 
             var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
             errorModal.show();

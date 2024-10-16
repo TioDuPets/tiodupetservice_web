@@ -152,7 +152,7 @@ if ($resultado->num_rows > 0) {
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Exclusão Veterinário</h5>
+                <h5 class="modal-title" id="modalTitle">Exclusão Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -196,7 +196,7 @@ if ($resultado->num_rows > 0) {
 
             // Exibir o modal com mensagem de erro
             document.getElementById('modalTitle').innerText = 'Erro';
-            document.getElementById('modalMessage').innerText = 'Erro ao excluir o veterinário. Tente novamente.';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir o Cliente. O Cliente que você está tentando excluir está associado a agendamentos existentes. Para excluir, por favor, cancele ou remova os agendamentos relacionados primeiro.';
 
             var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
             errorModal.show();

@@ -119,7 +119,7 @@ include 'header.php';
 
             // Exibir o modal com mensagem de erro
             document.getElementById('modalTitle').innerText = 'Erro';
-            document.getElementById('modalMessage').innerText = 'Erro ao excluir o veterinário. Tente novamente.';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir o serviço. O serviço que você está tentando excluir está associado a agendamentos existentes. Para excluir, por favor, cancele ou remova os relacionamentos primeiro.';
 
             var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
             errorModal.show();

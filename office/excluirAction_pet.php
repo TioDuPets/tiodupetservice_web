@@ -15,7 +15,7 @@ if ($conexao->connect_error) {
 // Obtém o ID do veterinário a ser excluído
 $id = (int)$_POST['txtID'];
 
-// Prepara a consulta SQL para excluir o veterinário
+// Prepara a consulta SQL para excluir o pet
 $sql = "DELETE FROM pet WHERE id = ?";
 
 // Prepara a consulta
