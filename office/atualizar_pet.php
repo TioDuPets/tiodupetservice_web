@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+$tempoExpiracao = 300;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempoExpiracao)) {
+    session_unset(); 
+    session_destroy(); 
+    header("Location: login.php");
+    exit();
+}
+
+$_SESSION['LAST_ACTIVITY'] = time();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<?php
 include 'header.php';
 
 // Conexão ao banco de dados
@@ -50,13 +69,14 @@ if ($resultado->num_rows > 0) {
         <!-- Exibe a imagem do pet -->
         <div class="text-center mb-3">
             <?php if (!empty($row['foto_pet'])): ?>
-                <img src="uploads/<?php echo $row['foto_pet']; ?>" alt="Foto do Pet" class="img-fluid rounded">
+                <img src="exibir_foto_pet.php?id=<?php echo $pet_id; ?>" alt="Foto do Pet" class="img-fluid rounded" style="max-width: 600px; height: auto;">
             <?php else: ?>
                 <p class="text-muted">Sem foto disponível.</p>
             <?php endif; ?>
         </div>
 
-        <form action="atualizarAction_pet.php" method="post" enctype="multipart/form-data">
+
+        <form id="atualizarpetForm">
             <!-- Campo oculto ID -->
             <input name="txtID" type="hidden" value="<?php echo $pet_id; ?>">
 
@@ -126,6 +146,47 @@ if ($resultado->num_rows > 0) {
         </form>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Atualizar Pet</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Atualização do Pet realizada com sucesso!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+          document.getElementById('atualizarpetForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('atualizarAction_pet.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+                matriculaModal.show();
+            })
+            .catch(error => console.error('Erro:', error));
+        };
+    </script>
 
 </body>
 

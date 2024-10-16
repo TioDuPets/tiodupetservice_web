@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+$tempoExpiracao = 300;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempoExpiracao)) {
+    session_unset(); 
+    session_destroy(); 
+    header("Location: login.php");
+    exit();
+}
+
+$_SESSION['LAST_ACTIVITY'] = time();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<?php
 include 'header.php';
 ?>
 
@@ -18,7 +37,7 @@ include 'header.php';
     <div class="form-container col-md-6 bg-light p-4 rounded shadow">
         <h1 class="text-center mb-4 display-4">Cadastro de Serviço</h1>
         
-        <form action="cadastroAction_servico.php" method="post">
+        <form id="cadastroservicoForm">
             
             <!-- Campo oculto ID -->
             <input type="text" name="txtID" id="txtID" hidden>
@@ -32,13 +51,19 @@ include 'header.php';
             </div>
 
             <div class="row mb-1">
-                <div class="col-md-6">
-                    <label for="txtTipo" class="form-label">Tipo</label>
-                    <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
+            <div class="col-md-6">
+                <label for="txtTipo" class="form-label">Tipo</label>
+                <select name="txtTipo" id="txtTipo" class="form-control" required>
+                    <option value="">Selecione o tipo de serviço</option> <!-- Placeholder -->
+                    <option value="Hospedagem">Hospedagem</option>
+                    <option value="Pet Sitter">Pet Sitter</option>
+                    <option value="Creche">Creche</option>
+                </select>
                 </div>
+
                 <div class="col-md-6">
                     <label for="txtPreco" class="form-label">Preço</label>
-                    <input type="text" name="txtPreco" id="txtPreco" class="form-control" required>
+                    <input type="double" name="txtPreco" id="txtPreco" class="form-control" required>
                 </div>
             </div>
 
@@ -51,10 +76,65 @@ include 'header.php';
         </form>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Cadastro Serviço</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Serviço cadastrado com sucesso!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+            document.getElementById('cadastroservicoForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('cadastroAction_servico.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Verifique o que está sendo retornado pelo servidor
+
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+                // Limpa os campos do formulário após o envio
+                if (data.status === 'success') {
+                    this.reset(); // Reseta todos os campos do formulário
+                }
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+                matriculaModal.show();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+
+                document.getElementById('modalTitle').innerText = 'Erro';
+                document.getElementById('modalMessage').innerText = 'Ocorreu um erro ao processar a solicitação.';
+                
+                var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
+                errorModal.show();
+            });
+            };
+
+    </script>
 
 </body>
+
 <?php
 include 'footer.php';
 ?>
-</html>

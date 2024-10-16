@@ -1,54 +1,44 @@
 <?php
-include 'header.php';
-?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_tiodupetservice";
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="officestyle.css">
-	<title>Atualizar</title>
-</head>
-<body>
-	<div>
-		<?php
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "db_tiodupetservice";
-		$conexao = new mysqli($servername, $username, $password, $dbname);
-		if ($conexao->connect_error) {
-			die("Connection failed: " . $conexao->connect_error);
-		}
-		$sql = "UPDATE veterinario SET nome = '" . $_POST['txtNome'] . "',
-								telefone = '" . $_POST['txtTelefone'] . "',
-								email = '" . $_POST['txtEmail'] . "',
-								endereco = '" . $_POST['txtEndereco'] . "',
-								numero = '" . $_POST['txtNumero'] . "',
-								complemento = '" . $_POST['txtComplemento'] . "',
-								bairro='" . $_POST['txtBairro'] . "',
-								cep='" . $_POST['txtCep'] . "',
-								cidade='" . $_POST['txtCidade'] . "',
-								estado='" . $_POST['txtEstado'] . "'
-									WHERE id =" . $_POST['txtID'] . ";";
-		if ($conexao->query($sql) === TRUE) {
-			echo ' 
-						<a href="listar_veterinario.php"> <h1>Veterinario Atualizado com sucesso! </h1> </a> 
-						';
-			$id = mysqli_insert_id($conexao);
-		} else {
-			echo ' 
-							<a href="listar_veterinario.php"> <h1>ERRO! </h1> </a>
-							 ';
-		}
-		$conexao->close();
-		?>
-	</div>
-</body>
-<?php
-include 'footer.php';
+// Cria a conexão com o banco de dados
+$conexao = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica se houve erro na conexão
+if ($conexao->connect_error) {
+    die(json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]));
+}
+
+// Prepara a consulta SQL para atualizar o veterinário
+$stmt = $conexao->prepare("UPDATE veterinario SET nome = ?, telefone = ?, email = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ? WHERE id = ?");
+
+// Obtém os valores do formulário
+$id = (int)$_POST['txtID']; // ID do veterinário a ser atualizado
+$nome = $_POST['txtNome'];
+$telefone = $_POST['txtTelefone'];
+$email = $_POST['txtEmail'];
+$endereco = $_POST['txtEndereco'];
+$numero = $_POST['txtNumero'];
+$complemento = $_POST['txtComplemento'];
+$bairro = $_POST['txtBairro'];
+$cep = $_POST['txtCep'];
+$cidade = $_POST['txtCidade'];
+$estado = $_POST['txtEstado'];
+
+// Associa os parâmetros à consulta
+$stmt->bind_param("ssssssssssi", $nome, $telefone, $email, $endereco, $numero, $complemento, $bairro, $cep, $cidade, $estado, $id);
+
+// Executa a consulta e verifica se foi bem-sucedida
+if ($stmt->execute()) {
+    echo json_encode(['status' => 'success', 'message' => 'Atualização de Veterinário realizada com sucesso!']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao atualizar dados: ' . $stmt->error]);
+}
+
+// Fecha a declaração e a conexão
+$stmt->close();
+$conexao->close();
 ?>
-</html>

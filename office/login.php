@@ -1,20 +1,55 @@
 <?php
-// Verifica se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Pega os dados do formulário
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+session_start();
 
-    // Verifica se o usuário e a senha são corretos
-    if ($username === 'admin' && $password === 'admin') {
-        // Redireciona para a tela de cadastro
-        header('Location: main.php');
-        exit;
-    } else {
-        $error = "Usuário ou senha incorretos. Tente novamente.";
+$erro = '';
+
+if (isset($_SESSION['usuario'])) {
+    header("Location: main.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "db_tiodupetservice";
+
+    $conexao = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conexao->connect_error) {
+        die("Falha na conexão: " . $conexao->conexaoect_error);
     }
+
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
+
+    $sql = "SELECT * FROM usuarios WHERE usuario = ?";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+     
+        if (password_verify($senha, $row['senha'])) {
+            $_SESSION['usuario'] = $row['usuario'];
+            $_SESSION['funcao'] = $row['funcao'];
+            header("Location: main.php");
+            exit();
+        } else {
+            $erro = "Senha incorreta!";
+        }
+    } else {
+        $erro = "Usuário não encontrado!";
+    }
+
+    $stmt->close();
+    $conexao->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -84,21 +119,24 @@ nav{
         <div class="form-container">
             <h1 class="text-center mb-4 display-4">Login</h1>
 
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo $error; ?>
-                </div>
-            <?php endif; ?>
 
-            <form method="POST" action="">
+		<!-- Exibe mensagem de erro, se houver -->
+     		    <?php if ($erro): ?>
+         	    <div class="alert alert-danger" role="alert">
+                    <?php echo $erro; ?>
+                </div>
+      		<?php endif; ?>
+
+
+        <form action="login.php" method="POST">
                 <div class="mb-3">
-                    <label for="username" class="form-label"><b>Usuário</b></label>
-                    <input class="form-control" type="text" id="username" name="username" required>
+                    <label for="usuario" class="form-label"><b>Usuário</b></label>
+                    <input class="form-control" type="text" id="usuario" name="usuario" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label"><b>Senha</b></label>
-                    <input class="form-control" type="password" id="password" name="password" required>
+                    <label for="senha" class="form-label"><b>Senha</b></label>
+                    <input class="form-control" type="password" id="senha" name="senha" required>
                 </div>
 
                 <div class="d-grid">
@@ -107,6 +145,11 @@ nav{
                     </button>
                 </div>
             </form>
+            <div style="height: 4vh;"></div>
+                <div class="d-grid">
+	        	    <button class="btn btn-primary btn-block back-button" onclick="window.location.href='../index.php';">
+                    <i class="fa fa-arrow-left"></i> Voltar</button>
+                </div>
         </div>
     </div>
 </body>

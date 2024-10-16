@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+$tempoExpiracao = 300;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempoExpiracao)) {
+    session_unset(); 
+    session_destroy(); 
+    header("Location: login.php");
+    exit();
+}
+
+$_SESSION['LAST_ACTIVITY'] = time();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<?php
 include 'header.php';
 ?>
 
@@ -17,7 +36,7 @@ include 'header.php';
 <div class="container-centered container d-flex justify-content-center align-items-center">
     <div class="form-container col-md-8 bg-light p-4 rounded shadow">
         <h1 class="text-center mb-4 display-4">Cadastro de Veterinário</h1>
-        <form action="cadastroAction_veterinario.php" method="post">
+        <form id="cadastroveterinarioForm">
 
             <!-- Campo oculto ID -->
             <input type="text" name="txtID" hidden>
@@ -92,7 +111,54 @@ include 'header.php';
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Cadastro Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Cadastro de Cliente realizado com sucesso!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+          document.getElementById('cadastroveterinarioForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('cadastroAction_veterinario.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+                 // Limpa os campos do formulário após o envio
+                if (data.status === 'success') {
+                    this.reset(); // Reseta todos os campos do formulário
+                }
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+                matriculaModal.show();
+            })
+            .catch(error => console.error('Erro:', error));
+        };
+    </script>
+
 </body>
+
 <?php
 include 'footer.php';
 ?>

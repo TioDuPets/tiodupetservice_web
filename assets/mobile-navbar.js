@@ -54,22 +54,15 @@ const mobileNavbar = new MobileNavbar(
 mobileNavbar.init();
 
 // --------- Calendar and Form Functions ---------
-function openCalendar(service) {
-    document.getElementById('serviceType').textContent = service;
+function setServiceType(service) {
     document.getElementById('serviceTypeInput').value = service;
-    console.log("Service:", service);  // Verifique o valor atribuído
-    document.getElementById('calendar').style.display = 'block';
+    document.getElementById('reservationForm').style.display = 'block';
 }
 
-function openForm() {
-    const selectedDate = document.getElementById('dateInput').value;
-    if (selectedDate) {
-        document.getElementById('selectedDate').value = selectedDate;
-        console.log("Selected Date:", selectedDate);  // Verifique o valor atribuído
-        document.getElementById('reservationForm').style.display = 'block';
-    } else {
-        console.log("Nenhuma data selecionada");  // Caso não tenha sido selecionada a data
-    }
+function setDateTime() {
+    const now = new Date();
+    const formattedDateTime = now.toISOString(); // Formato ISO 8601 (YYYY-MM-DDTHH:MM:SSZ)
+    document.getElementById('selectedDateTime').value = formattedDateTime;
 }
 
 function closeForm() {

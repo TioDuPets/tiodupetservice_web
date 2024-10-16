@@ -1,4 +1,24 @@
 <?php
+session_start();
+
+$tempoExpiracao = 300;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempoExpiracao)) {
+    session_unset(); 
+    session_destroy(); 
+    header("Location: login.php");
+    exit();
+}
+
+$_SESSION['LAST_ACTIVITY'] = time();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+
+<?php
 include 'header.php';
 ?>
 
@@ -16,64 +36,64 @@ include 'header.php';
     <div class="container-centered container d-flex justify-content-center align-items-center">
         <div class="form-container col-md-6 bg-light p-4 rounded shadow">
             <h1 class="text-center mb-4 display-4">Agendar Hospedagem</h1>
-            <form action="agendamentoAction_hospedagem.php" method="post">
+            <form id="agendamentoForm">
 
                 <!-- Datas de check-in e check-out -->
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="checkin" class="form-label">Data de Check-in</label>
-                        <input type="date" class="form-control" name="checkin" id="checkin" required>
+                        <input type="date" class="form-control" name="checkin" id="start" required>
                     </div>
 
                     <div class="col-md-6">
                         <label for="checkout" class="form-label">Data de Check-out</label>
-                        <input type="date" class="form-control" name="checkout" id="checkout" required>
+                        <input type="date" class="form-control" name="checkout" id="end" required>
                     </div>
                 </div>
 
-            <div class="row mb-3">
-                <!-- Seleção do pet -->
-                <div class="col-md-6">
-                    <label for="pet_ID" class="form-label">Selecione o Pet</label>
-                    <select name="pet_ID" id="pet_ID" class="form-select" required>
-                        <?php
-                        include 'conexaoAction.php'; // Inclui a conexão com o banco
+                <div class="row mb-3">
+                    <!-- Seleção do pet -->
+                    <div class="col-md-6">
+                        <label for="pet_ID" class="form-label">Selecione o Pet</label>
+                        <select name="pet_ID" id="pet_ID" class="form-select" required>
+                            <?php
+                            include 'conexaoAction.php'; // Inclui a conexão com o banco
 
-                        // Executa a consulta para buscar o id e nome dos pets
-                        $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
+                            // Executa a consulta para buscar o id e nome dos pets
+                            $result = mysqli_query($conexao, "SELECT id, nome FROM pet");
 
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                                }
+                            } else {
+                                echo "<option value=''>Nenhum pet encontrado</option>";
                             }
-                        } else {
-                            echo "<option value=''>Nenhum pet encontrado</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                            ?>
+                        </select>
+                    </div>
 
-                <!-- Seleção do cliente (tutor) -->
-                <div class="col-md-6">
-                    <label for="cliente_ID" class="form-label">Selecione o Cliente</label>
-                    <select name="cliente_ID" id="cliente_ID" class="form-select" required>
-                        <?php
-                        include 'conexaoAction.php'; // Inclui a conexão com o banco
+                    <!-- Seleção do cliente (tutor) -->
+                    <div class="col-md-6">
+                        <label for="cliente_ID" class="form-label">Selecione o Cliente</label>
+                        <select name="cliente_ID" id="cliente_ID" class="form-select" required>
+                            <?php
+                            include 'conexaoAction.php'; // Inclui a conexão com o banco
 
-                        // Buscando clientes cadastrados no banco de dados
-                        $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
+                            // Buscando clientes cadastrados no banco de dados
+                            $result = mysqli_query($conexao, "SELECT id, nome FROM cliente");
 
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+                                }
+                            } else {
+                                echo "<option value=''>Nenhum cliente encontrado</option>";
                             }
-                        } else {
-                            echo "<option value=''>Nenhum cliente encontrado</option>";
-                        }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
                 <!-- Observações adicionais -->
                 <div class="mb-3">
@@ -90,8 +110,48 @@ include 'header.php';
             </form>
         </div>
     </div>
-</body>
 
+    <!-- Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Hospedagem</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage">Hospedagem realizada com sucesso!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='bootstrap.bundle.min.js'></script>
+    <script>
+          document.getElementById('agendamentoForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('agendamentoAction_hospedagem.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').innerText = data.status === 'success' ? 'Sucesso' : 'Erro';
+                document.getElementById('modalMessage').innerText = data.message;
+
+                var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
+                matriculaModal.show();
+            })
+            .catch(error => console.error('Erro:', error));
+        };
+    </script>
+</body>
 <?php
 include 'footer.php';
 ?>
