@@ -57,9 +57,7 @@ include 'header.php';
         displayEventTime: false, // don't show the time column in list view
   
 
-        // Minhas credenciais
-        googleCalendarApiKey: 'AIzaSyC4H2IFmWoJLbtZFGPSw6Mww40qtObsF1c',
-       // events: 'tiodupets@gmail.com',
+       
        events: 'listar_eventos.php',
   
         eventClick: function(arg) {
