@@ -28,58 +28,58 @@ include 'header.php';
     <!--link rel="stylesheet" href="calendar/bootstrap5.1.3.min.css"-->
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
-    <link rel="stylesheet" href="calendar/calendar.css">
     <link rel="stylesheet" href="officestyle.css">
 
 
   </head>
   <div style="height: 4vh;"></div>
+
   <body>
-
-  <div class="container justify-content-center align-items-center">
-    <div id='calendar'></div>
-
-    </div>
-
+        <div class="container justify-content-center align-items-center">
+              <div id='calendar'></div>
+        </div>
   </body>
-  <script src='bootstrap.bundle.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
-  <script src='calendar/calendar_locales-all.global.min.js'></script>
-  <script src='calendar/calendar_pt-br.global.js'></script>
+
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+  
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap5',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
 
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
+        locale: 'pt-br',
+  
+        displayEventTime: false, // don't show the time column in list view
+  
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+        // Minhas credenciais
+        googleCalendarApiKey: 'AIzaSyC4H2IFmWoJLbtZFGPSw6Mww40qtObsF1c',
+       // events: 'tiodupets@gmail.com',
+       events: 'listar_eventos.php',
+  
+        eventClick: function(arg) {
 
-  themeSystem: 'bootstrap5',
+  
+          // prevents current tab from navigating
+          arg.jsEvent.preventDefault();
+        }
+  
+      });
+  
+      calendar.render();
+    });
+  </script>
 
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
 
-    locale:'pt-br',
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.9/index.global.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.9/index.global.min.js'></script>
 
-   initialView: 'dayGridMonth',
-    navLinks: true, // can click day/week names to navigate views
-    selectable: true,
-    selectMirror: true,
-    
-    editable: true,
-    dayMaxEvents: true, // allow "more" link when too many events
-    events:'listar_eventos.php', // A URL do arquivo que retorna os eventos
-    
-  });
-
-  calendar.render();
-});
-
-</script>
-
-<script src='calendar/bootstrap5_index.global.min.js'></script>
 <div style="height: 4vh;"></div>
   <?php
 include 'footer.php';
