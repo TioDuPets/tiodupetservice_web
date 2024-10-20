@@ -1,3 +1,13 @@
+body{
+    background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+}
+
+.container, justify-content-center, align-items-center{
+    background:#f8f9fa;
+    border: 10px solid #f8f9fa;
+    border-radius: 20px;
+}
+
 .container-centered {
     display: flex;
     justify-content: center;

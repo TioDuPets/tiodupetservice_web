@@ -1,24 +1,18 @@
 <?php
-header('Content-Type: application/json'); // Define o conteúdo como JSON
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "db_tiodupetservice";
 
-// Cria a conexão
-$conexao = new mysqli($servername, $username, $password, $dbname);
+// Criação da conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifica se há erros na conexão
-if ($conexao->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Falha na conexão com o banco de dados: ' . $conexao->connect_error]);
-    exit();
+// Verifica se a conexão falhou
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Prepara a query SQL para inserir o registro
-$stmt = $conexao->prepare("INSERT INTO pet (nome, sexo, especie, raca, cor, idade, porte, rga, foto_pet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-// Obtém os valores do formulário
+// Recebendo os dados do formulário
 $nome = $_POST['txtNome'];
 $sexo = $_POST['txtSexo'];
 $especie = $_POST['txtEspecie'];
@@ -27,26 +21,27 @@ $cor = $_POST['txtCor'];
 $idade = $_POST['txtIdade'];
 $porte = $_POST['txtPorte'];
 $rga = $_POST['txtRga'];
+$id_cliente = $_POST['id_cliente'];
+$id_veterinario = $_POST['id_veterinario'];
 
-// Verifica se há uma imagem enviada
-if (isset($_FILES['foto_pet']) && $_FILES['foto_pet']['error'] == 0) {
-    // Lê o conteúdo da imagem em binário
-    $foto_pet = file_get_contents($_FILES['foto_pet']['tmp_name']);
+// Upload da foto do pet
+$foto_pet = $_FILES['foto_pet']['name'];
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["foto_pet"]["name"]);
 
-    // Associa os parâmetros ao comando SQL
-    $stmt->bind_param("sssssisss", $nome, $sexo, $especie, $raca, $cor, $idade, $porte, $rga, $foto_pet);
+if (move_uploaded_file($_FILES["foto_pet"]["tmp_name"], $target_file)) {
+    // Inserir dados no banco
+    $sql = "INSERT INTO pet (nome, sexo, especie, raca, cor, idade, porte, rga, foto_pet, id_cliente, id_veterinario)
+            VALUES ('$nome', '$sexo', '$especie', '$raca', '$cor', '$idade', '$porte', '$rga', '$foto_pet', '$id_cliente', '$id_veterinario')";
 
-    // Executa a query e verifica se foi bem-sucedida
-    if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Cadastro de pet realizado com sucesso!']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Erro ao inserir dados: ' . $conexao->error]);
-    }
+if ($conn->query($sql) === TRUE) {
+    echo json_encode(["status" => "success", "message" => "Novo pet cadastrado com sucesso!"]);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Nenhuma imagem foi enviada ou ocorreu um erro.']);
+    echo json_encode(["status" => "error", "message" => "Erro ao cadastrar o pet: " . $conn->error]);
+}
+} else {
+echo json_encode(["status" => "error", "message" => "Erro no upload da foto."]);
 }
 
-// Fecha a conexão
-$stmt->close();
-$conexao->close();
+$conn->close();
 ?>

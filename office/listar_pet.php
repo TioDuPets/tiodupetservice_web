@@ -74,7 +74,7 @@ $resultado = $conexao->query($sql);
 if ($resultado != null) {
     foreach ($resultado as $linha) {
         echo '<tr>';
-        echo '<td>' . $linha['id'] . '</td>';
+        echo '<td>' . $linha['id_pet'] . '</td>';
         echo '<td>' . $linha['nome'] . '</td>';
         echo '<td>' . $linha['rga'] . '</td>';
         echo '<td>' . $linha['sexo'] . '</td>';
@@ -85,13 +85,13 @@ if ($resultado != null) {
         echo '<td>' . $linha['porte'] . '</td>';
         
         echo '<td>
-                <a href="excluir_pet.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '&rga=' . $linha['rga'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '">
+                <a href="excluir_pet.php?id_pet=' . $linha['id_pet'] . '&nome=' . $linha['nome'] . '&rga=' . $linha['rga'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '">
                     <i class="fa fa-user-times"></i>
                 </a>
               </td>';
         
         echo '<td>
-                <a href="atualizar_pet.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '&rga=' . $linha['rga'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '">
+                <a href="atualizar_pet.php?id_pet=' . $linha['id_pet'] . '&nome=' . $linha['nome'] . '&rga=' . $linha['rga'] . '&sexo=' . $linha['sexo'] . '&especie=' . $linha['especie'] . '&raca=' . $linha['raca'] . '&cor=' . $linha['cor'] . '&idade=' . $linha['idade'] . '&porte=' . $linha['porte'] . '">
                     <i class="fa fa-refresh"></i>
                 </a>
               </td>';

@@ -68,13 +68,13 @@ $resultado = $conexao->query($sql);
 if ($resultado != null) {
     foreach ($resultado as $linha) {
         echo '<tr>';
-        echo '<td>' . $linha['id'] . '</td>';
+        echo '<td>' . $linha['id_servico'] . '</td>';
         echo '<td>' . $linha['servico'] . '</td>';
         echo '<td>' . $linha['tipo'] . '</td>';
         echo '<td>' . number_format($linha['preco'], 2, ',', '.') . '</td>'; // Formatação de preço
 
         echo '<td>
-                <a href="excluir_servico.php?id=' . $linha['id'] .
+                <a href="excluir_servico.php?id=' . $linha['id_servico'] .
                      '&servico=' . $linha['servico'] .
                      '&tipo=' . $linha['tipo'] .
                      '&preco=' . $linha['preco'] . '">
@@ -83,7 +83,7 @@ if ($resultado != null) {
               </td>';
         
         echo '<td>
-                <a href="atualizar_servico.php?id=' . $linha['id'] .
+                <a href="atualizar_servico.php?id=' . $linha['id_servico'] .
                      '&servico=' . $linha['servico'] .
                      '&tipo=' . $linha['tipo'] .
                      '&preco=' . $linha['preco'] . '">

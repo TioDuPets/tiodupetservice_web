@@ -35,10 +35,10 @@ if ($conexao->connect_error) {
 }
 
 // Pega o ID do pet
-$pet_id = $_GET['id'];
+$pet_id = $_GET['id_pet'];
 
 // Busca os dados do pet, incluindo a imagem
-$sql = "SELECT * FROM pet WHERE id = $pet_id";
+$sql = "SELECT * FROM pet WHERE id_pet = $pet_id";
 $resultado = $conexao->query($sql);
 
 if ($resultado->num_rows > 0) {
@@ -137,7 +137,7 @@ if ($resultado->num_rows > 0) {
                 <p id="modalMessage">Pet excluído com sucesso!</p>
             </div>
             <div class="modal-footer">
-                <button id="closeButton" class="btn btn-primary">
+                <button id="closeButton" class="btn btn-primary" >
                 <i class="fa fa-times"></i> Fechar
                 </button>
             </div>
@@ -165,7 +165,7 @@ if ($resultado->num_rows > 0) {
             var matriculaModal = new bootstrap.Modal(document.getElementById('successModal'));
             matriculaModal.show();
 
-            // Após o fechamento do modal, redirecionar para listar_veterinario.php
+            // Após o fechamento do modal, redirecionar para listar_pet.php
             document.getElementById('closeButton').addEventListener('click', function() {
                 window.location.href = 'listar_pet.php';
             });
@@ -175,7 +175,7 @@ if ($resultado->num_rows > 0) {
 
             // Exibir o modal com mensagem de erro
             document.getElementById('modalTitle').innerText = 'Erro';
-            document.getElementById('modalMessage').innerText = 'Erro ao excluir o Pet. O pet que você está tentando excluir está associado a agendamentos existentes. Para excluir o pet, por favor, cancele ou remova os agendamentos relacionados primeiro.';
+            document.getElementById('modalMessage').innerText = 'Erro ao excluir o Pet. O pet que você está tentando excluir está associado a outros elementos existentes. Para excluir o pet, por favor, cancele ou remova os elementos relacionados primeiro.';
 
             var errorModal = new bootstrap.Modal(document.getElementById('successModal'));
             errorModal.show();

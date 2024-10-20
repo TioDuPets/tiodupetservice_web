@@ -116,34 +116,12 @@ nav{
 
             </li>
 
-        <!-- Dropdown Matrícula -->
-        <li class="dropdown">
-
-            <a class="dropbtn">Creche</a>
-
-            <div class="dropdown-content">
-
-                <ul>
-                    <li><a href="matricula_creche.php">Matrícula</a></li>
-                    <li><a href="matricula_consulta_creche.php">Consulta</a></li>
-                    <li><a href="matricula_listagem_creche.php">Listagem</a></li>
-                </ul>
-            </div>
-        </li>
         
         <!-- Dropdown de Serviços -->
         <li class="dropdown">
 
-            <a class="dropbtn">Agendamento</a>
+            <a href="agendamento_cadastro.php">Agendamento</a>
 
-            <div class="dropdown-content">
-
-                <ul>
-                    <li><a href="agendamento_hospedagem.php">Hotel</a></li>
-                    <li><a href="agendamento_petsitter.php">Pet Sitter</a></li>
-                    <li><a href="listar_agendamento.php">Agenda</a></li>
-                </ul>
-            </div>
         </li>
 
         <!-- Dropdown de Cadastro -->

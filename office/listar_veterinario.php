@@ -68,13 +68,13 @@ $resultado = $conexao->query($sql);
 if ($resultado != null) {
     foreach ($resultado as $linha) {
         echo '<tr>';
-        echo '<td>' . $linha['id'] . '</td>';
+        echo '<td>' . $linha['id_veterinario'] . '</td>';
         echo '<td>' . $linha['nome'] . '</td>';
         echo '<td>' . $linha['telefone'] . '</td>';
         echo '<td>' . $linha['email'] . '</td>';
 
         echo '<td>
-                <a href="excluir_veterinario.php?id=' . $linha['id'] .
+                <a href="excluir_veterinario.php?id=' . $linha['id_veterinario'] .
                      '&nome=' . $linha['nome'] .
                      '&telefone=' . $linha['telefone'] .
                      '&email=' . $linha['email'] .
@@ -90,7 +90,7 @@ if ($resultado != null) {
               </td>';
         
         echo '<td>
-                <a href="atualizar_veterinario.php?id=' . $linha['id'] .
+                <a href="atualizar_veterinario.php?id=' . $linha['id_veterinario'] .
                      '&nome=' . $linha['nome'] .
                      '&telefone=' . $linha['telefone'] .
                      '&email=' . $linha['email'] .

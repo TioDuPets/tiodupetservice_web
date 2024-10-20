@@ -35,7 +35,7 @@ if ($conexao->connect_error) {
 }
 
 // Pega o ID do cliente
-$cliente_id = $_GET['id'];
+$cliente_id = $_GET['id_cliente'];
 
 // Busca os dados do cliente
 $sql = "SELECT * FROM cliente WHERE id = $cliente_id";

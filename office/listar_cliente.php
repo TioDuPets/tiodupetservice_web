@@ -68,20 +68,20 @@ $resultado = $conexao->query($sql);
 if ($resultado != null) {
     foreach ($resultado as $linha) {
         echo '<tr>';
-        echo '<td>' . $linha['id'] . '</td>';
+        echo '<td>' . $linha['id_cliente'] . '</td>';
         echo '<td>' . $linha['nome'] . '</td>';
         echo '<td>' . $linha['email'] . '</td>';
         echo '<td>' . $linha['telefone'] . '</td>';
         echo '<td>' . $linha['endereco'] . '</td>';
 
         echo '<td>
-                <a href="excluir_cliente.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '">
+                <a href="excluir_cliente.php?id=' . $linha['id_cliente'] . '&nome=' . $linha['nome'] . '">
                     <i class="fa fa-user-times"></i>
                 </a>
               </td>';
         
         echo '<td>
-                <a href="atualizar_cliente.php?id=' . $linha['id'] . '&nome=' . $linha['nome'] . '&email=' . $linha['email'] . '&telefone=' . $linha['telefone'] . '&endereco=' . $linha['endereco'] . '">
+                <a href="atualizar_cliente.php?id=' . $linha['id_cliente'] . '&nome=' . $linha['nome'] . '&email=' . $linha['email'] . '&telefone=' . $linha['telefone'] . '&endereco=' . $linha['endereco'] . '">
                     <i class="fa fa-refresh"></i>
                 </a>
               </td>';

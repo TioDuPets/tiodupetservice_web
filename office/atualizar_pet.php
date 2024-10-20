@@ -35,10 +35,10 @@ if ($conexao->connect_error) {
 }
 
 // Pega o ID do pet
-$pet_id = $_GET['id'];
+$pet_id = $_GET['id_pet'];
 
 // Busca os dados do pet, incluindo a imagem
-$sql = "SELECT * FROM pet WHERE id = $pet_id";
+$sql = "SELECT * FROM pet WHERE id_pet = $pet_id";
 $resultado = $conexao->query($sql);
 
 if ($resultado->num_rows > 0) {
@@ -69,11 +69,12 @@ if ($resultado->num_rows > 0) {
         <!-- Exibe a imagem do pet -->
         <div class="text-center mb-3">
             <?php if (!empty($row['foto_pet'])): ?>
-                <img src="exibir_foto_pet.php?id=<?php echo $pet_id; ?>" alt="Foto do Pet" class="img-fluid rounded" style="max-width: 600px; height: auto;">
+                <img src="uploads/<?php echo $row['foto_pet']; ?>" alt="Foto do Pet" class="img-fluid rounded" style="max-width: 600px; height: auto;">
             <?php else: ?>
                 <p class="text-muted">Sem foto disponível.</p>
             <?php endif; ?>
         </div>
+
 
 
         <form id="atualizarpetForm">
